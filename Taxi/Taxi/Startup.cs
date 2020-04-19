@@ -29,6 +29,7 @@ namespace Taxi
             var connection = "Server=localhost;Database=postgres;Port=5432;Username=taxi;Password=taxi";
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseNpgsql(connection));
+            services.AddTransient<RatingContext>();
             services.AddControllersWithViews();
         }
 
