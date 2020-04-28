@@ -5,16 +5,15 @@ using System.Threading.Tasks;
 
 namespace Taxi_Database.Models
 {
-    public class HistoryOfOrder
+    public class ReadyOrders
     {
-        public HistoryOfOrder(int startPointId, int finishPointId, DateTime completeTime, 
-            DateTime orderTime, int[] clientsId)
+        public ReadyOrders(int startPointId, int finishPointId, DateTime completeTime, 
+            DateTime orderTime)
         {
             StartPointId = startPointId;
             FinishPointId = finishPointId;
             CompleteTime = completeTime;
             OrderTime = orderTime;
-            ClientsId = clientsId;
         }
 
         public int Id { get; set; }
@@ -22,6 +21,5 @@ namespace Taxi_Database.Models
         public int FinishPointId { get; set; }
         public DateTime CompleteTime { get; set; }
         public DateTime OrderTime { get; set; }
-        public int[] ClientsId { get; set; }
     }
 }

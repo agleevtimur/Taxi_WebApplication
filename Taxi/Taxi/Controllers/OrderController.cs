@@ -16,11 +16,11 @@ namespace Taxi.Controllers
         {
             this.context = context;
         }
-        // готовые заказы, заказать, рейтинг, история заказов, все заказы
+        // в процессе
         public IActionResult Index()
         {
             IRepository repository = new Repository(context);
-            var orders = repository.GetOrders();
+            var orders = repository.GetRequests();
             return View(orders);
         }
 
@@ -51,7 +51,7 @@ namespace Taxi.Controllers
                 return NotFound();
 
             var newId = Int32.Parse(id.ToString());
-            var orders = repository.GetOrdersByClientId(newId);
+            var orders = repository.GetRequestsByClientId(newId);
 
             if (orders == null)
                 return NotFound();
@@ -63,7 +63,7 @@ namespace Taxi.Controllers
         public IActionResult History()
         {
             IRepository repository = new Repository(context);
-            var orders = repository.GetHistoryOfOrders();
+            var orders = repository.GetOrders();
             return View(orders);
         }
 

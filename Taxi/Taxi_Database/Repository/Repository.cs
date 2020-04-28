@@ -59,39 +59,76 @@ namespace Taxi_Database.Repository
             await db.SaveChangesAsync();
         }
 
-        public async Task SaveOrder(Order order)
+        public int SaveOrder(Order order)
         {
             db.Order.Add(order);
+            db.ReadyOrders.Add(new ReadyOrders
+                (order.StartPointId, order.FinishPointId, order.DepartureTime, order.OrderTime));
             db.HistoryOfLocation.Find(order.StartPointId).CountOfDepartures++;
             db.HistoryOfLocation.Find(order.FinishPointId).CountOfArrivals++;
-            await db.SaveChangesAsync();
+            db.SaveChangesAsync();
+            return db.ReadyOrders.Last().Id;
         }
 
-        public IEnumerable<Order> GetOrders()
+        public IEnumerable<Order> GetRequests()
         {
             var orders = db.Order.Select(x => x);
             return orders;
         }
 
-        public IEnumerable<Order> GetOrdersByClientId (int id)
+        public IEnumerable<Order> GetRequestsByClientId (int id)
         {
             var orders = db.Order.Where(x => x.UserId == id);
             return orders;
         }
 
-        public async Task DeleteOrder(int id)
+        public async Task DeleteRequest(int id)
         {
             var order = db.Order.Find(id);
             db.Order.Remove(order);
-            //db.HistoryOfOrder.Add(new HistoryOfOrder(order.StartPointId, order.FinishPointId, 
-            //    order.DepartureTime, order.OrderTime,  ));
             await db.SaveChangesAsync();
         }
 
-        public IEnumerable<HistoryOfOrder> GetHistoryOfOrders()
+        public IEnumerable<ReadyOrders> GetOrders()
         {
-            var orders = db.HistoryOfOrder.Select(x => x);
+            var orders = db.ReadyOrders.Select(x => x);
             return orders;
+        }
+
+        public List<ReadyOrders> GetOrdersByClientId (int id)
+        {
+            var readyOrders = new List<ReadyOrders>();
+            var ordersId = GetOrdersId(id);
+            foreach (var orderId in ordersId)
+                readyOrders.Add(db.ReadyOrders.Find(orderId));
+            return readyOrders;
+        }
+
+        private List<int> GetOrdersId(int id)
+        {
+            var ordersId = new List<int>();
+            var passengers = db.Passengers;
+            foreach (var passenger in passengers)
+            {
+                if (passenger.FirstId == id || passenger.SecondId == id
+                    || passenger.ThirdId == id || passenger.ForthId == id)
+                    ordersId.Add(passenger.OrderId);
+            }
+
+            return ordersId;
+        }
+
+        public async Task DeleteOrder(int id)
+        {
+            var order = db.ReadyOrders.Find(id);
+            db.ReadyOrders.Remove(order);
+            await db.SaveChangesAsync();
+        }
+
+        public async Task SavePassengers(int orderId, int firstId, int secondId, int thirdId, int forthId)
+        {
+            db.Passengers.Add(new Passengers(orderId, firstId, secondId, thirdId, forthId));
+            await db.SaveChangesAsync();
         }
 
         public async Task SaveLocation(Location location)

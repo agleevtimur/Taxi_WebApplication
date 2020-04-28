@@ -14,11 +14,14 @@ namespace Taxi_Database.Repository
         IEnumerable<Client> GetClients();
         Client GetClient(int id);
         Task DeleteClient(int id);
-        Task SaveOrder(Order order);
-        IEnumerable<Order> GetOrders();
-        IEnumerable<Order> GetOrdersByClientId(int id);
+        int SaveOrder(Order order);
+        IEnumerable<Order> GetRequests();
+        IEnumerable<Order> GetRequestsByClientId(int id);
+        Task DeleteRequest(int id);
+        IEnumerable<ReadyOrders> GetOrders();
+        List<ReadyOrders> GetOrdersByClientId(int id);
         Task DeleteOrder(int id);
-        IEnumerable<HistoryOfOrder> GetHistoryOfOrders();
+        Task SavePassengers(int orderId, int firstId, int secondId, int thirdId, int forthId);
         Task SaveLocation(Location location);
         IEnumerable<Location> GetLocations();
         IEnumerable<HistoryOfLocation> GetHistoryOfLocations();
