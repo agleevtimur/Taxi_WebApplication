@@ -1,25 +1,63 @@
 ﻿@model app4.ViewModels.LoginViewModel;
 
+<div class="row">
+    <div class="col-md-6">
+        <h2>Вход в приложение</h2>
+        <form method="post" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">
+            <div asp-validation-summary="ModelOnly"></div>
+            <div>
+                <label asp-for="Login"></label><br />
+                <input asp-for="Login" />
+                <span asp-validation-for="Login"></span>
+            </div>
+            <div>
+                <label asp-for="Password"></label><br />
+                <input asp-for="Password" />
+                <span asp-validation-for="Password"></span>
+            </div>
+            <div>
+                <label asp-for="RememberMe"></label><br />
+                <input asp-for="RememberMe" />
+            </div>
+            <div>
+                <input type="submit" value="Войти" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <h2>Внешние провайдеры</h2>
+        <hr />
+        @{ 
+            if (Model.ExternaLogins.Count == 0)
+            {
+                <div>У вас нет внешних провайдеров</div>
+            }
+            else
+            {
+                <form asp-action="ExternalLogin" asp-controller="Account" method="post" asp-route-returnUrl="@Model.ReturnUrl">
+                    <div>
+                        @{
+                            foreach(var provider in Model.ExternaLogins)
+                            {
+                              <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name">
+                                  @provider.DisplayName
+                              </button>
+                            }
+                        }
+                    </div>
+                </form>
+            }
+        }
+    </div>
+</div>
 
-<h2>Вход в приложение</h2>
-<form method="post" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">
-    <div asp-validation-summary="ModelOnly"></div>
-    <div>
-        <label asp-for="Login"></label><br />
-        <input asp-for="Login" />
-        <span asp-validation-for="Login"></span>
-    </div>
-    <div>
-        <label asp-for="Password"></label><br />
-        <input asp-for="Password" />
-        <span asp-validation-for="Password"></span>
-    </div>
-    <div>
-        <label asp-for="RememberMe"></label><br />
-        <input asp-for="RememberMe" />
-    </div>
-    <div>
-        <input type="submit" value="Войти" />
-    </div>
-</form>
+@*<script>
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    }
+</script>*@
 

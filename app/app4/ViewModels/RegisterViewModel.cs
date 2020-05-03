@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,17 +9,21 @@ namespace app4.ViewModels
 {
     public class RegisterViewModel
     {
-        [EmailAddress]
+        [Remote(action: "EmailInUse", controller: "Account")]
         [Required(ErrorMessage = "Не указан электронный адрес")]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
+        [Remote(action: "UserNameInUse", controller: "Account")]
         [Required(ErrorMessage = "Не указано имя пользователя")]
+        [MinLength(5, ErrorMessage = "Слишком короткое имя")]
         [Display(Name = "Имя пользователя")]
-        public string Login { get; set; }
+        public string UserName { get; set; }
 
+        [Remote(action: "PasswordIsStrong", controller: "Account")]
         [Required(ErrorMessage = "Не указан пароль")]
+        [MinLength(5, ErrorMessage = "Слишком короткий пароль")]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }

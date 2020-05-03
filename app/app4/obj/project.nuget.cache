@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "DqTVTW64Ce6r2RMLOFhTrYOnJg8DjkBmZzCVTA5wF44HN+KLNjMk99RCTwtrA9si5HPQgzUW2y5FXVvh+No7+w==",
+  "dgSpecHash": "SN96pQFP8f/jQdScUk1HDmlqIMdllbT4fLYvssf+fOON6g9XZkQHs3xQPr9Djgyuw0/4CCwBGZNBIWRzCC3riA==",
   "success": true,
   "projectFilePath": "C:\\Users\\fanto\\Desktop\\gitTaxiWeb\\app4\\app4\\app4.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\fanto\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\3.1.3\\microsoft.aspnetcore.authentication.google.3.1.3.nupkg.sha512",
     "C:\\Users\\fanto\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.3\\microsoft.aspnetcore.cryptography.internal.3.1.3.nupkg.sha512",
     "C:\\Users\\fanto\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.3\\microsoft.aspnetcore.cryptography.keyderivation.3.1.3.nupkg.sha512",
     "C:\\Users\\fanto\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",

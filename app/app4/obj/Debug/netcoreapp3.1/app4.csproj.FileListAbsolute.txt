@@ -146,6 +146,11 @@ C:\Users\fanto\Desktop\gitTaxiWeb\app4\app4\bin\Debug\netcoreapp3.1\Microsoft.As
 C:\Users\fanto\Desktop\gitTaxiWeb\app4\app4\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.UI.dll
 C:\Users\fanto\Desktop\gitTaxiWeb\app4\app4\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll
 C:\Users\fanto\Desktop\gitTaxiWeb\app4\app4\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Embedded.dll
+C:\Users\fanto\Desktop\gitTaxiWeb\app4\app4\obj\Debug\netcoreapp3.1\app4.csprojAssemblyReference.cache
+C:\Users\fanto\Desktop\gitTaxiWeb\app4\app4\obj\Debug\netcoreapp3.1\Razor\Views\Account\ForgotPassword.cshtml.g.cs
+C:\Users\fanto\Desktop\gitTaxiWeb\app4\app4\obj\Debug\netcoreapp3.1\Razor\Views\Account\ForgotPasswordConfirmation.cshtml.g.cs
+C:\Users\fanto\Desktop\gitTaxiWeb\app4\app4\obj\Debug\netcoreapp3.1\Razor\Views\Account\ResetPassword.cshtml.g.cs
+C:\Users\fanto\Desktop\gitTaxiWeb\app4\app4\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Google.dll
 C:\Users\fanto\Desktop\gitTaxiWeb\app4\app4\obj\Debug\netcoreapp3.1\app4.csproj.CoreCompileInputs.cache
 C:\Users\fanto\Desktop\gitTaxiWeb\app4\app4\obj\Debug\netcoreapp3.1\app4.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\fanto\Desktop\gitTaxiWeb\app4\app4\obj\Debug\netcoreapp3.1\app4.MvcApplicationPartsAssemblyInfo.cache

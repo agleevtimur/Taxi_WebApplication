@@ -1,6 +1,6 @@
 ﻿@model app4.ViewModels.RegisterViewModel
 <h2>Регистрация нового пользователя</h2>
-<form method="post" asp-controller="Account" asp-action="Register">
+<form method="post" asp-controller="Account" asp-action="Register" novalidate>
     <div asp-validation-summary="ModelOnly"></div>
     <div>
         <label asp-for="Email"></label><br />
@@ -8,9 +8,9 @@
         <span asp-validation-for="Email"></span>
     </div>
     <div>
-        <label asp-for="Login"></label><br />
-        <input asp-for="Login" />
-        <span asp-validation-for="Login"></span>
+        <label asp-for="UserName"></label><br />
+        <input asp-for="UserName" />
+        <span asp-validation-for="UserName"></span>
     </div>
     <div>
         <label asp-for="Password"></label><br />
@@ -25,5 +25,7 @@
     <div>
         <input type="submit" value="Регистрация" />
     </div>
+    
 </form>
+
 

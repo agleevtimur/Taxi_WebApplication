@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using app4.Models;
 using app4.Models.ApplicationContext;
 using app4.Services;
+using app4.Services.Validation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,23 +30,29 @@ namespace app4
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-           // services.AddTransient<IUserValidator<User>, CustomUserValidator>();
             services.AddControllersWithViews();
-            
+            //services.AddMvc();
+            services.AddTransient<IPasswordValidator<User>, CustomPasswordValidator<User>>();
+            services.AddTransient<IUserValidator<User>, CustomUserValidator<User>>();
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<User, IdentityRole>(opts => 
-            { 
-                opts.User.RequireUniqueEmail = true;
-                opts.Password.RequireUppercase = false;
-                opts.Password.RequireNonAlphanumeric = false;
-            })
-                //.AddRoleManager<RoleManager<IdentityRole>>()
+
+            services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationContext>()
                 .AddDefaultTokenProviders();
+                
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
-            //services.AddAuthentication();
+            
+            services.AddAuthentication()
+        .AddGoogle(options =>
+        {
+            IConfigurationSection googleAuthNSection =
+                Configuration.GetSection("Authentication:Google");
+
+            options.ClientId = googleAuthNSection["ClientId"];
+            options.ClientSecret = googleAuthNSection["ClientSecret"];
+        });// ToDo доделать аутентификацию
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
