@@ -1,0 +1,14 @@
+﻿<Properties StartupConfiguration="{87134EF5-7737-4399-BCDD-BC613CDFFB33}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="taxiAlgorithm/Program.cs">
+    <Files>
+      <File FileName="taxiAlgorithm/Program.cs" Line="13" Column="6" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.taxiAlgorithm FirstBuild="True" PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>
