@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9b138517-c18f-4a37-ab8c-0b04b5595742" name="Default Changelist" comment="" />
+    <list default="true" id="9b138517-c18f-4a37-ab8c-0b04b5595742" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/findTaxi.html" beforeDir="false" afterPath="$PROJECT_DIR$/findTaxi.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orders.html" beforeDir="false" afterPath="$PROJECT_DIR$/orders.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subscribe.html" beforeDir="false" afterPath="$PROJECT_DIR$/subscribe.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +21,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1ZnLk1EiQhan5xkbZ3FK07oLMo2" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -23,7 +34,9 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -56,6 +69,12 @@
       <workItem from="1586723556967" duration="17644000" />
       <workItem from="1586784962226" duration="8943000" />
       <workItem from="1586818634846" duration="186000" />
+      <workItem from="1586857131588" duration="14891000" />
+      <workItem from="1586955015964" duration="4084000" />
+      <workItem from="1586986479568" duration="624000" />
+      <workItem from="1587378818119" duration="254000" />
+      <workItem from="1587392235631" duration="381000" />
+      <workItem from="1588015800350" duration="625000" />
     </task>
     <servers />
   </component>

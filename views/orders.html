@@ -39,7 +39,7 @@
             transition: all 600ms ease-out;
         }
 
-        .hover-card {
+        .card-hover {
             border-color: #000000;
             -moz-box-shadow: 0 0 12px #000000;
             -webkit-box-shadow: 0 0 12px #000000;
@@ -78,9 +78,13 @@
                        aria-describedby="button-addon2">
                 <div class="input-group-append">
                 <span class="input-group-text bg-light border-light" id="basic-addon1">
-                    <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z" clip-rule="evenodd"/>
-  <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM13 6.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z" clip-rule="evenodd"/>
+                    <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                         xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd"
+        d="M10.442 10.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z"
+        clip-rule="evenodd"/>
+  <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM13 6.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"
+        clip-rule="evenodd"/>
 </svg>
                 </span>
                 </div>
@@ -102,8 +106,23 @@
 
 </nav>
 <div class="container-sm p-4 mt-sm-5 transition" style="max-width: 40em; margin-top: 50px">
-    <div id="titlesearch" style="display: none">
-        <h1 class="title mt-3 mb-5 ">Поиск<span class="badge badge-primary  ml-sm-3">3</span></h1>
+    <div id="titlesearch">
+        <div class="radio-group flex-row d-flex flex-row mt-3 mb-5 justify-content-between align-content-center">
+            <div class="align-self-center">
+                <h1 class="title my-auto">Найдено<span class="badge badge-primary transition  ml-sm-3"></span></h1>
+            </div>
+            <div data-value="high" class="align-self-center radio transition">
+                    <span class="my-auto badge badge-pill text-white transition"
+                          style="background: #5a28b3;font-weight: 500">high priority</span>
+            </div>
+            <div data-value="medium" class="my-auto align-self-center radio">
+                <span class="badge badge-pill badge-warning  transition" style="font-weight: 500">medium priority</span>
+            </div>
+            <div data-value="low" class="my-auto align-self-center radio">
+                <span class="radio badge badge-pill badge-secondary transition" style="font-weight: 500">low</span>
+            </div>
+            <input hidden id="priorityfilter" type="text" name="radio-value"/>
+        </div>
     </div>
     <div id="titleactual">
         <h1 class="title mt-3 mb-5 ">Оформленные заказы<span class="badge badge-primary ml-sm-3 ">3</span></h1>
@@ -120,6 +139,225 @@
                     </div>
                     <div class="col-auto mr-0 ml-auto pt-0">
                         <span class="badge badge-pill text-white " style="background: #5a28b3;font-weight: 500">high priority</span>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-auto .mr-auto">
+                        <label class="m-auto">
+                            Кремлевская, 18
+                        </label>
+                    </div>
+                </div>
+                <div class="row p-0">
+                    <div class="col-auto .mr-auto">
+                        <svg class="bi bi-arrow-down" width="1em" height="1em" viewBox="0 0 16 16"
+                             fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M4.646 9.646a.5.5 0 01.708 0L8 12.293l2.646-2.647a.5.5 0 01.708.708l-3 3a.5.5 0 01-.708 0l-3-3a.5.5 0 010-.708z"
+                                  clip-rule="evenodd"/>
+                            <path fill-rule="evenodd" d="M8 2.5a.5.5 0 01.5.5v9a.5.5 0 01-1 0V3a.5.5 0 01.5-.5z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="row p-0 ">
+                    <div class="col-auto mr-auto">
+                        <label class="m-auto">
+                            Деревня Универсиады, 20
+                        </label>
+                    </div>
+                </div>
+                <div class="row mb-0 pb-0">
+                    <div class="col-auto .mr-auto card-title">
+                        <p class="card-text ml-0 mt-2"><small class="text-muted">Заказ был размещен в 14:43
+                            03.05.2019
+                        </small></p>
+                    </div>
+                    <div class="col-auto mr-0 ml-auto pt-0 mb-0">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-outline-dark pt-0 pb-0 pl-3 pr-3">
+                                <svg class="bi bi-pencil" width="0.8em" height="0.8em" viewBox="0 0 16 16"
+                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"
+                                          clip-rule="evenodd"/>
+                                    <path fill-rule="evenodd"
+                                          d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                            <button type="button" class="btn btn-outline-dark pt-0 pb-0  pl-3 pr-3">
+                                <svg class="bi bi-trash-fill" width="0.8em" height="0.8em" viewBox="0 0 16 16"
+                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M2.5 1a1 1 0 00-1 1v1a1 1 0 001 1H3v9a2 2 0 002 2h6a2 2 0 002-2V4h.5a1 1 0 001-1V2a1 1 0 00-1-1H10a1 1 0 00-1-1H7a1 1 0 00-1 1H2.5zm3 4a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7a.5.5 0 01.5-.5zM8 5a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7A.5.5 0 018 5zm3 .5a.5.5 0 00-1 0v7a.5.5 0 001 0v-7z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mt-4 mb-4">
+        <div class="card-body">
+            <div class="container pt-2 pb-0">
+                <div class="row">
+                    <div class="col-auto .mr-auto card-title">
+                        <h4 class="m-auto">
+                            13:50, Пятница
+                        </h4>
+                    </div>
+                    <div class="col-auto mr-0 ml-auto pt-0">
+                        <span class="badge badge-pill text-white " style="background: #5a28b3;font-weight: 500">high priority</span>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-auto .mr-auto">
+                        <label class="m-auto">
+                            Кремлевская, 18
+                        </label>
+                    </div>
+                </div>
+                <div class="row p-0">
+                    <div class="col-auto .mr-auto">
+                        <svg class="bi bi-arrow-down" width="1em" height="1em" viewBox="0 0 16 16"
+                             fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M4.646 9.646a.5.5 0 01.708 0L8 12.293l2.646-2.647a.5.5 0 01.708.708l-3 3a.5.5 0 01-.708 0l-3-3a.5.5 0 010-.708z"
+                                  clip-rule="evenodd"/>
+                            <path fill-rule="evenodd" d="M8 2.5a.5.5 0 01.5.5v9a.5.5 0 01-1 0V3a.5.5 0 01.5-.5z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="row p-0 ">
+                    <div class="col-auto mr-auto">
+                        <label class="m-auto">
+                            Деревня Универсиады, 20
+                        </label>
+                    </div>
+                </div>
+                <div class="row mb-0 pb-0">
+                    <div class="col-auto .mr-auto card-title">
+                        <p class="card-text ml-0 mt-2"><small class="text-muted">Заказ был размещен в 14:43
+                            03.05.2019
+                        </small></p>
+                    </div>
+                    <div class="col-auto mr-0 ml-auto pt-0 mb-0">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-outline-dark pt-0 pb-0 pl-3 pr-3">
+                                <svg class="bi bi-pencil" width="0.8em" height="0.8em" viewBox="0 0 16 16"
+                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"
+                                          clip-rule="evenodd"/>
+                                    <path fill-rule="evenodd"
+                                          d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                            <button type="button" class="btn btn-outline-dark pt-0 pb-0  pl-3 pr-3">
+                                <svg class="bi bi-trash-fill" width="0.8em" height="0.8em" viewBox="0 0 16 16"
+                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M2.5 1a1 1 0 00-1 1v1a1 1 0 001 1H3v9a2 2 0 002 2h6a2 2 0 002-2V4h.5a1 1 0 001-1V2a1 1 0 00-1-1H10a1 1 0 00-1-1H7a1 1 0 00-1 1H2.5zm3 4a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7a.5.5 0 01.5-.5zM8 5a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7A.5.5 0 018 5zm3 .5a.5.5 0 00-1 0v7a.5.5 0 001 0v-7z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mt-4 mb-4">
+        <div class="card-body">
+            <div class="container pt-2 pb-0">
+                <div class="row">
+                    <div class="col-auto .mr-auto card-title">
+                        <h4 class="m-auto">
+                            13:50, Пятница
+                        </h4>
+                    </div>
+                    <div class="col-auto mr-0 ml-auto pt-0">
+                        <span class="badge badge-pill text-white " style="background: #5a28b3;font-weight: 500">high priority</span>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-auto .mr-auto">
+                        <label class="m-auto">
+                            Кремлевская, 18
+                        </label>
+                    </div>
+                </div>
+                <div class="row p-0">
+                    <div class="col-auto .mr-auto">
+                        <svg class="bi bi-arrow-down" width="1em" height="1em" viewBox="0 0 16 16"
+                             fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M4.646 9.646a.5.5 0 01.708 0L8 12.293l2.646-2.647a.5.5 0 01.708.708l-3 3a.5.5 0 01-.708 0l-3-3a.5.5 0 010-.708z"
+                                  clip-rule="evenodd"/>
+                            <path fill-rule="evenodd" d="M8 2.5a.5.5 0 01.5.5v9a.5.5 0 01-1 0V3a.5.5 0 01.5-.5z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="row p-0 ">
+                    <div class="col-auto mr-auto">
+                        <label class="m-auto">
+                            Деревня Универсиады, 20
+                        </label>
+                    </div>
+                </div>
+                <div class="row mb-0 pb-0">
+                    <div class="col-auto .mr-auto card-title">
+                        <p class="card-text ml-0 mt-2"><small class="text-muted">Заказ был размещен в 14:43
+                            03.05.2019
+                        </small></p>
+                    </div>
+                    <div class="col-auto mr-0 ml-auto pt-0 mb-0">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-outline-dark pt-0 pb-0 pl-3 pr-3">
+                                <svg class="bi bi-pencil" width="0.8em" height="0.8em" viewBox="0 0 16 16"
+                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"
+                                          clip-rule="evenodd"/>
+                                    <path fill-rule="evenodd"
+                                          d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                            <button type="button" class="btn btn-outline-dark pt-0 pb-0  pl-3 pr-3">
+                                <svg class="bi bi-trash-fill" width="0.8em" height="0.8em" viewBox="0 0 16 16"
+                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M2.5 1a1 1 0 00-1 1v1a1 1 0 001 1H3v9a2 2 0 002 2h6a2 2 0 002-2V4h.5a1 1 0 001-1V2a1 1 0 00-1-1H10a1 1 0 00-1-1H7a1 1 0 00-1 1H2.5zm3 4a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7a.5.5 0 01.5-.5zM8 5a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7A.5.5 0 018 5zm3 .5a.5.5 0 00-1 0v7a.5.5 0 001 0v-7z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mt-4 mb-4">
+        <div class="card-body">
+            <div class="container pt-2 pb-0">
+                <div class="row">
+                    <div class="col-auto .mr-auto card-title">
+                        <h4 class="m-auto">
+                            13:50, Пятница
+                        </h4>
+                    </div>
+                    <div class="col-auto mr-0 ml-auto pt-0">
+                        <span class="badge badge-pill badge-warning  " style="font-weight: 500">medium priority</span>
                     </div>
                 </div>
                 <div class="row ">
@@ -328,7 +566,80 @@
             </div>
         </div>
     </div>
-    <h1 class="title  mt-5 mb-5" id="titlehistory">История заказов <span class="badge badge-primary">27</span></h1>
+    <div class="card mt-4 mb-4">
+        <div class="card-body">
+            <div class="container pt-2 pb-2">
+                <div class="row">
+                    <div class="col-auto .mr-auto card-title">
+                        <h4 class="m-auto">
+                            13:50, Wednesday
+                        </h4>
+                    </div>
+                    <div class="col-auto mr-0 ml-auto pt-0">
+                            <span class="badge badge-pill badge-secondary  "
+                                  style="font-weight: 500">low priority</span>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-auto .mr-auto">
+                        <label class="m-auto">
+                            Kremlevskaya st, 18
+                        </label>
+                    </div>
+                </div>
+                <div class="row p-0">
+                    <div class="col-auto .mr-auto">
+                        <svg class="bi bi-arrow-down" width="1em" height="1em" viewBox="0 0 16 16"
+                             fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M4.646 9.646a.5.5 0 01.708 0L8 12.293l2.646-2.647a.5.5 0 01.708.708l-3 3a.5.5 0 01-.708 0l-3-3a.5.5 0 010-.708z"
+                                  clip-rule="evenodd"/>
+                            <path fill-rule="evenodd" d="M8 2.5a.5.5 0 01.5.5v9a.5.5 0 01-1 0V3a.5.5 0 01.5-.5z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="row p-0 ">
+                    <div class="col-auto mr-auto">
+                        <label class="m-auto">
+                            Universiade Village st, 20
+                        </label>
+                    </div>
+                </div>
+                <div class="row mb-0 pb-0">
+                    <div class="col-auto .mr-auto card-title">
+                        <p class="card-text ml-0 mt-2"><small class="text-muted">The order was placed at 11:40
+                            15.09.2020</small></p>
+                    </div>
+                    <div class="col-auto mr-0 ml-auto pt-0 mb-0">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-outline-dark pt-0 pb-0 pl-3 pr-3">
+                                <svg class="bi bi-pencil" width="0.8em" height="0.8em" viewBox="0 0 16 16"
+                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"
+                                          clip-rule="evenodd"/>
+                                    <path fill-rule="evenodd"
+                                          d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                            <button type="button" class="btn btn-outline-dark pt-0 pb-0  pl-3 pr-3">
+                                <svg class="bi bi-trash-fill" width="0.8em" height="0.8em" viewBox="0 0 16 16"
+                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M2.5 1a1 1 0 00-1 1v1a1 1 0 001 1H3v9a2 2 0 002 2h6a2 2 0 002-2V4h.5a1 1 0 001-1V2a1 1 0 00-1-1H10a1 1 0 00-1-1H7a1 1 0 00-1 1H2.5zm3 4a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7a.5.5 0 01.5-.5zM8 5a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7A.5.5 0 018 5zm3 .5a.5.5 0 00-1 0v7a.5.5 0 001 0v-7z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h1 class="title  mt-5 mb-5 " id="titlehistory">История заказов <span class="badge badge-primary">27</span></h1>
     <div class="card mt-4 mb-4">
         <div class="card-body">
             <div class="container pt-2 pb-2">
@@ -1255,12 +1566,36 @@
     }
     $('.card ').hover(
         function () {
-            $(this).addClass('border-dark hover-card')
+            $(this).addClass('border-dark card-hover')
         },
         function () {
-            $(this).removeClass('border-dark hover-card')
+            $(this).removeClass('border-dark card-hover')
         }
     );
+    $('.radio-group .radio ').hover(
+        function () {
+            $(this).children().addClass('pl-sm-4 pr-sm-4 radio-hover')
+        },
+        function () {
+            $(this).children().removeClass(' pl-sm-4 pr-sm-4 radio-hover')
+        }
+    );
+
+    $('.radio-group .radio').click(function () {
+        let alreadyselected = $(this).children().hasClass('selected');
+        $(this).parent().find('.radio').children().removeClass('selected pt-2 pb-2');
+        if (alreadyselected) {
+            $(this).parent().find('input').val("");
+            search(false);
+        } else {
+            $(this).children().addClass('selected pt-2 pb-2');
+            var val = $(this).attr('data-value');
+            $(this).parent().find('input').val(val);
+            search(true);
+        }
+    });
+    
+
     $(".subscribe").hover(
         function () {
             $(".find").removeClass('pr-sm-4 pl-sm-4');
@@ -1295,28 +1630,53 @@
         $(".find").parent().parent().toggleClass("mr-sm-0");
     });
     $(document).ready(function () {
-        $("#search").on("keyup", function () {
-            let value = $(this).val().toLowerCase();
-            let count=0;
-            $(".card").filter(function () {
-                if($(this).text().toLowerCase().indexOf(value) > -1) {
-                    count++;
-                }
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-            });
-            if (value !== "") {
-                $("#titleactual").hide();
-                $("#titlesearch h1 span").text(count);
-                $("#titlesearch").show();
-                $("#titlehistory").hide(600);
-            }
-            if (value === "") {
-                $("#titleactual").show();
-                $("#titlesearch").hide();
-                $("#titlehistory").show(600);
-            }
-        });
+        $("#titlesearch").hide();
+        $("#search").keyup(search);
     });
+
+    function search(withFilter) {
+        let value = $("#search").val().toLowerCase();
+        let words= value.split(" ");
+        let count = 0;
+        let searching = value.length !== 0;
+
+        $(".card").filter(function () {
+            let totalFilter=true;
+            let thisText=$(this).text().toLowerCase();
+            for (let i = 0; i < words.length ; i++) {
+                totalFilter=totalFilter&&(thisText.indexOf(words[i]) > -1);
+            }
+            let priorityFilter = true;
+            if (searching && withFilter) {
+
+                let priority = $("#priorityfilter").val();
+                priorityFilter = (thisText.indexOf(priority) > -1);
+            }
+            if (totalFilter && priorityFilter) {
+                count++;
+            }
+            $(this).toggle(totalFilter&& priorityFilter);
+        });
+        if (searching) {//searching
+            hideTitles(count, 400);
+        } else {//stop searching
+            showTitles(400);
+        }
+    }
+
+    function hideTitles(count, delay) {
+        $("#titlesearch h1 span").text(count);
+        $("#titleactual").hide();
+        $("#titlesearch").show();
+        $("#titlehistory").hide();
+    }
+
+    function showTitles(delay) {
+        $("#titlesearch").hide();
+        $("#titleactual").show();
+        $("#titlehistory").show();
+    }
+
     $("#search").hover(
         function () {
             $(this).addClass('pr-sm-5');

@@ -173,7 +173,17 @@
         </div>
         <button type="submit" class="btn btn-primary container-fluid mt-3 p-2">Оформить</button>
     </form>
-</div>
+    <div id="spinner" class="text-center mt-3 ">
+        <div  class="spinner-border text-primary   text-center" role="status">
+            <span class="sr-only"></span>
+        </div>
+    </div>
+    <iframe id="iframe" class="p-0 mt-3 "
+            src="https://yandex.ru/map-widget/v1/?um=constructor%3A97965eab362949c9553f8d3fa17ac47db489a98952cdf5fe45ccf420f0888d6c&amp;source=constructor"
+            width="100%" height="500" frameborder="0" style="display: none; opacity: 0" align="center" >
+    </iframe>
+    </div>
+
 <script>
     $(".subscribe").hover(
         function () {
@@ -185,6 +195,12 @@
             $(this).addClass('pr-sm-4 pl-sm-4');
         }
     );
+
+    $("#iframe").load(function () {
+        $("#spinner").fadeOut(600);
+        $(this).show(600);
+        $(this).fadeTo( 600 , 1);
+    });
 
     $("#nav-button").click(function () {
         $(".find").parent().toggleClass("d-flex flex-fill");
