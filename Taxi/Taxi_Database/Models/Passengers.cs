@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Taxi_Database.Models
+﻿namespace Taxi_Database.Models
 {
     public class Passengers
     {

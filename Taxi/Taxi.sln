@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Taxi", "Taxi\Taxi.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Taxi_Database", "Taxi_Database\Taxi_Database.csproj", "{35245819-75A3-4404-832F-BEEB46321541}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{47BD234B-03FA-48DC-A3C0-6740C589BFFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{47BD234B-03FA-48DC-A3C0-6740C589BFFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{2E902B6C-85B9-4AA3-9A7E-59EA15EE0CDF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{47BD234B-03FA-48DC-A3C0-6740C589BFFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47BD234B-03FA-48DC-A3C0-6740C589BFFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47BD234B-03FA-48DC-A3C0-6740C589BFFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E902B6C-85B9-4AA3-9A7E-59EA15EE0CDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E902B6C-85B9-4AA3-9A7E-59EA15EE0CDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E902B6C-85B9-4AA3-9A7E-59EA15EE0CDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E902B6C-85B9-4AA3-9A7E-59EA15EE0CDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

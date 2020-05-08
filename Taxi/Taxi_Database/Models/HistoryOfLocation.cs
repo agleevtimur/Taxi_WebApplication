@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Taxi_Database.Models
+﻿namespace Taxi_Database.Models
 {
     public class HistoryOfLocation
     {

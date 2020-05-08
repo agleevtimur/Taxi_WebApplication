@@ -27,3 +27,9 @@ C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\Taxi_
 C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\Taxi_Database\bin\Debug\netcoreapp3.1\MongoDB.Driver.Core.dll
 C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\Taxi_Database\bin\Debug\netcoreapp3.1\MongoDB.Libmongocrypt.dll
 C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\Taxi_Database\bin\Debug\netcoreapp3.1\SharpCompress.dll
+C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\Taxi_Database\bin\Debug\netcoreapp3.1\MongoDB.Driver.GridFS.dll
+C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\Taxi_Database\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\Taxi_Database\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\Taxi_Database\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\Taxi_Database\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Core.dll
+C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\Taxi_Database\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Stores.dll

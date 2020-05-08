@@ -1,15 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Services;
+using Services.Validation;
 using Taxi_Database.Context;
+using Taxi_Database.Models;
 
 namespace Taxi
 {
@@ -29,8 +29,25 @@ namespace Taxi
             var connection = "Server=localhost;Database=postgres;Port=5432;Username=taxi;Password=taxi";
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseNpgsql(connection));
+            services.AddDbContext<IdentityContext>(options =>
+                options.UseNpgsql(connection));
             services.AddTransient<RatingContext>();
+            services.AddTransient<IPasswordValidator<User>, CustomPasswordValidator<User>>();
+            services.AddTransient<IUserValidator<User>, CustomUserValidator<User>>();
             services.AddControllersWithViews();
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationContext>()
+                .AddDefaultTokenProviders();
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    IConfigurationSection googleAuthNSection =
+                    Configuration.GetSection("Authentication:Google");
+                    options.ClientId = googleAuthNSection["ClientId"];
+                    options.ClientSecret = googleAuthNSection["ClientSecret"];
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
