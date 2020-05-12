@@ -15,6 +15,32 @@ namespace Taxi_Database.Repository
             this.db = db;
         }
 
+        public async Task SaveClient(int clientId)
+        {
+            var client = db.Client
+                .Where(x => x.Id == clientId)
+                .FirstOrDefault();
+            if (client.Priority != 0)//уменьшаем количество поездок в случае наличия приоритета
+            {
+                if (client.LeftOrdersPriority <= 1)//уменьшаем количество поездок
+                {
+                    client.Priority = 0;//минимальный приоритет, т.е. без приоритета
+                }
+                else
+                {
+                    client.LeftOrdersPriority--;
+                }
+            }
+            client.CountOfTrips++;
+            await db.SaveChangesAsync();
+        }
+
+        public async Task UpdateUser(Client client)
+        {
+            db.Client.Add(client);
+            await db.SaveChangesAsync();
+        }
+
         public async Task SaveClient(Client client)
         {
             db.Client.Add(client);
@@ -73,7 +99,7 @@ namespace Taxi_Database.Repository
             return orders;
         }
 
-        public IEnumerable<Order> GetRequestsByClientId (int id)
+        public IEnumerable<Order> GetRequestsByClientId(int id)
         {
             var orders = db.Order.Where(x => x.UserId == id);
             return orders;
@@ -92,7 +118,7 @@ namespace Taxi_Database.Repository
             return orders;
         }
 
-        public List<ReadyOrders> GetOrdersByClientId (int id)
+        public List<ReadyOrders> GetOrdersByClientId(int id)
         {
             var readyOrders = new List<ReadyOrders>();
             var ordersId = GetOrdersId(id);

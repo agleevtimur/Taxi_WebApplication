@@ -2494,10 +2494,7 @@
         },
         "runtime": {
           "bin/placeholder/BusinessLogic.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
+        }
       },
       "Services/1.0.0": {
         "type": "project",
@@ -2512,10 +2509,7 @@
         },
         "runtime": {
           "bin/placeholder/Services.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
+        }
       },
       "Taxi_Database/1.0.0": {
         "type": "project",
@@ -8132,39 +8126,41 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Dimon\\.nuget\\packages\\": {}
+    "/Users/ildardavletarov/.nuget/packages/": {},
+    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Taxi\\Taxi.csproj",
+      "projectUniqueName": "/Users/ildardavletarov/Taxi_WebApplication/Taxi/Taxi/Taxi.csproj",
       "projectName": "Taxi",
-      "projectPath": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Taxi\\Taxi.csproj",
-      "packagesPath": "C:\\Users\\Dimon\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Taxi\\obj\\",
+      "projectPath": "/Users/ildardavletarov/Taxi_WebApplication/Taxi/Taxi/Taxi.csproj",
+      "packagesPath": "/Users/ildardavletarov/.nuget/packages/",
+      "outputPath": "/Users/ildardavletarov/Taxi_WebApplication/Taxi/Taxi/obj/",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Dimon\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/ildardavletarov/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\BusinessLogic\\BusinessLogic.csproj": {
-              "projectPath": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\BusinessLogic\\BusinessLogic.csproj"
+            "/Users/ildardavletarov/Taxi_WebApplication/Taxi/BusinessLogic/BusinessLogic.csproj": {
+              "projectPath": "/Users/ildardavletarov/Taxi_WebApplication/Taxi/BusinessLogic/BusinessLogic.csproj"
             },
-            "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Services\\Services.csproj": {
-              "projectPath": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Services\\Services.csproj"
+            "/Users/ildardavletarov/Taxi_WebApplication/Taxi/Services/Services.csproj": {
+              "projectPath": "/Users/ildardavletarov/Taxi_WebApplication/Taxi/Services/Services.csproj"
             },
-            "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Taxi_Database\\Taxi_Database.csproj": {
-              "projectPath": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Taxi_Database\\Taxi_Database.csproj"
+            "/Users/ildardavletarov/Taxi_WebApplication/Taxi/Taxi_Database/Taxi_Database.csproj": {
+              "projectPath": "/Users/ildardavletarov/Taxi_WebApplication/Taxi/Taxi_Database/Taxi_Database.csproj"
             }
           }
         }
@@ -8221,7 +8217,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.200/RuntimeIdentifierGraph.json"
       }
     }
   }

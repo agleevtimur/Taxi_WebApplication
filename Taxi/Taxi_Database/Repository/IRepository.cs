@@ -26,6 +26,7 @@ namespace Taxi_Database.Repository
         int GetCountOfRates(int id);
         double GetRating(int id);
         Task UpdateRating(int id, int countOfRates, double rating);
+        Task SaveClient(int clientId);
     }
 
     public interface IRating

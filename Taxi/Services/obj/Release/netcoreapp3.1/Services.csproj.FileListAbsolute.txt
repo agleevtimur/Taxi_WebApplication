@@ -1,0 +1,9 @@
+/Users/ildardavletarov/Taxi_WebApplication/Taxi/Services/bin/Release/netcoreapp3.1/Services.deps.json
+/Users/ildardavletarov/Taxi_WebApplication/Taxi/Services/bin/Release/netcoreapp3.1/Services.dll
+/Users/ildardavletarov/Taxi_WebApplication/Taxi/Services/bin/Release/netcoreapp3.1/Services.pdb
+/Users/ildardavletarov/Taxi_WebApplication/Taxi/Services/obj/Release/netcoreapp3.1/Services.csprojAssemblyReference.cache
+/Users/ildardavletarov/Taxi_WebApplication/Taxi/Services/obj/Release/netcoreapp3.1/Services.csproj.CoreCompileInputs.cache
+/Users/ildardavletarov/Taxi_WebApplication/Taxi/Services/obj/Release/netcoreapp3.1/Services.AssemblyInfoInputs.cache
+/Users/ildardavletarov/Taxi_WebApplication/Taxi/Services/obj/Release/netcoreapp3.1/Services.AssemblyInfo.cs
+/Users/ildardavletarov/Taxi_WebApplication/Taxi/Services/obj/Release/netcoreapp3.1/Services.dll
+/Users/ildardavletarov/Taxi_WebApplication/Taxi/Services/obj/Release/netcoreapp3.1/Services.pdb
