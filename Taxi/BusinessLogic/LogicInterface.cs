@@ -20,7 +20,9 @@ namespace BusinessLogic
 
     public interface IUserController
     {
-        List<User> Index();
+        Client Index(string id);
+        ClientAuthorizeViewModel Information(Client client);
+        IEnumerable<Client> Clients();
         Task<IdentityResult> Create(string email, string login, string password);
         Task<User> FindUser(string id);
         EditUserViewModel EditGet(User user);
@@ -58,5 +60,12 @@ namespace BusinessLogic
     public interface IOrderController
     {
         IEnumerable<Order> Index();
+    }
+
+    public interface ILocationController
+    {
+        IEnumerable<Location> Index();
+        IEnumerable<HistoryOfLocation> History();
+        Task SavePost(string name, string googleCode, string yandexCode, string twoGisCode);
     }
 }

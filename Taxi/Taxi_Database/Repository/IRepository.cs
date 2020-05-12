@@ -7,11 +7,11 @@ namespace Taxi_Database.Repository
     public interface IRepository
     {
         Task SaveClient(Client client);
-        bool FindClient(string password);
+        Task UpdateClient(int clientId);
         Task EditClient(Client client);
         IEnumerable<Client> GetClients();
-        Client GetClient(int id);
-        Task DeleteClient(int id);
+        Client GetClient(string id);
+        Task DeleteClient(string id);
         int SaveOrder(Order order);
         IEnumerable<Order> GetRequests();
         IEnumerable<Order> GetRequestsByClientId(int id);

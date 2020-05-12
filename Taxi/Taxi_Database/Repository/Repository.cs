@@ -47,13 +47,22 @@ namespace Taxi_Database.Repository
             await db.SaveChangesAsync();
         }
 
-        public bool FindClient(string password)
+        public async Task UpdateClient(int clientId)
         {
-            var client = db.Client.Where(x => x.Password == password)
-                .FirstOrDefault();
-            if (client == null)
-                return false;
-            return true;
+            var client = db.Client
+               .Where(x => x.Id == clientId)
+               .FirstOrDefault();
+
+            if (client.Priority != 0)//уменьшаем количество поездок в случае наличия приоритета
+            {
+                if (client.LeftOrdersPriority <= 1)//уменьшаем количество поездок
+                    client.Priority = 0;//минимальный приоритет, т.е. без приоритета
+                else
+                    client.LeftOrdersPriority--;
+            }
+
+            client.CountOfTrips++;
+            await db.SaveChangesAsync();
         }
 
         public async Task EditClient(Client client)
@@ -69,15 +78,17 @@ namespace Taxi_Database.Repository
             return clients;
         }
 
-        public Client GetClient(int id)
+        public Client GetClient(string id)
         {
-            var client = db.Client.Find(id);
+            var client = db.Client.Where(x => x.StringId == id)
+                .FirstOrDefault();
             return client;
         }
 
-        public async Task DeleteClient(int id)
+        public async Task DeleteClient(string id)
         {
-            var client = db.Client.Find(id);
+            var client = db.Client.Where(x => x.StringId == id)
+                .FirstOrDefault();
             db.Client.Remove(client);
             await db.SaveChangesAsync();
         }
@@ -159,7 +170,7 @@ namespace Taxi_Database.Repository
             db.Location.Add(location);
             await db.SaveChangesAsync();
             var newLocation = db.Location.Last();
-            db.HistoryOfLocation.Add(new HistoryOfLocation(newLocation.Id));
+            db.HistoryOfLocation.Add(new HistoryOfLocation(newLocation.Id, newLocation.NameOfLocation));
             await db.SaveChangesAsync();
         }
 
