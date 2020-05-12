@@ -1,0 +1,5 @@
+C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\BusinessLogic\bin\Debug\netcoreapp3.1\BusinessLogic.deps.json
+C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\BusinessLogic\bin\Debug\netcoreapp3.1\BusinessLogic.dll
+C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\BusinessLogic\obj\Debug\netcoreapp3.1\BusinessLogic.csprojAssemblyReference.cache
+C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\BusinessLogic\obj\Debug\netcoreapp3.1\BusinessLogic.AssemblyInfoInputs.cache
+C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\BusinessLogic\obj\Debug\netcoreapp3.1\BusinessLogic.AssemblyInfo.cs
