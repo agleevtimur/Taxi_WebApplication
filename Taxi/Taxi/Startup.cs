@@ -26,7 +26,7 @@ namespace Taxi
         public void ConfigureServices(IServiceCollection services)
         {
             //перед запуском создать пользователя taxi с паролем taxi в PostgreSQL
-            var connection = "Server=localhost;Database=postgres;Port=5432;Username=taxi;Password=taxi";
+            var connection = "Server=localhost;Database=z;Port=5432;Username=ildar;Password=1";
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseNpgsql(connection));
             services.AddDbContext<IdentityContext>(options =>
@@ -40,14 +40,14 @@ namespace Taxi
                 .AddDefaultTokenProviders();
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
-            services.AddAuthentication()
-                .AddGoogle(options =>
-                {
-                    IConfigurationSection googleAuthNSection =
-                    Configuration.GetSection("Authentication:Google");
-                    options.ClientId = googleAuthNSection["ClientId"];
-                    options.ClientSecret = googleAuthNSection["ClientSecret"];
-                });
+            //services.AddAuthentication()
+            //    .AddGoogle(options =>
+            //    {
+            //        IConfigurationSection googleAuthNSection =
+            //        Configuration.GetSection("Authentication:Google");
+            //        options.ClientId = googleAuthNSection["ClientId"];
+            //        options.ClientSecret = googleAuthNSection["ClientSecret"];
+            //    });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,7 +74,7 @@ namespace Taxi
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Account}/{action=Login}/{id?}");
             });
         }
     }
