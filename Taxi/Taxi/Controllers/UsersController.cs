@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Taxi.ViewModels.User;
+using Taxi_Database.Context;
 using Taxi_Database.Models;
 
 namespace Taxi.Controllers
@@ -14,28 +15,41 @@ namespace Taxi.Controllers
     public class UsersController : Controller
     {
         private readonly UserManager<User> _userManager;
+        private readonly ApplicationContext context;
 
-        public UsersController(UserManager<User> userManager)
+        public UsersController(UserManager<User> userManager, ApplicationContext context)
         {
             _userManager = userManager;
+            this.context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string id)
         {
-            IUserController repository = new Users(_userManager);
+            IUserController repository = new Users(_userManager, context);
 
-            var model = repository.Index();
+            var client = repository.Index(id);
+            if (client == null)
+                return NotFound();
+            var model = repository.Information(client);
+            return View(model);
+        }
+
+        [Authorize(Roles = "admin")]
+        public IActionResult Clients()
+        {
+            IUserController repository = new Users(_userManager, context);
+
+            var model = repository.Clients();
             return View(model);
         }
 
         [HttpGet]
         public IActionResult Create() => View();
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Create(CreateUserViewModel model)
         {
-            IUserController repository = new Users(_userManager);
+            IUserController repository = new Users(_userManager, context);
 
             if (ModelState.IsValid)
             {
@@ -51,11 +65,10 @@ namespace Taxi.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
-            IUserController repository = new Users(_userManager);
+            IUserController repository = new Users(_userManager, context);
 
             User user = await repository.FindUser(id);
             if (user == null)
@@ -68,7 +81,7 @@ namespace Taxi.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(EditUserViewModel model)
         {
-            IUserController repository = new Users(_userManager);
+            IUserController repository = new Users(_userManager, context);
 
             if (ModelState.IsValid)
             {
@@ -87,17 +100,18 @@ namespace Taxi.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Delete(string id)
         {
-            IUserController repository = new Users(_userManager);
+            IUserController repository = new Users(_userManager, context);
             var result = await repository.Delete(id);
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> ChangePassword(string id)
         {
-            IUserController repository = new Users(_userManager);
+            IUserController repository = new Users(_userManager, context);
 
             User user = await repository.FindUser(id);
             if (user == null)
@@ -110,7 +124,7 @@ namespace Taxi.Controllers
         [HttpPost]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
         {
-            IUserController repository = new Users(_userManager);
+            IUserController repository = new Users(_userManager, context);
 
             if (ModelState.IsValid)
             {

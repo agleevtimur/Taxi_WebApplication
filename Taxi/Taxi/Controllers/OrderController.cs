@@ -1,13 +1,15 @@
 ﻿using BusinessLogic;
+using BusinessLogic.ControllersForMVC;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using Taxi.ViewModels.Order;
 using Taxi_Database.Context;
-using Taxi_Database.Models;
 using Taxi_Database.Repository;
 
 namespace Taxi.Controllers
 {
+    [Authorize(Roles = "employee")]
     public class OrderController : Controller
     {
         private readonly ApplicationContext context;
@@ -19,11 +21,12 @@ namespace Taxi.Controllers
         // в процессе
         public IActionResult Index()
         {
-            IRepository repository = new Repository(context);
-            var orders = repository.GetRequests();
+            IOrderController repository = new Orders(context);
+            var orders = repository.Index();
             return View(orders);
         }
 
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -31,16 +34,16 @@ namespace Taxi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Order order)
+        public IActionResult Create(CreateOrderViewModel model)
         {
-            IRepository repository = new Repository(context);
+            IOrderController repository = new Orders(context);
             if (ModelState.IsValid)
             {
-                repository.SaveOrder(order);
-                return RedirectToAction(nameof(Index));
+                //repository.SaveOrder(order);
+                return RedirectToAction("Index");
             }
 
-            return View(order);
+            return View(model);
         }
 
         [Authorize(Roles = "admin")]

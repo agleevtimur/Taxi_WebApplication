@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authentication;
 using System.ComponentModel.DataAnnotations;
 
-namespace Taxi.ViewModels.Login
+namespace BusinessLogic.ModelsForControllers
 {
     public class LoginViewModel
     {
