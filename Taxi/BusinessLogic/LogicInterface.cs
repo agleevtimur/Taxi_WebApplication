@@ -30,6 +30,7 @@ namespace BusinessLogic
         Task<IdentityResult> Delete(string id);
         ChangePasswordViewModel ChangeGet(string id);
         Task<IdentityResult> ChangePost(User user, string oldPassword, string newPassword);
+        Task Subscription(int priority, int countOfTravels, string id);
     }
 
     public interface IAccountController
@@ -59,7 +60,15 @@ namespace BusinessLogic
 
     public interface IOrderController
     {
-        IEnumerable<Order> Index();
+        IndexOrderViewModel Index();
+        CreateOrderViewModel CreateGet();
+        Task Create(string locationFrom, string locationTo, string time, int countOfPeople, string id);
+        OrderWithClientViewModel GetOrder(int id);
+        List<ReadyOrders> GetOrdersByClientId(string id);
+        IEnumerable<Order> GetRequestsByClientId(string id);
+        ReadyOrders GetReadyOrderId(int id);
+        Task DeleteOrder(int id);
+        Task Rating(string whoId, string whomId, int orderId, int newRating);
     }
 
     public interface ILocationController

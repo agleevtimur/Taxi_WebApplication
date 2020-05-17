@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lPcIbFun1Yvp/sJC3XeqZBu/plSD6TW39qZWGolINQFPUz+OMN1vbJuZ+2ogadtSxaI1lvpqAY/9jXZslhqgdA==",
+  "dgSpecHash": "9AFbCV7k5YoIt0CXbtNXz6G8g78I3MYB6CEk707CgB6h8pV/DN6FC7QErHSBQamZunADXsXiYChqevUWIUMAwg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\Services\\Services.csproj",
+  "projectFilePath": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Services\\Services.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Dimon\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.3\\microsoft.aspnetcore.cryptography.internal.3.1.3.nupkg.sha512",
     "C:\\Users\\Dimon\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.3\\microsoft.aspnetcore.cryptography.keyderivation.3.1.3.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\Taxi\\Taxi.csproj": {}
+    "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Taxi\\Taxi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\BusinessLogic\\BusinessLogic.csproj": {
+    "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\BusinessLogic\\BusinessLogic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\BusinessLogic\\BusinessLogic.csproj",
+        "projectUniqueName": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\BusinessLogic\\BusinessLogic.csproj",
         "projectName": "BusinessLogic",
-        "projectPath": "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\BusinessLogic\\BusinessLogic.csproj",
+        "projectPath": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\BusinessLogic\\BusinessLogic.csproj",
         "packagesPath": "C:\\Users\\Dimon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\BusinessLogic\\obj\\",
+        "outputPath": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\BusinessLogic\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Dimon\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -22,13 +22,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.telerik.com/nuget": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\Taxi_Database\\Taxi_Database.csproj": {
-                "projectPath": "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\Taxi_Database\\Taxi_Database.csproj"
+              "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Taxi_Database\\Taxi_Database.csproj": {
+                "projectPath": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Taxi_Database\\Taxi_Database.csproj"
               }
             }
           }
@@ -73,14 +74,14 @@
         }
       }
     },
-    "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\Services\\Services.csproj": {
+    "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Services\\Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\Services\\Services.csproj",
+        "projectUniqueName": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Services\\Services.csproj",
         "projectName": "Services",
-        "projectPath": "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\Services\\Services.csproj",
+        "projectPath": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Services\\Services.csproj",
         "packagesPath": "C:\\Users\\Dimon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\Services\\obj\\",
+        "outputPath": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Services\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Dimon\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -91,7 +92,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.telerik.com/nuget": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
@@ -142,14 +144,14 @@
         }
       }
     },
-    "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\Taxi\\Taxi.csproj": {
+    "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Taxi\\Taxi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\Taxi\\Taxi.csproj",
+        "projectUniqueName": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Taxi\\Taxi.csproj",
         "projectName": "Taxi",
-        "projectPath": "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\Taxi\\Taxi.csproj",
+        "projectPath": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Taxi\\Taxi.csproj",
         "packagesPath": "C:\\Users\\Dimon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\Taxi\\obj\\",
+        "outputPath": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Taxi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Dimon\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -160,19 +162,20 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.telerik.com/nuget": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\BusinessLogic\\BusinessLogic.csproj": {
-                "projectPath": "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\BusinessLogic\\BusinessLogic.csproj"
+              "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\BusinessLogic\\BusinessLogic.csproj": {
+                "projectPath": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\BusinessLogic\\BusinessLogic.csproj"
               },
-              "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\Services\\Services.csproj": {
-                "projectPath": "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\Services\\Services.csproj"
+              "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Services\\Services.csproj": {
+                "projectPath": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Services\\Services.csproj"
               },
-              "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\Taxi_Database\\Taxi_Database.csproj": {
-                "projectPath": "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\Taxi_Database\\Taxi_Database.csproj"
+              "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Taxi_Database\\Taxi_Database.csproj": {
+                "projectPath": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Taxi_Database\\Taxi_Database.csproj"
               }
             }
           }
@@ -233,14 +236,14 @@
         }
       }
     },
-    "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\Taxi_Database\\Taxi_Database.csproj": {
+    "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Taxi_Database\\Taxi_Database.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\Taxi_Database\\Taxi_Database.csproj",
+        "projectUniqueName": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Taxi_Database\\Taxi_Database.csproj",
         "projectName": "Taxi_Database",
-        "projectPath": "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\Taxi_Database\\Taxi_Database.csproj",
+        "projectPath": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Taxi_Database\\Taxi_Database.csproj",
         "packagesPath": "C:\\Users\\Dimon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\Taxi_Database\\obj\\",
+        "outputPath": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Taxi_Database\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Dimon\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -251,7 +254,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.telerik.com/nuget": {}
         },
         "frameworks": {
           "netcoreapp3.1": {

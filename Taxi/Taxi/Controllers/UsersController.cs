@@ -5,6 +5,7 @@ using BusinessLogic.ModelsForControllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Taxi.ViewModels.Subscription;
 using Taxi.ViewModels.User;
 using Taxi_Database.Context;
 using Taxi_Database.Models;
@@ -144,6 +145,21 @@ namespace Taxi.Controllers
                     ModelState.AddModelError(string.Empty, "Пользователь не найден");
             }
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult Subscription()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Subscription(GetSubscriptionViewModel model)
+        {
+            IUserController repository = new Users(_userManager, context);
+
+            repository.Subscription(model.Priority, model.CountOfTravels, model.Id);
+            return RedirectToAction("Index");
         }
     }
 }

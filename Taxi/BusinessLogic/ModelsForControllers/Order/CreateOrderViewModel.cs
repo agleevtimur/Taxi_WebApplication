@@ -1,16 +1,16 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Taxi.ViewModels.Order
+namespace BusinessLogic.ModelsForControllers
 {
     public class CreateOrderViewModel
     {
-        public string[] LocationsFrom { get; set; }
+        public List<string> LocationsFrom { get; set; }
         public string LocationFrom { get; set; }
-        public string[] LocationsTo { get; set; }
+        public List<string> LocationsTo { get; set; }
         public string LocationTo { get; set; }
         [Required]
-        public DateTime Time { get; set; }
+        public string Time { get; set; }
         [Required]
         public int CountOfPeople { get; set; }
     }

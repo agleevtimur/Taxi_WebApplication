@@ -22,7 +22,7 @@ namespace Taxi_Database.Context
         }
 
         // добавление документа
-        public async Task Create(int whoId, int whomId, int orderId, int rating)
+        public async Task Create(string whoId, string whomId, int orderId, int rating)
         {
             var rate = new Rating(whoId, whomId, orderId, rating);
             await Rating.InsertOneAsync(rate);

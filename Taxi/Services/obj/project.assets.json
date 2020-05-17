@@ -1066,11 +1066,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\Services\\Services.csproj",
+      "projectUniqueName": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Services\\Services.csproj",
       "projectName": "Services",
-      "projectPath": "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\Services\\Services.csproj",
+      "projectPath": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Services\\Services.csproj",
       "packagesPath": "C:\\Users\\Dimon\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\Services\\obj\\",
+      "outputPath": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Services\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Dimon\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1081,7 +1081,8 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://nuget.telerik.com/nuget": {}
       },
       "frameworks": {
         "netcoreapp3.1": {

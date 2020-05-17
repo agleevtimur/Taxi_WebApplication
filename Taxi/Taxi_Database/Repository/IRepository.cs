@@ -7,29 +7,34 @@ namespace Taxi_Database.Repository
     public interface IRepository
     {
         Task SaveClient(Client client);
-        Task UpdateClient(int clientId);
+        Task UpdateClient(string clientId);
         Task EditClient(Client client);
         IEnumerable<Client> GetClients();
         Client GetClient(string id);
+        Client GetClientForOrders(int id);
         Task DeleteClient(string id);
-        int SaveOrder(Order order);
+        Task SaveRequest(Order order);
         IEnumerable<Order> GetRequests();
         IEnumerable<Order> GetRequestsByClientId(int id);
         Task DeleteRequest(int id);
+        Task<int> SaveOrder(Order order);
         IEnumerable<ReadyOrders> GetOrders();
+        ReadyOrders GetOrder(int id);
         List<ReadyOrders> GetOrdersByClientId(int id);
+        ReadyOrders GetReadyOrderId(int id);
         Task DeleteOrder(int id);
+        List<Client> GetPassengers(int id);
         Task SavePassengers(int orderId, int firstId, int secondId, int thirdId, int forthId);
         Task SaveLocation(Location location);
         IEnumerable<Location> GetLocations();
         IEnumerable<HistoryOfLocation> GetHistoryOfLocations();
-        int GetCountOfRates(int id);
-        double GetRating(int id);
-        Task UpdateRating(int id, int countOfRates, double rating);
+        int GetCountOfRates(string id);
+        double GetRating(string id);
+        Task UpdateRating(string id, int countOfRates, double rating);
     }
 
     public interface IRating
     {
-        Task Create(int whoId, int whomId, int orderId, int rating);
+        Task Create(string whoId, string whomId, int orderId, int rating);
     }
 }

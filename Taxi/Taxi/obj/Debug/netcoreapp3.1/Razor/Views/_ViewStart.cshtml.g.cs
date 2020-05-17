@@ -21,13 +21,13 @@ using Taxi;
 #nullable disable
 #nullable restore
 #line 2 "C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\Taxi\Views\_ViewImports.cshtml"
-using Taxi.Models;
+using Taxi_Database.Models;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7091c65830b0329e613be026ede8a57552863778", @"/Views/_ViewStart.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"619b22f9bbb25566fbf24f36c30bfcb8fe9211fd", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"1e40fcd57fb6224475aa68ca6977d70bd4ea86e3", @"/Views/_ViewImports.cshtml")]
     public class Views__ViewStart : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

@@ -127,3 +127,14 @@ C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\Taxi\
 C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\Taxi\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll
 C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\Taxi\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Embedded.dll
 C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\Taxi\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\Taxi\bin\Debug\netcoreapp3.1\Taxi_Database.exe
+C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\Taxi\bin\Debug\netcoreapp3.1\Taxi.StaticWebAssets.xml
+C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\Taxi\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Google.dll
+C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\Taxi\bin\Debug\netcoreapp3.1\SendGrid.dll
+C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\Taxi\bin\Debug\netcoreapp3.1\Services.dll
+C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\Taxi\bin\Debug\netcoreapp3.1\BusinessLogic.pdb
+C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\Taxi\bin\Debug\netcoreapp3.1\Services.pdb
+C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\Taxi\bin\Debug\netcoreapp3.1\Taxi_Database.pdb
+C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\Taxi\obj\Debug\netcoreapp3.1\Taxi.csproj.CoreCompileInputs.cache
+C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\Taxi\obj\Debug\netcoreapp3.1\Taxi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Dimon\OneDrive\Документы\GitHub\Taxi_WebApplication\Taxi\Taxi\obj\Debug\netcoreapp3.1\Taxi.MvcApplicationPartsAssemblyInfo.cache

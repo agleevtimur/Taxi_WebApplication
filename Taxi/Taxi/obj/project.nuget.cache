@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XxlNUA58+lsiY7ebdE1IJ2/09/GaB9p+Hm0r04U1gFmv98WbD8RagjKrYNujkM9VqPqeu/Tw1PYb1HGr2VSQtw==",
+  "dgSpecHash": "e6Zz9a0MMktON69WYCQkAzL6HuoyGF0H9JmacZVh4G1Kf1UJKlK+wP2naMeS1MgAN/P/D2y6rz/nCigYM76Y+Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\Taxi\\Taxi.csproj",
+  "projectFilePath": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Taxi\\Taxi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Dimon\\.nuget\\packages\\dnsclient\\1.3.1\\dnsclient.1.3.1.nupkg.sha512",
     "C:\\Users\\Dimon\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",

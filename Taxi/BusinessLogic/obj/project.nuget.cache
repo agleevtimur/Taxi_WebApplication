@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "SSzQBBNbCzaIhDh+njBxdEfZTCt1O+GSKAEPL28j5N7SIfTZ6PckegfuybZx9qg1wxIbV3Fitu/ChLXg4GChpQ==",
+  "dgSpecHash": "S4KDG6Kv7sx7ypfykkSFQ4NyJRogVP4Xi5dtEOc3hmTlM6tECRIc7xVE233r++m4wh6JrNbIW2pXUUlW1dwvBQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Dimon\\source\\repos\\Taxi_WebApplication\\Taxi\\BusinessLogic\\BusinessLogic.csproj",
+  "projectFilePath": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\BusinessLogic\\BusinessLogic.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Dimon\\.nuget\\packages\\dnsclient\\1.3.1\\dnsclient.1.3.1.nupkg.sha512",
     "C:\\Users\\Dimon\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",

@@ -135,5 +135,14 @@ namespace BusinessLogic.ControllersForMVC
             await repository1.EditClient(client);
             return result;
         }
+        
+        public async Task Subscription(int priority, int countOfTravels, string id)
+        {
+            IRepository repository = new Repository(context);
+            var client = repository.GetClient(id);
+            client.Priority = priority;
+            client.LeftOrdersPriority = countOfTravels;
+            await repository.EditClient(client);
+        }
     }
 }

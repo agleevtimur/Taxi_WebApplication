@@ -1,11 +1,10 @@
 ﻿using BusinessLogic;
 using BusinessLogic.ControllersForMVC;
+using BusinessLogic.ModelsForControllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using Taxi.ViewModels.Order;
+using System.Threading.Tasks;
 using Taxi_Database.Context;
-using Taxi_Database.Repository;
 
 namespace Taxi.Controllers
 {
@@ -18,43 +17,55 @@ namespace Taxi.Controllers
         {
             this.context = context;
         }
-        // в процессе
+
         public IActionResult Index()
         {
             IOrderController repository = new Orders(context);
-            var orders = repository.Index();
-            return View(orders);
+            var model = repository.Index();
+            return View(model);
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            IOrderController repository = new Orders(context);
+            var model = repository.CreateGet();
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(CreateOrderViewModel model)
+        public async Task<IActionResult> Create(CreateOrderViewModel model, string id)
         {
             IOrderController repository = new Orders(context);
             if (ModelState.IsValid)
             {
-                //repository.SaveOrder(order);
+                await repository.Create(model.LocationFrom, model.LocationTo, model.Time, model.CountOfPeople, id);
                 return RedirectToAction("Index");
             }
 
             return View(model);
         }
 
-        [Authorize(Roles = "admin")]
-        public IActionResult Get(int? id)
+        public IActionResult Order(int? id)
         {
-            IRepository repository = new Repository(context);
+            IOrderController repository = new Orders(context);
+
             if (id == null)
                 return NotFound();
 
-            var newId = Int32.Parse(id.ToString());
-            var orders = repository.GetRequestsByClientId(newId);
+            var model = repository.GetOrder((int)id);
+            return View(model);
+        }
+
+        [Authorize(Roles = "admin")]
+        public IActionResult ReadyOrders(string id)
+        {
+            IOrderController repository = new Orders(context);
+            if (id == null)
+                return NotFound();
+
+            var orders = repository.GetOrdersByClientId(id);
 
             if (orders == null)
                 return NotFound();
@@ -63,31 +74,51 @@ namespace Taxi.Controllers
         }
 
         [Authorize(Roles = "admin")]
-        public IActionResult History()
+        public IActionResult Requests(string id)
         {
-            IRepository repository = new Repository(context);
-            var orders = repository.GetOrders();
+            IOrderController repository = new Orders(context);
+            if (id == null)
+                return NotFound();
+
+            var orders = repository.GetRequestsByClientId(id);
+
+            if (orders == null)
+                return NotFound();
+
             return View(orders);
         }
 
-        [HttpPost]
-        [Authorize(Roles = "user, admin")]
-        public IActionResult Rating(int whoId, int whomId, int orderId, int newRating)
+        [Authorize(Roles = "admin")]
+        [HttpGet]
+        public IActionResult Delete(int? id)
         {
-            IRating rate = new RatingContext();
-            rate.Create(whoId, whomId, orderId, newRating);
+            IOrderController repository = new Orders(context);
 
-            IRepository repository = new Repository(context);
-            var countOfRates = repository.GetCountOfRates(whomId);
-            var rating = repository.GetRating(whomId);
+            if (id == null)
+                return NotFound();
 
-            INewRating newRate = new NewRating();
-            var newCountOfRates = newRate.GetNewCountOfRates(countOfRates);
-            var ratingOfClient = newRate.GetNewRating(countOfRates, rating, newRating);
+            var order = repository.GetReadyOrderId((int)id);
+            if (order == null)
+                return NotFound();
+            return View(order);
+        }
 
-            repository.UpdateRating(whomId, newCountOfRates, ratingOfClient);
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            IOrderController repository = new Orders(context);
+            repository.DeleteOrder(id);
+            return RedirectToAction("Index");
+        }
 
-            return RedirectToAction(nameof(Index));
+        [HttpPost]
+        public async Task<IActionResult> Rating(string whoId, string whomId, int orderId, int newRating)
+        {
+            IOrderController repository = new Orders(context);
+            await repository.Rating(whoId, whomId, orderId, newRating);
+            return RedirectToAction("Index");
         }
     }
 }

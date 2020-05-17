@@ -5,7 +5,7 @@ namespace Taxi_Database.Models
 {
     public class Rating
     {
-        public Rating(int whoId, int whomId, int orderId, int countOfStars)
+        public Rating(string whoId, string whomId, int orderId, int countOfStars)
         {
             WhoId = whoId;
             WhomId = whomId;
@@ -15,8 +15,8 @@ namespace Taxi_Database.Models
 
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
-        public int WhoId { get; set; }
-        public int WhomId { get; set; }
+        public string WhoId { get; set; }
+        public string WhomId { get; set; }
         public int OrderId { get; set; }
         public int CountOfStars { get; set; }
     }
