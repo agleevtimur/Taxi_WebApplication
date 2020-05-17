@@ -1,21 +1,18 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\fanto\\Desktop\\gitTaxiWeb\\app4\\app4\\app4.csproj": {}
+    "C:\\Users\\fanto\\Desktop\\gitTaxiWeb\\Taxi_WebApplication\\app\\app4\\app4.csproj": {}
   },
   "projects": {
-    "C:\\Users\\fanto\\Desktop\\gitTaxiWeb\\app4\\app4\\app4.csproj": {
+    "C:\\Users\\fanto\\Desktop\\gitTaxiWeb\\Taxi_WebApplication\\app\\app4\\app4.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\fanto\\Desktop\\gitTaxiWeb\\app4\\app4\\app4.csproj",
+        "projectUniqueName": "C:\\Users\\fanto\\Desktop\\gitTaxiWeb\\Taxi_WebApplication\\app\\app4\\app4.csproj",
         "projectName": "app4",
-        "projectPath": "C:\\Users\\fanto\\Desktop\\gitTaxiWeb\\app4\\app4\\app4.csproj",
+        "projectPath": "C:\\Users\\fanto\\Desktop\\gitTaxiWeb\\Taxi_WebApplication\\app\\app4\\app4.csproj",
         "packagesPath": "C:\\Users\\fanto\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\fanto\\Desktop\\gitTaxiWeb\\app4\\app4\\obj\\",
+        "outputPath": "C:\\Users\\fanto\\Desktop\\gitTaxiWeb\\Taxi_WebApplication\\app\\app4\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
           "C:\\Users\\fanto\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -76,6 +73,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -84,7 +87,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

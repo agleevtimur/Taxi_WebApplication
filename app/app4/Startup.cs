@@ -50,8 +50,8 @@ namespace app4
             IConfigurationSection googleAuthNSection =
                 Configuration.GetSection("Authentication:Google");
 
-            options.ClientId = googleAuthNSection["580368506802-mea9eonokpop0njdo5l20io6e0dhgs5t.apps.googleusercontent.com"];
-            options.ClientSecret = googleAuthNSection["kDnXMPy9QxIZhIE6GJ_4ui0s"];//!
+            options.ClientId = "580368506802-mea9eonokpop0njdo5l20io6e0dhgs5t.apps.googleusercontent.com";
+            options.ClientSecret = "kDnXMPy9QxIZhIE6GJ_4ui0s";//!
         });// ToDo доделать аутентификацию
         }
 
