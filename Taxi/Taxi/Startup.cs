@@ -74,7 +74,7 @@ namespace Taxi
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Account}/{action=Login}/{id?}");
+                    pattern: "{controller=Users}/{action=Index}/{id?}");
             });
         }
     }
