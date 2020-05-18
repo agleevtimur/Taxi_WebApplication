@@ -226,3 +226,5 @@ C:/Users/Dimon/OneDrive/Документы/GitHub/Taxi_WebApplication/Taxi/Taxi/
 /Users/ildardavletarov/Taxi_WebApplication/Taxi/Taxi/obj/Debug/netcoreapp3.1/Taxi.dll
 /Users/ildardavletarov/Taxi_WebApplication/Taxi/Taxi/obj/Debug/netcoreapp3.1/Taxi.pdb
 /Users/ildardavletarov/Taxi_WebApplication/Taxi/Taxi/obj/Debug/netcoreapp3.1/Taxi.genruntimeconfig.cache
+/Users/ildardavletarov/Taxi_WebApplication/Taxi/Taxi/obj/Debug/netcoreapp3.1/Razor/Views/Users/Edit.cshtml.g.cs
+/Users/ildardavletarov/Taxi_WebApplication/Taxi/Taxi/obj/Debug/netcoreapp3.1/Razor/Views/Users/Index.cshtml.g.cs

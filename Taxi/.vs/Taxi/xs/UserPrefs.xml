@@ -1,15 +1,11 @@
 ﻿<Properties StartupConfiguration="{8E5E869E-2BE5-4702-A072-1C4EF5158F44}|Default">
   <MonoDevelop.Ide.ItemProperties.Taxi PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Taxi/Views/Account/ForgotPassword.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Taxi/Views/Account/Register.cshtml">
     <Files>
-      <File FileName="Taxi/Views/Account/Register.cshtml" Line="19" Column="1" />
-      <File FileName="Taxi/Views/Account/Login.cshtml" Line="20" Column="12" />
-      <File FileName="Taxi/Views/Account/ResetPassword.cshtml" Line="28" Column="21" />
-      <File FileName="Taxi/Startup.cs" Line="50" Column="22" />
-      <File FileName="Taxi/Views/Account/ForgotPassword.cshtml" Line="18" Column="25" />
-      <File FileName="Taxi_Database/Context/ApplicationContext.cs" Line="22" Column="1" />
-      <File FileName="Taxi/Views/Account/ForgotPasswordConfirmation.cshtml" Line="1" Column="1" />
-      <File FileName="Taxi/Views/Account/AccessDenied.cshtml" Line="1" Column="1" />
+      <File FileName="Taxi/Controllers/UsersController.cs" Line="80" Column="10" />
+      <File FileName="Taxi/Controllers/RolesController.cs" Line="1" Column="1" />
+      <File FileName="Taxi/Views/Account/Login.cshtml" Line="90" Column="37" />
+      <File FileName="Taxi/Views/Account/Register.cshtml" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -21,10 +17,12 @@
               </Node>
             </Node>
             <Node name="Taxi" expanded="True">
+              <Node name="Controllers" expanded="True" />
               <Node name="Views" expanded="True">
                 <Node name="Account" expanded="True">
-                  <Node name="ForgotPassword.cshtml" selected="True" />
+                  <Node name="Register.cshtml" selected="True" />
                 </Node>
+                <Node name="Users" expanded="True" />
               </Node>
             </Node>
             <Node name="Taxi_Database" expanded="True">
