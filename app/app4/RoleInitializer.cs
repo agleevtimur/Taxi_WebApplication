@@ -12,8 +12,9 @@ namespace app4
     {
         public static async Task InitializeAsync(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
+            string adminName = "admin";
             string adminEmail = "admin@gmail.com";
-            string password = "_Aa123456";
+            string password = "Aa123456!";
             if (await roleManager.FindByNameAsync("admin") == null)
             {
                 await roleManager.CreateAsync(new IdentityRole("admin"));
@@ -22,9 +23,9 @@ namespace app4
             {
                 await roleManager.CreateAsync(new IdentityRole("employee"));
             }
-            if (await userManager.FindByNameAsync(adminEmail) == null)
+            if (await userManager.FindByNameAsync(adminName) == null)
             {
-                User admin = new User { Email = adminEmail, UserName = adminEmail };
+                User admin = new User { Email = adminEmail, UserName = adminName };
                 IdentityResult result = await userManager.CreateAsync(admin, password);
                 if (result.Succeeded)
                 {
