@@ -84,7 +84,7 @@ namespace Taxi.Controllers
 
             var result = await repository.ConfirmGet(user, code);
             if (result.Succeeded)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Users");
             else
                 return View("Error");
         }
@@ -116,7 +116,7 @@ namespace Taxi.Controllers
                         return Redirect(model.ReturnUrl);
 
                     else
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Users");
                 }
                 else
                     ModelState.AddModelError("", "Неправильный логин и (или) пароль");
