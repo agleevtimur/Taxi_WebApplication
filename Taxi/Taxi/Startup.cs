@@ -25,29 +25,28 @@ namespace Taxi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //перед запуском создать пользователя taxi с паролем taxi в PostgreSQL
-            var connection = "Server=localhost;Database=z;Port=5432;Username=ildar;Password=1";
             services.AddDbContext<ApplicationContext>(options =>
-                options.UseNpgsql(connection));
-            services.AddDbContext<IdentityContext>(options =>
-                options.UseNpgsql(connection));
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<RatingContext>();
+
+            services.AddControllersWithViews();
             services.AddTransient<IPasswordValidator<User>, CustomPasswordValidator<User>>();
             services.AddTransient<IUserValidator<User>, CustomUserValidator<User>>();
-            services.AddControllersWithViews();
+            services.AddDbContext<IdentityContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationContext>()
+                .AddEntityFrameworkStores<IdentityContext>()
                 .AddDefaultTokenProviders();
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
-            //services.AddAuthentication()
-            //    .AddGoogle(options =>
-            //    {
-            //        IConfigurationSection googleAuthNSection =
-            //        Configuration.GetSection("Authentication:Google");
-            //        options.ClientId = googleAuthNSection["ClientId"];
-            //        options.ClientSecret = googleAuthNSection["ClientSecret"];
-            //    });
+            services.AddAuthentication()
+        .AddGoogle(options =>
+        {
+            IConfigurationSection googleAuthNSection =
+                Configuration.GetSection("Authentication:Google");
+            options.ClientId = "580368506802-mea9eonokpop0njdo5l20io6e0dhgs5t.apps.googleusercontent.com";
+            options.ClientSecret = "kDnXMPy9QxIZhIE6GJ_4ui0s";//!
+        });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,13 +67,14 @@ namespace Taxi
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Users}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
