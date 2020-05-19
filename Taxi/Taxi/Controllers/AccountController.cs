@@ -13,7 +13,6 @@ using Taxi_Database.Models;
 
 namespace Taxi.Controllers
 {
-    [Authorize(Roles = "employee")]
     public class AccountController : Controller
     {
 
@@ -120,8 +119,8 @@ namespace Taxi.Controllers
                         return Redirect(model.ReturnUrl);
                     else
                     {
-                        var user = repository.GetUserByLogin(model.Login);
-                        return RedirectToAction("Index/" + user.StringId, "Users");
+                        //var user = repository.GetUserByLogin(model.Login);
+                        return RedirectToAction("Index", "Users");
                     }
                 }
                 else
