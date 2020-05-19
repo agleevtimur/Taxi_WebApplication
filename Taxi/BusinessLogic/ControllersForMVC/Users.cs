@@ -58,7 +58,7 @@ namespace BusinessLogic.ControllersForMVC
             IUser repository = new UserRepository(userManager);
             IRepository repository1 = new Repository(context);
             User user = new User { Email = email, UserName = login };
-            await repository1.SaveClient(new Client(user.Id, null, null, user.UserName, user.Email, password,
+            await repository1.SaveClient(new Client(user.Id, "Требуется ввести", "Требуется ввести", user.UserName, user.Email, password,
                 0, 0, 0, -1, null, 0, DateTime.Now));
             var result = await repository.CreateUser(user, password);
             return result;
