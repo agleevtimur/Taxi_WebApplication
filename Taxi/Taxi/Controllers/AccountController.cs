@@ -119,8 +119,13 @@ namespace Taxi.Controllers
                         return Redirect(model.ReturnUrl);
                     else
                     {
-                        //var user = repository.GetUserByLogin(model.Login);
-                        return RedirectToAction("Index", "Users");
+                        var user = repository.GetUserByLogin(model.Login);
+                        return RedirectToRoute(new
+                        {
+                            controller = "Users",
+                            action = "Index",
+                            id = user.StringId
+                        }); 
                     }
                 }
                 else
