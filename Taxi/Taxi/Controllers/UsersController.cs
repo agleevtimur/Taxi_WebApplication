@@ -2,7 +2,6 @@
 using BusinessLogic;
 using BusinessLogic.ControllersForMVC;
 using BusinessLogic.ModelsForControllers;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Taxi.ViewModels.Subscription;

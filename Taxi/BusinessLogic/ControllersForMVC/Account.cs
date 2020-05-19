@@ -56,7 +56,7 @@ namespace BusinessLogic.ControllersForMVC
             //установка куки
             await signInManager.SignInAsync(user, false);
             IRepository repository = new Repository(context);
-            await repository.SaveClient(new Client(user.Id, "Требуется ввести", "Требуется ввести", user.UserName, user.Email, password,
+            await repository.SaveClient(new Client(user.Id, null, null, user.UserName, user.Email, password,
                0, 0, 0, -1, null, 0, DateTime.Now));
             var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
             return code;
