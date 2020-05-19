@@ -16,3 +16,12 @@ C:/Users/Dimon/OneDrive/Документы/GitHub/Taxi_WebApplication/Taxi/Servi
 /Users/ildardavletarov/Taxi_WebApplication/Taxi/Services/obj/Debug/netcoreapp3.1/Services.AssemblyInfo.cs
 /Users/ildardavletarov/Taxi_WebApplication/Taxi/Services/obj/Debug/netcoreapp3.1/Services.dll
 /Users/ildardavletarov/Taxi_WebApplication/Taxi/Services/obj/Debug/netcoreapp3.1/Services.pdb
+C:\Users\fanto\Desktop\gitTaxiWeb\dmitrii\Taxi\Services\bin\Debug\netcoreapp3.1\Services.deps.json
+C:\Users\fanto\Desktop\gitTaxiWeb\dmitrii\Taxi\Services\bin\Debug\netcoreapp3.1\Services.dll
+C:\Users\fanto\Desktop\gitTaxiWeb\dmitrii\Taxi\Services\bin\Debug\netcoreapp3.1\Services.pdb
+C:\Users\fanto\Desktop\gitTaxiWeb\dmitrii\Taxi\Services\obj\Debug\netcoreapp3.1\Services.csprojAssemblyReference.cache
+C:\Users\fanto\Desktop\gitTaxiWeb\dmitrii\Taxi\Services\obj\Debug\netcoreapp3.1\Services.csproj.CoreCompileInputs.cache
+C:\Users\fanto\Desktop\gitTaxiWeb\dmitrii\Taxi\Services\obj\Debug\netcoreapp3.1\Services.AssemblyInfoInputs.cache
+C:\Users\fanto\Desktop\gitTaxiWeb\dmitrii\Taxi\Services\obj\Debug\netcoreapp3.1\Services.AssemblyInfo.cs
+C:\Users\fanto\Desktop\gitTaxiWeb\dmitrii\Taxi\Services\obj\Debug\netcoreapp3.1\Services.dll
+C:\Users\fanto\Desktop\gitTaxiWeb\dmitrii\Taxi\Services\obj\Debug\netcoreapp3.1\Services.pdb

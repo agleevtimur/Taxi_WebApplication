@@ -23,3 +23,16 @@ C:/Users/Dimon/OneDrive/Документы/GitHub/Taxi_WebApplication/Taxi/Busin
 /Users/ildardavletarov/Taxi_WebApplication/Taxi/BusinessLogic/obj/Debug/netcoreapp3.1/BusinessLogic.csproj.CopyComplete
 /Users/ildardavletarov/Taxi_WebApplication/Taxi/BusinessLogic/obj/Debug/netcoreapp3.1/BusinessLogic.dll
 /Users/ildardavletarov/Taxi_WebApplication/Taxi/BusinessLogic/obj/Debug/netcoreapp3.1/BusinessLogic.pdb
+C:\Users\fanto\Desktop\gitTaxiWeb\dmitrii\Taxi\BusinessLogic\bin\Debug\netcoreapp3.1\Taxi_Database.exe
+C:\Users\fanto\Desktop\gitTaxiWeb\dmitrii\Taxi\BusinessLogic\bin\Debug\netcoreapp3.1\BusinessLogic.deps.json
+C:\Users\fanto\Desktop\gitTaxiWeb\dmitrii\Taxi\BusinessLogic\bin\Debug\netcoreapp3.1\BusinessLogic.dll
+C:\Users\fanto\Desktop\gitTaxiWeb\dmitrii\Taxi\BusinessLogic\bin\Debug\netcoreapp3.1\BusinessLogic.pdb
+C:\Users\fanto\Desktop\gitTaxiWeb\dmitrii\Taxi\BusinessLogic\bin\Debug\netcoreapp3.1\Taxi_Database.dll
+C:\Users\fanto\Desktop\gitTaxiWeb\dmitrii\Taxi\BusinessLogic\bin\Debug\netcoreapp3.1\Taxi_Database.pdb
+C:\Users\fanto\Desktop\gitTaxiWeb\dmitrii\Taxi\BusinessLogic\obj\Debug\netcoreapp3.1\BusinessLogic.csprojAssemblyReference.cache
+C:\Users\fanto\Desktop\gitTaxiWeb\dmitrii\Taxi\BusinessLogic\obj\Debug\netcoreapp3.1\BusinessLogic.csproj.CoreCompileInputs.cache
+C:\Users\fanto\Desktop\gitTaxiWeb\dmitrii\Taxi\BusinessLogic\obj\Debug\netcoreapp3.1\BusinessLogic.AssemblyInfoInputs.cache
+C:\Users\fanto\Desktop\gitTaxiWeb\dmitrii\Taxi\BusinessLogic\obj\Debug\netcoreapp3.1\BusinessLogic.AssemblyInfo.cs
+C:\Users\fanto\Desktop\gitTaxiWeb\dmitrii\Taxi\BusinessLogic\obj\Debug\netcoreapp3.1\BusinessLogic.csproj.CopyComplete
+C:\Users\fanto\Desktop\gitTaxiWeb\dmitrii\Taxi\BusinessLogic\obj\Debug\netcoreapp3.1\BusinessLogic.dll
+C:\Users\fanto\Desktop\gitTaxiWeb\dmitrii\Taxi\BusinessLogic\obj\Debug\netcoreapp3.1\BusinessLogic.pdb

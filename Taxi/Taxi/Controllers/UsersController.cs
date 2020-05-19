@@ -12,7 +12,7 @@ using Taxi_Database.Models;
 
 namespace Taxi.Controllers
 {
-    [Authorize(Roles = "employee, admin")]
+    [Authorize(Roles = "admin")]
     public class UsersController : Controller
     {
         private readonly UserManager<User> _userManager;
@@ -24,7 +24,6 @@ namespace Taxi.Controllers
             this.context = context;
         }
 
-        [Authorize(Roles = "employee")]
         public async Task<IActionResult> Index(string id)
         {
             IUserController repository = new Users(_userManager, context);
@@ -36,7 +35,6 @@ namespace Taxi.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "admin")]
         public IActionResult Clients()
         {
             IUserController repository = new Users(_userManager, context);
@@ -102,7 +100,6 @@ namespace Taxi.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Delete(string id)
         {

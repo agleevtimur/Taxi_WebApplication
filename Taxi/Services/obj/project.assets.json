@@ -1061,28 +1061,26 @@
     ]
   },
   "packageFolders": {
-    "/Users/ildardavletarov/.nuget/packages/": {},
-    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
+    "C:\\Users\\fanto\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/ildardavletarov/Taxi_WebApplication/Taxi/Services/Services.csproj",
+      "projectUniqueName": "C:\\Users\\fanto\\Desktop\\gitTaxiWeb\\dmitrii\\Taxi\\Services\\Services.csproj",
       "projectName": "Services",
-      "projectPath": "/Users/ildardavletarov/Taxi_WebApplication/Taxi/Services/Services.csproj",
-      "packagesPath": "/Users/ildardavletarov/.nuget/packages/",
-      "outputPath": "/Users/ildardavletarov/Taxi_WebApplication/Taxi/Services/obj/",
+      "projectPath": "C:\\Users\\fanto\\Desktop\\gitTaxiWeb\\dmitrii\\Taxi\\Services\\Services.csproj",
+      "packagesPath": "C:\\Users\\fanto\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\fanto\\Desktop\\gitTaxiWeb\\dmitrii\\Taxi\\Services\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "/Users/ildardavletarov/.config/NuGet/NuGet.Config"
+        "C:\\Users\\fanto\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1122,12 +1120,21 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[3.1.0, 3.1.0]"
+          }
+        ],
         "frameworkReferences": {
+          "Microsoft.AspNetCore.App": {
+            "privateAssets": "none"
+          },
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.200/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
       }
     }
   }
