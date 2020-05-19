@@ -12,7 +12,7 @@ using Taxi_Database.Models;
 
 namespace Taxi.Controllers
 {
-    [Authorize(Roles = "admin")]
+    //[Authorize(Roles = "admin")]
     public class UsersController : Controller
     {
         private readonly UserManager<User> _userManager;
