@@ -8,10 +8,12 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
 using Taxi.ViewModels.Login;
+using Taxi_Database.Context;
 using Taxi_Database.Models;
 
 namespace Taxi.Controllers
 {
+    [Authorize(Roles = "employee")]
     public class AccountController : Controller
     {
 
@@ -19,14 +21,16 @@ namespace Taxi.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly IPasswordValidator<User> _passwordValidator;
+        private readonly ApplicationContext context;
 
         public AccountController(UserManager<User> userManager, SignInManager<User> signInManager,
-            IEmailSender emailSender, IPasswordValidator<User> passwordValidator)
+            IEmailSender emailSender, IPasswordValidator<User> passwordValidator, ApplicationContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _passwordValidator = passwordValidator;
+            this.context = context;
         }
 
         [HttpGet]
@@ -39,7 +43,7 @@ namespace Taxi.Controllers
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             IAccountController repository = new Account(_userManager, 
-                _signInManager, _emailSender, _passwordValidator);
+                _signInManager, _emailSender, _passwordValidator, context);
 
             if (ModelState.IsValid)
             {
@@ -48,7 +52,7 @@ namespace Taxi.Controllers
 
                 if (result.Succeeded)
                 {
-                    var code = await repository.Register(user);
+                    var code = await repository.Register(user, model.Password);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code },
                         protocol: HttpContext.Request.Scheme);
                     await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
@@ -73,7 +77,7 @@ namespace Taxi.Controllers
         public async Task<IActionResult> ConfirmEmail(string userId, string code)
         {
             IAccountController repository = new Account(_userManager,
-                _signInManager, _emailSender, _passwordValidator);
+                _signInManager, _emailSender, _passwordValidator, context);
 
             if (userId == null || code == null)
                 return View("Error");
@@ -93,7 +97,7 @@ namespace Taxi.Controllers
         public async Task<IActionResult> LoginAsync(string returnUrl = null)
         {
             IAccountController repository = new Account(_userManager,
-                 _signInManager, _emailSender, _passwordValidator);
+                _signInManager, _emailSender, _passwordValidator, context);
             var model = await repository.LoginGet(returnUrl);
 
             return View(model);
@@ -104,7 +108,7 @@ namespace Taxi.Controllers
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             IAccountController repository = new Account(_userManager,
-               _signInManager, _emailSender, _passwordValidator);
+                _signInManager, _emailSender, _passwordValidator, context);
 
             if (ModelState.IsValid)
             {
@@ -114,9 +118,11 @@ namespace Taxi.Controllers
                     // проверяем, принадлежит ли URL приложению
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
                         return Redirect(model.ReturnUrl);
-
                     else
-                        return RedirectToAction("Index", "Users");
+                    {
+                        var user = repository.GetUserByLogin(model.Login);
+                        return RedirectToAction("Index/" + user.StringId, "Users");
+                    }
                 }
                 else
                     ModelState.AddModelError("", "Неправильный логин и (или) пароль");
@@ -130,7 +136,7 @@ namespace Taxi.Controllers
         public async Task<IActionResult> Logout()
         {
             IAccountController repository = new Account(_userManager,
-               _signInManager, _emailSender, _passwordValidator);
+                _signInManager, _emailSender, _passwordValidator, context);
             await repository.LogOut();
             return RedirectToAction("Index", "Home");
         }
@@ -149,7 +155,7 @@ namespace Taxi.Controllers
         public async Task<IActionResult> EmailInUse(string email)
         {
             IAccountController repository = new Account(_userManager,
-                _signInManager, _emailSender, _passwordValidator);
+                _signInManager, _emailSender, _passwordValidator, context);
             var user = await repository.EmailInUse(email);
             return user == null ? Json(true) : Json($"Почта '{email}' уже занята");
         }
@@ -158,7 +164,7 @@ namespace Taxi.Controllers
         public async Task<IActionResult> UserNameInUse(string userName)
         {
             IAccountController repository = new Account(_userManager,
-                _signInManager, _emailSender, _passwordValidator);
+                _signInManager, _emailSender, _passwordValidator, context);
 
             if (userName == null) 
                 return Json("Имя пользователя не корректно");
@@ -171,7 +177,7 @@ namespace Taxi.Controllers
         public async Task<IActionResult> PasswordIsStrong(string password)
         {
             IAccountController repository = new Account(_userManager,
-                _signInManager, _emailSender, _passwordValidator);
+                _signInManager, _emailSender, _passwordValidator, context);
             var result = await repository.PasswordIsStrong(password);
             if (result.Succeeded) 
                 return Json(true);
@@ -192,7 +198,7 @@ namespace Taxi.Controllers
         public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
             IAccountController repository = new Account(_userManager,
-                _signInManager, _emailSender, _passwordValidator);
+                _signInManager, _emailSender, _passwordValidator, context);
 
             if (ModelState.IsValid)
             {
@@ -231,7 +237,7 @@ namespace Taxi.Controllers
         public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
         {
             IAccountController repository = new Account(_userManager,
-                _signInManager, _emailSender, _passwordValidator);
+                _signInManager, _emailSender, _passwordValidator, context);
 
             if (!ModelState.IsValid)
                 return View(model);
@@ -254,7 +260,7 @@ namespace Taxi.Controllers
         public IActionResult ExternalLogin(string provider, string returnUrl)
         {
             IAccountController repository = new Account(_userManager,
-                _signInManager, _emailSender, _passwordValidator);
+                _signInManager, _emailSender, _passwordValidator, context);
             var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
             return repository.ExternalLogin(provider, redirectUrl);            
         }
@@ -262,7 +268,7 @@ namespace Taxi.Controllers
         public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
         {
             IAccountController repository = new Account(_userManager,
-                _signInManager, _emailSender, _passwordValidator);
+                _signInManager, _emailSender, _passwordValidator, context);
             returnUrl = returnUrl ?? Url.Content("~/");
 
             var model = await repository.LoginGet(returnUrl);

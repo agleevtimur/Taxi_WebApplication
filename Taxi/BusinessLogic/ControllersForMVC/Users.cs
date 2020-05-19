@@ -19,10 +19,10 @@ namespace BusinessLogic.ControllersForMVC
             this.context = context;
         }
 
-        public Client Index(string id)
+        public async Task<Client> Index(string id)
         {
             IRepository repository = new Repository(context);
-            return repository.GetClient(id);
+            return await repository.GetClient(id);
         }
 
         public ClientAuthorizeViewModel Information(Client client)
@@ -71,10 +71,10 @@ namespace BusinessLogic.ControllersForMVC
             return user;
         }
 
-        public EditUserViewModel EditGet(User user)
+        public async Task<EditUserViewModel> EditGet(User user)
         {
             IRepository repository = new Repository(context);
-            var client = repository.GetClient(user.Id);
+            var client = await repository.GetClient(user.Id);
             EditUserViewModel model = new EditUserViewModel { Id = user.Id, Email = user.Email, Login = user.UserName,
                 FirstName = client.FirstName, SecondName = client.SecondName, AboutSelf = client.AboutSelf};
             return model;
@@ -84,7 +84,7 @@ namespace BusinessLogic.ControllersForMVC
         {
             IUser repository = new UserRepository(userManager);
             IRepository repository1 = new Repository(context);
-            var client = repository1.GetClient(model.Id);
+            var client = await repository1.GetClient(model.Id);
             await repository1.EditClient(Update(model, client));
             user.Email = model.Email;
             user.UserName = model.Login;
@@ -130,7 +130,7 @@ namespace BusinessLogic.ControllersForMVC
             IRepository repository1 = new Repository(context);
             IdentityResult result =
                         await repository.ChangePassword(user, oldPassword, newPassword);
-            var client = repository1.GetClient(user.Id);
+            var client = await repository1.GetClient(user.Id);
             client.Password = newPassword;
             await repository1.EditClient(client);
             return result;
@@ -139,7 +139,7 @@ namespace BusinessLogic.ControllersForMVC
         public async Task Subscription(int priority, int countOfTravels, string id)
         {
             IRepository repository = new Repository(context);
-            var client = repository.GetClient(id);
+            var client = await repository.GetClient(id);
             client.Priority = priority;
             client.LeftOrdersPriority = countOfTravels;
             await repository.EditClient(client);

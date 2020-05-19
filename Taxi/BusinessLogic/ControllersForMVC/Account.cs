@@ -7,6 +7,8 @@ using Taxi_Database.Repository;
 using BusinessLogic.ModelsForControllers;
 using System.Linq;
 using System.Security.Claims;
+using Taxi_Database.Context;
+using System;
 
 namespace BusinessLogic.ControllersForMVC
 {
@@ -16,14 +18,17 @@ namespace BusinessLogic.ControllersForMVC
         private readonly SignInManager<User> signInManager;
         private readonly IEmailSender emailSender;
         private readonly IPasswordValidator<User> passwordValidator;
+        private readonly ApplicationContext context;
 
         public Account(UserManager<User> userManager, SignInManager<User> signInManager,
-            IEmailSender emailSender, IPasswordValidator<User> passwordValidator)
+            IEmailSender emailSender, IPasswordValidator<User> passwordValidator,
+            ApplicationContext context)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.emailSender = emailSender;
             this.passwordValidator = passwordValidator;
+            this.context = context;
         }
 
         public User RegisterGet(string email, string userName)
@@ -39,10 +44,20 @@ namespace BusinessLogic.ControllersForMVC
             return result;
         }
 
-        public async Task<string> Register(User user)
+        public Client GetUserByLogin(string login)
+        {
+            IRepository repository = new Repository(context);
+            var user = repository.GetClientByLogin(login);
+            return user;
+        }
+
+        public async Task<string> Register(User user, string password)
         {
             //установка куки
             await signInManager.SignInAsync(user, false);
+            IRepository repository = new Repository(context);
+            await repository.SaveClient(new Client(user.Id, null, null, user.UserName, user.Email, password,
+               0, 0, 0, -1, null, 0, DateTime.Now));
             var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
             return code;
         }

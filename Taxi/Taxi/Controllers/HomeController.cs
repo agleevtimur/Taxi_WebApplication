@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using BusinessLogic;
+using BusinessLogic.ControllersForMVC;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Taxi_Database.Context;
@@ -19,7 +21,9 @@ namespace Taxi.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            IHomeController repository = new Home(context);
+            var model = repository.Index();
+            return View(model);
         }
 
         public IActionResult Privacy()

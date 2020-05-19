@@ -7,13 +7,19 @@ namespace Taxi_Database.Repository
     public interface IRepository
     {
         Task SaveClient(Client client);
+        int CountOfClients();
+        int CountOfClientsInMonth();
+        int CountOfSubscription();
         Task UpdateClient(string clientId);
         Task EditClient(Client client);
         IEnumerable<Client> GetClients();
-        Client GetClient(string id);
+        Task<Client> GetClient(string id);
+        Client GetClientByLogin(string login);
         Client GetClientForOrders(int id);
         Task DeleteClient(string id);
         Task SaveRequest(Order order);
+        int CountOdReadyOrders();
+        int CountOfReadyOrdersInDay();
         IEnumerable<Order> GetRequests();
         IEnumerable<Order> GetRequestsByClientId(int id);
         Task DeleteRequest(int id);

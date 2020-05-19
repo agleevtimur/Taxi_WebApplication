@@ -23,7 +23,7 @@ namespace BusinessLogic.Algorithms
             IRepository repository = new Repository(context);
             DeleteOldRequests();//удаляем все просроченные реквесты
             await repository.UpdateClient(clientId);//обновляем данные по клиенту: число поездок++;остаток по приоритету--;если становится 0, то приоритет меняется на базовый
-            var client = repository.GetClient(clientId);//получаем клиента по id
+            var client = await repository.GetClient(clientId);//получаем клиента по id
             var newRequest = Extension.ParseToOrder(time, start, finish, countPerson, client.Id, client.Priority);//собираем из данных реквест
             await repository.SaveRequest(newRequest);//добавляем в репозиторий новый заказ,получаем Id для заказа
             var comlete = AggregateComplete(newRequest);//вызываем чекер на набор такси, возвращает класс Complete

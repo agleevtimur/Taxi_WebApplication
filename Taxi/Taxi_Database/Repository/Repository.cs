@@ -22,6 +22,21 @@ namespace Taxi_Database.Repository
             await db.SaveChangesAsync();
         }
 
+        public int CountOfClients()
+        {
+            return db.Client.Count();
+        }
+
+        public int CountOfClientsInMonth()
+        {
+            return db.Client.Where(x => x.RegisterTime.Month == DateTime.Now.Month).Count();
+        }
+
+        public int CountOfSubscription()
+        {
+            return db.Client.Where(x => x.Priority > 0).Count();
+        }
+
         public async Task UpdateClient(string clientId)
         {
             var client = db.Client
@@ -53,9 +68,16 @@ namespace Taxi_Database.Repository
             return clients;
         }
 
-        public Client GetClient(string id)
+        public async Task<Client> GetClient(string id)
         {
-            var client = db.Client.Where(x => x.StringId == id)
+            var client = await db.Client.Where(x => x.StringId == id)
+                .FirstOrDefaultAsync();
+            return client;
+        }
+
+        public Client GetClientByLogin(string login)
+        {
+            var client = db.Client.Where(x => x.ClientName == login)
                 .FirstOrDefault();
             return client;
         }
@@ -112,6 +134,16 @@ namespace Taxi_Database.Repository
         {
             var orders = db.ReadyOrders.Select(x => x);
             return orders;
+        }
+
+        public int CountOdReadyOrders()
+        {
+            return db.ReadyOrders.Count();
+        }
+
+        public int CountOfReadyOrdersInDay()
+        {
+            return db.ReadyOrders.Where(x => x.OrderTime.Day == DateTime.Now.Day).Count();
         }
 
         public ReadyOrders GetOrder(int id)

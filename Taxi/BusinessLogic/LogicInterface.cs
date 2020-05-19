@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.ModelsForControllers;
+using BusinessLogic.ModelsForControllers.Home;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -20,12 +21,12 @@ namespace BusinessLogic
 
     public interface IUserController
     {
-        Client Index(string id);
+        Task<Client> Index(string id);
         ClientAuthorizeViewModel Information(Client client);
         IEnumerable<Client> Clients();
         Task<IdentityResult> Create(string email, string login, string password);
         Task<User> FindUser(string id);
-        EditUserViewModel EditGet(User user);
+        Task<EditUserViewModel> EditGet(User user);
         Task<IdentityResult> EditPost(User user, EditUserViewModel model);
         Task<IdentityResult> Delete(string id);
         ChangePasswordViewModel ChangeGet(string id);
@@ -37,7 +38,8 @@ namespace BusinessLogic
     {
         User RegisterGet(string email, string userName);
         Task<IdentityResult> Create(User user, string password);
-        Task<string> Register(User user);
+        Task<string> Register(User user, string password);
+        Client GetUserByLogin(string login);
         Task<User> FindUser(string userId);
         Task<IdentityResult> ConfirmGet(User user, string code);
         Task<LoginViewModel> LoginGet(string returnUrl = null);
@@ -76,5 +78,10 @@ namespace BusinessLogic
         IEnumerable<Location> Index();
         IEnumerable<HistoryOfLocation> History();
         Task SavePost(string name, string googleCode, string yandexCode, string twoGisCode);
+    }
+
+    public interface IHomeController
+    {
+        IndexHomeViewModel Index();
     }
 }

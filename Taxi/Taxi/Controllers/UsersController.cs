@@ -12,7 +12,7 @@ using Taxi_Database.Models;
 
 namespace Taxi.Controllers
 {
-    [Authorize(Roles = "employee")]
+    [Authorize(Roles = "employee, admin")]
     public class UsersController : Controller
     {
         private readonly UserManager<User> _userManager;
@@ -24,11 +24,12 @@ namespace Taxi.Controllers
             this.context = context;
         }
 
-        public IActionResult Index(string id)
+        [Authorize(Roles = "employee")]
+        public async Task<IActionResult> Index(string id)
         {
             IUserController repository = new Users(_userManager, context);
 
-            var client = repository.Index(id);
+            var client = await repository.Index(id);
             if (client == null)
                 return NotFound();
             var model = repository.Information(client);

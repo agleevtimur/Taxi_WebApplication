@@ -26,7 +26,7 @@ namespace Taxi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseNpgsql(Configuration.GetConnectionString("ApplicationConnection")));
             services.AddTransient<RatingContext>();
 
             services.AddControllersWithViews();
