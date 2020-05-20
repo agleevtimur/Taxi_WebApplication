@@ -24,7 +24,8 @@ namespace BusinessLogic.Algorithms
             DeleteOldRequests();//удаляем все просроченные реквесты
             await repository.UpdateClient(clientId);//обновляем данные по клиенту: число поездок++;остаток по приоритету--;если становится 0, то приоритет меняется на базовый
             var client = await repository.GetClient(clientId);//получаем клиента по id
-            var newRequest = Extension.ParseToOrder(time, start, finish, countPerson, client.Id, client.Priority);//собираем из данных реквест
+            var newRequest = Extension.ParseToOrder(time, await repository.GetLocationId(start), 
+                await repository.GetLocationId(finish), countPerson, client.Id, client.Priority);//собираем из данных реквест
             await repository.SaveRequest(newRequest);//добавляем в репозиторий новый заказ,получаем Id для заказа
             var comlete = AggregateComplete(newRequest);//вызываем чекер на набор такси, возвращает класс Complete
             if (!comlete.IsComplete)//если такси не собрано, возвращаем null
@@ -87,9 +88,9 @@ namespace BusinessLogic.Algorithms
 
     public static class Extension
     {
-        public static Order ParseToOrder(string time, string start, string finish, int countPerson, int clientId, int priority)//возвращаем ордер из сообщения cmdFind
+        public static Order ParseToOrder(string time, int start, int finish, int countPerson, int clientId, int priority)//возвращаем ордер из сообщения cmdFind
         {
-            return new Order(int.Parse(start), int.Parse(finish), countPerson, AroundTime(time), DateTime.Now, priority, clientId);
+            return new Order(start, finish, countPerson, AroundTime(time), DateTime.Now, priority, clientId);
         }
 
         private static DateTime AroundTime(string time)

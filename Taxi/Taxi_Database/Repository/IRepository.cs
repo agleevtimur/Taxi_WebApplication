@@ -33,6 +33,7 @@ namespace Taxi_Database.Repository
         List<Client> GetPassengers(int id);
         Task SavePassengers(int orderId, int firstId, int secondId, int thirdId, int forthId);
         Task SaveLocation(Location location);
+        Task<int> GetLocationId(string location);
         Task SaveHistoryOfLocation(string location);
         IEnumerable<Location> GetLocations();
         IEnumerable<HistoryOfLocation> GetHistoryOfLocations();

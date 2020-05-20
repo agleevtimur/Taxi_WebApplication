@@ -215,6 +215,13 @@ namespace Taxi_Database.Repository
             await db.SaveChangesAsync();
         }
 
+        public async Task<int> GetLocationId(string location)
+        {
+            var newlocation = await db.Location.Where(x => x.NameOfLocation == location)
+                .FirstOrDefaultAsync();
+            return newlocation.Id;
+        }
+
         public async Task SaveHistoryOfLocation(string location)
         {
             var newLocation = await db.Location.Where(x => x.NameOfLocation == location)

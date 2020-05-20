@@ -72,7 +72,7 @@ namespace Taxi.Controllers
             if (user == null)
                  return NotFound();
 
-            var model = repository.EditGet(user);
+            var model = await repository.EditGet(user);
             return View(model);
         }
 

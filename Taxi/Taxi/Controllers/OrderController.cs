@@ -25,8 +25,10 @@ namespace Taxi.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Create(string id)
         {
+            if (id == null)
+                return NotFound();
             IOrderController repository = new Orders(context);
             var model = repository.CreateGet();
             return View(model);
