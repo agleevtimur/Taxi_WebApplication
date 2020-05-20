@@ -71,7 +71,7 @@
                 <div class=" flex-fill">
                     <div class="form-group-sm">
                         <select required class="form-control" asp-for="LocationFrom" id="exampleFormControlSelect1">
-                            @foreach(var location in Model.LocationFrom)
+                            @foreach(var location in Model.LocationsFrom)
                             {
                                 <option>@location</option>
                             }
@@ -91,7 +91,7 @@
                 <div class=" flex-fill">
                     <div class="form-group-sm">
                         <select required class="form-control" asp-for="LocationTo" id="exampleFormControlSelect1">
-                            @foreach (var location in Model.LocationTo)
+                            @foreach (var location in Model.LocationsTo)
                             {
                                 <option>@location</option>
                             }
