@@ -8,7 +8,6 @@ using Taxi_Database.Context;
 
 namespace Taxi.Controllers
 {
-    [Authorize(Roles = "employee")]
     public class OrderController : Controller
     {
         private readonly ApplicationContext context;

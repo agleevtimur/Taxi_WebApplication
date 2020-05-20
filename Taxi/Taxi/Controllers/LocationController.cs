@@ -8,7 +8,6 @@ using Taxi_Database.Context;
 
 namespace Taxi.Controllers
 {
-    [Authorize(Roles = "employee")]
     public class LocationController : Controller
     {
         private readonly ApplicationContext context;
@@ -32,7 +31,13 @@ namespace Taxi.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "admin")]
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+        //[Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Add(AddLocationViewModel model)
         {
