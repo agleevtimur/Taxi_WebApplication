@@ -120,14 +120,19 @@ namespace Taxi_Database.Repository
             await db.SaveChangesAsync();
         }
 
-        public async Task<int> SaveOrder(Order order)
+        public async Task SaveOrder(ReadyOrders order)
         {
-            db.ReadyOrders.Add(new ReadyOrders
-               (order.StartPointId, order.FinishPointId, order.DepartureTime, DateTime.Now));
+            db.ReadyOrders.Add(order);
             db.HistoryOfLocation.Find(order.StartPointId).CountOfDepartures++;
             db.HistoryOfLocation.Find(order.FinishPointId).CountOfArrivals++;
             await db.SaveChangesAsync();
-            return db.ReadyOrders.Last().Id;
+        }
+
+        public async Task<int> GetSaveOrderId(ReadyOrders order)
+        {
+            var neworder = await db.ReadyOrders.Where(x => x.OrderTime == order.OrderTime)
+                .FirstOrDefaultAsync();
+            return neworder.Id;
         }
 
         public IEnumerable<ReadyOrders> GetOrders()
@@ -208,7 +213,12 @@ namespace Taxi_Database.Repository
         {
             db.Location.Add(location);
             await db.SaveChangesAsync();
-            var newLocation = db.Location.Last();
+        }
+
+        public async Task SaveHistoryOfLocation(string location)
+        {
+            var newLocation = await db.Location.Where(x => x.NameOfLocation == location)
+                .FirstOrDefaultAsync();
             db.HistoryOfLocation.Add(new HistoryOfLocation(newLocation.Id, newLocation.NameOfLocation));
             await db.SaveChangesAsync();
         }

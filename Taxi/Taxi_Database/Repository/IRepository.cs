@@ -23,7 +23,8 @@ namespace Taxi_Database.Repository
         IEnumerable<Order> GetRequests();
         IEnumerable<Order> GetRequestsByClientId(int id);
         Task DeleteRequest(int id);
-        Task<int> SaveOrder(Order order);
+        Task SaveOrder(ReadyOrders order);
+        Task<int> GetSaveOrderId(ReadyOrders order);
         IEnumerable<ReadyOrders> GetOrders();
         ReadyOrders GetOrder(int id);
         List<ReadyOrders> GetOrdersByClientId(int id);
@@ -32,6 +33,7 @@ namespace Taxi_Database.Repository
         List<Client> GetPassengers(int id);
         Task SavePassengers(int orderId, int firstId, int secondId, int thirdId, int forthId);
         Task SaveLocation(Location location);
+        Task SaveHistoryOfLocation(string location);
         IEnumerable<Location> GetLocations();
         IEnumerable<HistoryOfLocation> GetHistoryOfLocations();
         int GetCountOfRates(string id);

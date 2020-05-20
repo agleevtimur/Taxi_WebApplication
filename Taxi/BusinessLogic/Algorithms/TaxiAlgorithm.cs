@@ -31,7 +31,10 @@ namespace BusinessLogic.Algorithms
                 return null;
             var reqs = comlete.enumReqs;//иначе возвращаем список собранных заказов
             reqs.ForEach(x => repository.DeleteRequest(x.Id));//и удаляем данные реквесты из таблицы, обновляем значения таблиц ReadyOrders(логика репозитория)
-            list.Add(await repository.SaveOrder(reqs.First()));
+            var order = new ReadyOrders(reqs.First().StartPointId, reqs.First().FinishPointId,
+                DateTime.Now, reqs.First().OrderTime);
+            await repository.SaveOrder(order);
+            list.Add(await repository.GetSaveOrderId(order));
             var clients = reqs.Select(x => repository.GetClientForOrders(x.UserId));//возвращаем список найденных клиентов
             foreach (var user in clients)
             {

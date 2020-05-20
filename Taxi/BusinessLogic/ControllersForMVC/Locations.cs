@@ -31,6 +31,7 @@ namespace BusinessLogic.ControllersForMVC
         {
             IRepository repository = new Repository(context);
             await repository.SaveLocation(new Location(name, googleCode, yandexCode, twoGisCode));
+            await repository.SaveHistoryOfLocation(name);
         }
     }
 }
