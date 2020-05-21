@@ -63,7 +63,7 @@ namespace BusinessLogic
     public interface IOrderController
     {
         IndexOrderViewModel Index();
-        CreateOrderViewModel CreateGet();
+        CreateOrderViewModel CreateGet(string id);
         Task Create(string locationFrom, string locationTo, string time, int countOfPeople, string id);
         OrderWithClientViewModel GetOrder(int id);
         List<ReadyOrders> GetOrdersByClientId(string id);

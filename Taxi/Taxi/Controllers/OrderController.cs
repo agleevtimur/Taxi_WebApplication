@@ -24,30 +24,32 @@ namespace Taxi.Controllers
             return View(model);
         }
 
-        [HttpGet]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(string id)
         {
             if (id == null)
                 return NotFound();
             IOrderController repository = new Orders(context);
-            var model = repository.CreateGet();
+            var model = repository.CreateGet(id);
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CreateOrderViewModel model, string id)
+        public async Task<IActionResult> CreateOrder(CreateOrderViewModel model)
         {
+            if (model.Id == null)
+                return NotFound();
             IOrderController repository = new Orders(context);
             if (ModelState.IsValid)
             {
-                await repository.Create(model.LocationFrom, model.LocationTo, model.Time, model.CountOfPeople, id);
+                await repository.Create(model.LocationFrom, model.LocationTo, model.Time, model.CountOfPeople, model.Id);
                 return RedirectToAction("Index");
             }
-
-            return View(model);
+            return View("Error");
         }
-
+         
         public IActionResult Order(int? id)
         {
             IOrderController repository = new Orders(context);
