@@ -25,6 +25,7 @@ namespace Taxi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSignalR();
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("ApplicationConnection")));
             services.AddTransient<RatingContext>();
@@ -72,6 +73,7 @@ namespace Taxi
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<ChatHub>("/Chat/Index");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
