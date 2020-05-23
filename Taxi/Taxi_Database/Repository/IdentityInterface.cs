@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Taxi_Database.Models;
 
@@ -31,5 +32,10 @@ namespace Taxi_Database.Repository
         Task<string> GeneratePassword(User user);
         Task<IdentityResult> ResetPassword(User user, string code, string password);
         Task AddLogin(User user, ExternalLoginInfo info);
+    }
+
+    public interface IChat
+    {
+        Task<User> GetUser(ClaimsPrincipal user);
     }
 }

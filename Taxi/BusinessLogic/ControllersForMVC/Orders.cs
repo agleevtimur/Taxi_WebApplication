@@ -1,6 +1,5 @@
 ﻿using BusinessLogic.Algorithms;
 using BusinessLogic.ModelsForControllers;
-using Microsoft.EntityFrameworkCore.Metadata;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Taxi_Database.Context;
@@ -12,10 +11,11 @@ namespace BusinessLogic.ControllersForMVC
     public class Orders : IOrderController
     {
         private readonly ApplicationContext context;
-
-        public Orders(ApplicationContext context)
+        private readonly LocationService locationService;
+        public Orders(ApplicationContext context, LocationService locationService)
         {
             this.context = context;
+            this.locationService = locationService;
         }
 
         public IndexOrderViewModel Index()
@@ -28,7 +28,7 @@ namespace BusinessLogic.ControllersForMVC
 
         public CreateOrderViewModel CreateGet(string id)
         {
-            ILocationController repository = new Locations(context);
+            ILocationController repository = new Locations(locationService, context);
             var locations = repository.Index();
             var list = new List<string>();
             foreach (var location in locations)
@@ -40,7 +40,7 @@ namespace BusinessLogic.ControllersForMVC
         public async Task Create(string locationFrom, string locationTo, string time, int countOfPeople, string id)
         {
             IRepository repository = new Repository(context);
-            Algorithm algorithm = new Algorithm(context);
+            Algorithm algorithm = new Algorithm(context, locationService);
             var info = await algorithm.Find(time, locationFrom, locationTo, countOfPeople, id);
             if (info != null)
                 await repository.SavePassengers(info[0], info[1], info[2], info[3], info[4]);

@@ -3,6 +3,7 @@ using BusinessLogic.ModelsForControllers.Home;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Taxi_Database.Models;
 
@@ -83,5 +84,12 @@ namespace BusinessLogic
     public interface IHomeController
     {
         IndexHomeViewModel Index();
+    }
+
+    public interface IChatController
+    {
+        Task<User> GetUser(ClaimsPrincipal user);
+        Task<List<Message>> GetMessages();
+        Task Messages(ClaimsPrincipal user, Message message);
     }
 }

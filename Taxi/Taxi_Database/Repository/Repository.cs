@@ -209,31 +209,12 @@ namespace Taxi_Database.Repository
             await db.SaveChangesAsync();
         }
 
-        public async Task SaveLocation(Location location)
-        {
-            db.Location.Add(location);
-            await db.SaveChangesAsync();
-        }
-
-        public async Task<int> GetLocationId(string location)
-        {
-            var newlocation = await db.Location.Where(x => x.NameOfLocation == location)
-                .FirstOrDefaultAsync();
-            return newlocation.Id;
-        }
-
         public async Task SaveHistoryOfLocation(string location)
         {
             var newLocation = await db.Location.Where(x => x.NameOfLocation == location)
                 .FirstOrDefaultAsync();
             db.HistoryOfLocation.Add(new HistoryOfLocation(newLocation.Id, newLocation.NameOfLocation));
             await db.SaveChangesAsync();
-        }
-
-        public IEnumerable<Location> GetLocations()
-        {
-            var locations = db.Location.Select(x => x);
-            return locations;
         }
 
         public IEnumerable<HistoryOfLocation> GetHistoryOfLocations()

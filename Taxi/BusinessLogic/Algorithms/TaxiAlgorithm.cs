@@ -11,10 +11,12 @@ namespace BusinessLogic.Algorithms
     public class Algorithm
     {
         private readonly ApplicationContext context;
+        private readonly LocationService locationService;
 
-        public Algorithm(ApplicationContext context)
+        public Algorithm(ApplicationContext context, LocationService locationService)
         {
             this.context = context;
+            this.locationService = locationService;
         }
 
         public async Task<List<int>> Find(string time, string start, string finish, int countPerson, string clientId)
@@ -24,8 +26,8 @@ namespace BusinessLogic.Algorithms
             DeleteOldRequests();//удаляем все просроченные реквесты
             await repository.UpdateClient(clientId);//обновляем данные по клиенту: число поездок++;остаток по приоритету--;если становится 0, то приоритет меняется на базовый
             var client = await repository.GetClient(clientId);//получаем клиента по id
-            var newRequest = Extension.ParseToOrder(time, await repository.GetLocationId(start), 
-                await repository.GetLocationId(finish), countPerson, client.Id, client.Priority);//собираем из данных реквест
+            var newRequest = Extension.ParseToOrder(time, await locationService.GetLocationId(start),
+                await locationService.GetLocationId(finish), countPerson, client.Id, client.Priority);//собираем из данных реквест
             await repository.SaveRequest(newRequest);//добавляем в репозиторий новый заказ,получаем Id для заказа
             var comlete = AggregateComplete(newRequest);//вызываем чекер на набор такси, возвращает класс Complete
             if (!comlete.IsComplete)//если такси не собрано, возвращаем null

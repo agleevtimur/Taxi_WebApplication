@@ -8,17 +8,18 @@ namespace BusinessLogic.ControllersForMVC
 {
     public class Locations : ILocationController
     {
+        private readonly LocationService locationService;
         private readonly ApplicationContext context;
 
-        public Locations(ApplicationContext context)
+        public Locations(LocationService locationService, ApplicationContext context)
         {
+            this.locationService = locationService;
             this.context = context;
         }
 
         public IEnumerable<Location> Index()
         {
-            IRepository repository = new Repository(context);
-            return repository.GetLocations();
+            return locationService.GetLocations();
         }
 
         public IEnumerable<HistoryOfLocation> History()
@@ -30,7 +31,7 @@ namespace BusinessLogic.ControllersForMVC
         public async Task SavePost(string name, string googleCode, string yandexCode, string twoGisCode)
         {
             IRepository repository = new Repository(context);
-            await repository.SaveLocation(new Location(name, googleCode, yandexCode, twoGisCode));
+            await locationService.SaveLocation(new Location(name, googleCode, yandexCode, twoGisCode));
             await repository.SaveHistoryOfLocation(name);
         }
     }

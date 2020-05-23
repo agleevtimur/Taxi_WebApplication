@@ -2,14 +2,17 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Services;
 using Services.Validation;
+using System.IO.Compression;
 using Taxi_Database.Context;
 using Taxi_Database.Models;
+using Taxi_Database.Repository;
 
 namespace Taxi
 {
@@ -25,7 +28,9 @@ namespace Taxi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddResponseCompression(options => options.EnableForHttps = true);
             services.AddSignalR();
+            services.AddTransient<LocationService>();
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("ApplicationConnection")));
             services.AddTransient<RatingContext>();
@@ -41,13 +46,18 @@ namespace Taxi
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
             services.AddAuthentication()
-        .AddGoogle(options =>
-        {
-            IConfigurationSection googleAuthNSection =
-                Configuration.GetSection("Authentication:Google");
-            options.ClientId = "580368506802-mea9eonokpop0njdo5l20io6e0dhgs5t.apps.googleusercontent.com";
-            options.ClientSecret = "kDnXMPy9QxIZhIE6GJ_4ui0s";//!
-        });
+                .AddGoogle(options =>
+                {
+                    IConfigurationSection googleAuthNSection =
+                        Configuration.GetSection("Authentication:Google");
+                    options.ClientId = "580368506802-mea9eonokpop0njdo5l20io6e0dhgs5t.apps.googleusercontent.com";
+                    options.ClientSecret = "kDnXMPy9QxIZhIE6GJ_4ui0s";//!
+                });
+            services.AddMemoryCache();
+            services.Configure<BrotliCompressionProviderOptions>(options =>
+            {
+                options.Level = CompressionLevel.Optimal;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,6 +80,7 @@ namespace Taxi
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseResponseCompression();
 
             app.UseEndpoints(endpoints =>
             {

@@ -32,10 +32,7 @@ namespace Taxi_Database.Repository
         Task DeleteOrder(int id);
         List<Client> GetPassengers(int id);
         Task SavePassengers(int orderId, int firstId, int secondId, int thirdId, int forthId);
-        Task SaveLocation(Location location);
-        Task<int> GetLocationId(string location);
         Task SaveHistoryOfLocation(string location);
-        IEnumerable<Location> GetLocations();
         IEnumerable<HistoryOfLocation> GetHistoryOfLocations();
         int GetCountOfRates(string id);
         double GetRating(string id);
@@ -45,5 +42,13 @@ namespace Taxi_Database.Repository
     public interface IRating
     {
         Task Create(string whoId, string whomId, int orderId, int rating);
+    }
+
+    public interface ILocationService
+    {
+        Task SaveLocation(Location location);
+        Task<int> GetLocationId(string location);
+        IEnumerable<Location> GetLocations();
+
     }
 }

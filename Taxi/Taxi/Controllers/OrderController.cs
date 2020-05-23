@@ -5,21 +5,26 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Taxi_Database.Context;
+using Taxi_Database.Repository;
 
 namespace Taxi.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
         private readonly ApplicationContext context;
+        private readonly LocationService locationService;
 
-        public OrderController(ApplicationContext context)
+        public OrderController(ApplicationContext context, LocationService locationService)
         {
             this.context = context;
+            this.locationService = locationService;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
-            IOrderController repository = new Orders(context);
+            IOrderController repository = new Orders(context, locationService);
             var model = repository.Index();
             return View(model);
         }
@@ -30,7 +35,7 @@ namespace Taxi.Controllers
         {
             if (id == null)
                 return NotFound();
-            IOrderController repository = new Orders(context);
+            IOrderController repository = new Orders(context, locationService);
             var model = repository.CreateGet(id);
             return View(model);
         }
@@ -41,7 +46,7 @@ namespace Taxi.Controllers
         {
             if (model.Id == null)
                 return NotFound();
-            IOrderController repository = new Orders(context);
+            IOrderController repository = new Orders(context, locationService);
             if (ModelState.IsValid)
             {
                 await repository.Create(model.LocationFrom, model.LocationTo, model.Time, model.CountOfPeople, model.Id);
@@ -52,7 +57,7 @@ namespace Taxi.Controllers
          
         public IActionResult Order(int? id)
         {
-            IOrderController repository = new Orders(context);
+            IOrderController repository = new Orders(context, locationService);
 
             if (id == null)
                 return NotFound();
@@ -61,10 +66,9 @@ namespace Taxi.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "admin")]
         public IActionResult ReadyOrders(string id)
         {
-            IOrderController repository = new Orders(context);
+            IOrderController repository = new Orders(context, locationService);
             if (id == null)
                 return NotFound();
 
@@ -79,7 +83,7 @@ namespace Taxi.Controllers
         [Authorize(Roles = "admin")]
         public IActionResult Requests(string id)
         {
-            IOrderController repository = new Orders(context);
+            IOrderController repository = new Orders(context, locationService);
             if (id == null)
                 return NotFound();
 
@@ -95,7 +99,7 @@ namespace Taxi.Controllers
         [HttpGet]
         public IActionResult Delete(int? id)
         {
-            IOrderController repository = new Orders(context);
+            IOrderController repository = new Orders(context, locationService);
 
             if (id == null)
                 return NotFound();
@@ -111,7 +115,7 @@ namespace Taxi.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
-            IOrderController repository = new Orders(context);
+            IOrderController repository = new Orders(context, locationService);
             repository.DeleteOrder(id);
             return RedirectToAction("Index");
         }
@@ -119,7 +123,7 @@ namespace Taxi.Controllers
         [HttpPost]
         public async Task<IActionResult> Rating(string whoId, string whomId, int orderId, int newRating)
         {
-            IOrderController repository = new Orders(context);
+            IOrderController repository = new Orders(context, locationService);
             await repository.Rating(whoId, whomId, orderId, newRating);
             return RedirectToAction("Index");
         }

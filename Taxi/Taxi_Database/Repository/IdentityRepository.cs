@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Taxi_Database.Models;
 
@@ -139,5 +140,22 @@ namespace Taxi_Database.Repository
         {
             await userManager.AddLoginAsync(user, info);
         }
+    }
+
+    public class ChatRepository : IChat
+    {
+        private readonly UserManager<User> userManager;
+
+        public ChatRepository(UserManager<User> userManager)
+        {
+            this.userManager = userManager;
+        }
+
+        public async Task<User> GetUser(ClaimsPrincipal user)
+        {
+            return await userManager.GetUserAsync(user);
+        }
+
+
     }
 }

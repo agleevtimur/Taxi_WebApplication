@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using BusinessLogic;
+using BusinessLogic.ControllersForMVC;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Taxi_Database.Context;
 using Taxi_Database.Models;
@@ -14,8 +13,8 @@ namespace Taxi.Controllers
     [Authorize]
     public class ChatController : Controller
     {
-        readonly IdentityContext _context;
-        readonly UserManager<User> _userManager;
+        private readonly IdentityContext _context;
+        private readonly UserManager<User> _userManager;
         public ChatController(IdentityContext context, UserManager<User> userManager)
         {
             _context = context;
@@ -24,20 +23,19 @@ namespace Taxi.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            var currentUser = await _userManager.GetUserAsync(User);
+            IChatController repository = new Chat(_context, _userManager);
+            var currentUser = await repository.GetUser(User);
             ViewBag.CurrentUserName = currentUser.UserName;
-            var messages = await _context.Messages.ToListAsync();
+            var messages = await repository.GetMessages();
 
             return View(messages);
         }
         public async Task<IActionResult> Create(Message message)
         {
+            IChatController repository = new Chat(_context, _userManager);
             if (ModelState.IsValid)
             {
-                var sender = await _userManager.GetUserAsync(User);
-                message.UserId = sender.Id;
-                await _context.Messages.AddAsync(message);
-                await _context.SaveChangesAsync();
+                await repository.Messages(User, message);
                 return Ok();
             }
             return View("Error");

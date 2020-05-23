@@ -1,4 +1,6 @@
-﻿namespace Taxi_Database.Models
+﻿using System;
+
+namespace Taxi_Database.Models
 {
     public class HistoryOfLocation
     {
