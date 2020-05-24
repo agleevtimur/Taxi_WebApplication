@@ -51,7 +51,7 @@ namespace Taxi.Controllers
             if (ModelState.IsValid)
             {
                 await repository.Create(model.LocationFrom, model.LocationTo, model.Time, model.CountOfPeople, model.Id);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Order");
             }
             var errorModel = error.GetError("Ошибка", "Ошибка в данных, убедитесь, что все поля были заполнены");
             return View("Error", errorModel);
