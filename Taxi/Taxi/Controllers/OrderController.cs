@@ -50,6 +50,11 @@ namespace Taxi.Controllers
             IOrderController repository = new Orders(context, locationService);
             if (ModelState.IsValid)
             {
+                if (model.LocationFrom == model.LocationTo)
+                {
+                    var newModel = error.GetError("Ошибка", "Место отправления не может совпадать с местом назначения");
+                    return View("Error", newModel);
+                }
                 await repository.Create(model.LocationFrom, model.LocationTo, model.Time, model.CountOfPeople, model.Id);
                 return RedirectToAction("Index", "Order");
             }

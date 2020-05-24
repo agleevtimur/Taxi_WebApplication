@@ -45,6 +45,7 @@ namespace Taxi.Controllers
 
         [Authorize(Roles = "admin")]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(AddLocationViewModel model)
         {
             IError error = new Error();
