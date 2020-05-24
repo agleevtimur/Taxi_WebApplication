@@ -128,5 +128,12 @@
             <button type="submit" class="container-fluid btn btn-primary mt-2">Зарегистрироваться</button>
         </form>
     </div>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        jQuery.extend(jQuery.validator.messages, {
+            email: "Email не корректен",
+        });
+    </script>
 </body>
 </html>

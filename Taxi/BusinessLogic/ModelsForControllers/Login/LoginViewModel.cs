@@ -20,6 +20,6 @@ namespace BusinessLogic.ModelsForControllers
 
         public string ReturnUrl { get; set; }
 
-        public IList<AuthenticationScheme> ExternaLogins { get; set; }
+        public IList<AuthenticationScheme> ExternalLogins { get; set; }
     }
 }
