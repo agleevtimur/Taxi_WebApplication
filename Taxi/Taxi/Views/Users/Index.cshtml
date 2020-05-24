@@ -78,11 +78,11 @@
         <div class="row  row-cols-2  ml-md-0 mr-md-0 mb-1 mt-1 align-content-stretch d-flex  flex-fill ">
             <div class="col-auto  pl-md-0 pr-sm-2  align-content-center pb-0 transition">
                 <form asp-action="Create" asp-controller="Order" method="post" asp-route-id="@Model.Id">
-                <button type="submit"
-                        class="flex-fill btn btn-primary  pr-sm-4 pl-sm-4 pb-auto mb-0 font-weight-bold text-center find">
-                    Найти попутчиков
-                </button>
-                    </form>
+                    <button type="submit"
+                            class="flex-fill btn btn-primary  pr-sm-4 pl-sm-4 pb-auto mb-0 font-weight-bold text-center find">
+                        Найти попутчиков
+                    </button>
+                </form>
             </div>
             <div class="col-auto mr-0 pl-sm-2 pr-sm-0 align-content-stretch transition">
                 <button type="button"
@@ -107,11 +107,10 @@
                 </li>
 
                 <li class="nav-item ">
-                    <a class="nav-link flex-nowrap nowrap text-right" href="#">Мой профиль<span class="sr-only"></span></a>
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-action="Index" asp-controller="Users" asp-route-id="@Model.Id">Мой профиль<span class="sr-only"></span></a>
                 </li>
             </ul>
         </div>
-
     </nav>
     <div class="container-sm p-4 " style="max-width: 40em; margin-top: 50px">
         <div class="d-inline-flex align-items-center row mb-5 mt-3">

@@ -2,6 +2,7 @@
 using BusinessLogic;
 using BusinessLogic.ControllersForMVC;
 using BusinessLogic.ModelsForControllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Taxi.ViewModels.Subscription;
@@ -11,6 +12,7 @@ using Taxi_Database.Models;
 
 namespace Taxi.Controllers
 {
+    [Authorize]
     public class UsersController : Controller
     {
         private readonly UserManager<User> _userManager;
@@ -21,7 +23,7 @@ namespace Taxi.Controllers
             _userManager = userManager;
             this.context = context;
         }
-
+        [Authorize]
         public async Task<IActionResult> Index(string id)
         {
             IUserController repository = new Users(_userManager, context);

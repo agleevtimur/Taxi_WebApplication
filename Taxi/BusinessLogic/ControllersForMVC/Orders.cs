@@ -43,6 +43,16 @@ namespace BusinessLogic.ControllersForMVC
             Algorithm algorithm = new Algorithm(context, locationService);
             var info = await algorithm.Find(time, locationFrom, locationTo, countOfPeople, id);
             if (info != null)
+                await Save(info, repository);
+        }
+
+        private async Task Save(List<int> info, IRepository repository)
+        {
+            if (info.Count == 3)
+                await repository.SavePassengers(info[0], info[1], info[2], 0, 0);
+            else if (info.Count == 4)
+                await repository.SavePassengers(info[0], info[1], info[2], info[3], 0);
+            else
                 await repository.SavePassengers(info[0], info[1], info[2], info[3], info[4]);
         }
 

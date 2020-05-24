@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Threading.Tasks;
 using Taxi_Database.Context;
 using Taxi_Database.Models;
@@ -21,7 +22,6 @@ namespace BusinessLogic.Algorithms
 
         public async Task<List<int>> Find(string time, string start, string finish, int countPerson, string clientId)
         {
-            var list = new List<int>();
             IRepository repository = new Repository(context);
             DeleteOldRequests();//удаляем все просроченные реквесты
             await repository.UpdateClient(clientId);//обновляем данные по клиенту: число поездок++;остаток по приоритету--;если становится 0, то приоритет меняется на базовый
@@ -32,6 +32,12 @@ namespace BusinessLogic.Algorithms
             var comlete = AggregateComplete(newRequest);//вызываем чекер на набор такси, возвращает класс Complete
             if (!comlete.IsComplete)//если такси не собрано, возвращаем null
                 return null;
+            return await GetId(comlete, repository);
+        }
+
+        private async Task<List<int>> GetId(Complete comlete, IRepository repository)
+        {
+            var list = new List<int>();
             var reqs = comlete.enumReqs;//иначе возвращаем список собранных заказов
             reqs.ForEach(x => repository.DeleteRequest(x.Id));//и удаляем данные реквесты из таблицы, обновляем значения таблиц ReadyOrders(логика репозитория)
             var order = new ReadyOrders(reqs.First().StartPointId, reqs.First().FinishPointId,
