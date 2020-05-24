@@ -55,6 +55,9 @@
         <div class="collapse navbar-collapse  justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav ml-sm-2">
                 <li class="nav-item ">
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-controller="Users" asp-action="Admin">Администратор</a>
+                </li>
+                <li class="nav-item ">
                     <a class="nav-link flex-nowrap nowrap text-right" asp-action="Index" asp-controller="Home">О Проекте<span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item">
@@ -69,7 +72,7 @@
     </nav>
     <div class="container-sm p-4 " style="max-width: 40em; margin-top: 50px">
         <h1 class="title  mb-5 mt-3">Редактирование профиля</h1>
-        <form method="post" asp-controller="Account" asp-action="Register" novalidate>
+        <form method="post" asp-controller="Users" asp-action="Edit" novalidate>
             <div asp-validation-summary="ModelOnly"></div>
             <div class="form-group">
                 <label asp-for="Login">Изменить ник</label>
@@ -131,8 +134,7 @@
                     </textarea>
                 </p>
             </div>
-
-            <button type="submit" class="container-fluid btn btn-primary mt-2">Зарегистрироваться</button>
+            <button type="submit" class="container-fluid btn btn-primary mt-2">Редактировать</button>
         </form>
     </div>
     <script>

@@ -35,6 +35,12 @@ namespace Taxi.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
+        public IActionResult Admin()
+        {
+            return View();
+        }
+
         public IActionResult Clients()
         {
             IUserController repository = new Users(_userManager, context);
@@ -90,7 +96,12 @@ namespace Taxi.Controllers
                 {
                     var result = await repository.EditPost(user, model);
                     if (result.Succeeded)
-                        return RedirectToAction("Index");
+                        return RedirectToRoute(new
+                        {
+                            controller = "Users",
+                            action = "Index",
+                            id = model.Id
+                        });
 
                     else
                         foreach (var error in result.Errors)
@@ -133,7 +144,12 @@ namespace Taxi.Controllers
                     IdentityResult result =
                         await repository.ChangePost(user, model.OldPassword, model.NewPassword);
                     if (result.Succeeded)
-                        return RedirectToAction("Index");
+                        return RedirectToRoute(new
+                        {
+                            controller = "Users",
+                            action = "Index",
+                            id = model.Id
+                        });
 
                     else
                         foreach (var error in result.Errors)
