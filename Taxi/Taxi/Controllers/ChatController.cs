@@ -31,13 +31,15 @@ namespace Taxi.Controllers
         }
         public async Task<IActionResult> Create(Message message)
         {
+            IError error = new Error();
             IChatController repository = new Chat(_context, _userManager);
             if (ModelState.IsValid)
             {
                 await repository.Messages(User, message);
                 return Ok();
             }
-            return View("Error");
+            var model = error.GetError("Ошибка", "Не удалось отправить сообщение, возникла ошибка в базе данных");
+            return View("Error", model);
         }
     }
 }

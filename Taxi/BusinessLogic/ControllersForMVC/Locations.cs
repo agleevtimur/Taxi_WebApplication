@@ -34,5 +34,14 @@ namespace BusinessLogic.ControllersForMVC
             await locationService.SaveLocation(new Location(name, googleCode, yandexCode, twoGisCode));
             await repository.SaveHistoryOfLocation(name);
         }
+
+        public async Task<bool> IsInLocations(string locationName)
+        {
+            var location = await locationService.GetLocation(locationName);
+            if (location == null)
+                return false;
+            else
+                return true;
+        }
     }
 }

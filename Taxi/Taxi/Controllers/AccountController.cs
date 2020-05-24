@@ -75,21 +75,31 @@ namespace Taxi.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string userId, string code)
         {
+            IError error = new Error();
             IAccountController repository = new Account(_userManager,
                 _signInManager, _emailSender, _passwordValidator, context);
 
             if (userId == null || code == null)
-                return View("Error");
+            {
+                var model = error.GetError("Ошибка в данных", "Не найден пользоваетль с таким id");
+                return View("Error", model);
+            }
 
             var user = await repository.FindUser(userId);
             if (user == null)
-                return View("Error");
+            {
+                var model = error.GetError("Ошибка в данных", "Не найден пользоваетль с таким id");
+                return View("Error", model);
+            }
 
             var result = await repository.ConfirmGet(user, code);
             if (result.Succeeded)
                 return RedirectToAction("Index", "Users");
             else
-                return View("Error");
+            {
+                var model = error.GetError("Ошибка в данных", "Не удалось зарегестрировать пользователя");
+                return View("Error", model);
+            }
         }
 
         [HttpGet]
@@ -232,7 +242,14 @@ namespace Taxi.Controllers
         [AllowAnonymous]
         public IActionResult ResetPassword(string code = null)
         {
-            return code == null ? View("Error") : View();
+            IError error = new Error();
+            if(code == null)
+            {
+                var model = error.GetError("Ошибка", "Не удалось найти пользователя");
+                return View("Error", model);
+            }
+            else
+                return View();
         }
 
         [HttpPost]
@@ -274,6 +291,7 @@ namespace Taxi.Controllers
             IAccountController repository = new Account(_userManager,
                 _signInManager, _emailSender, _passwordValidator, context);
             returnUrl = returnUrl ?? Url.Content("~/");
+            IError error = new Error();
 
             var model = await repository.LoginGet(returnUrl);
             if (remoteError != null)
@@ -309,8 +327,8 @@ namespace Taxi.Controllers
 
                 ViewBag.ErrorType = $"Email Claim не получен от {info.LoginProvider}";
                 ViewBag.ErrorType = "Пожалуйста, обратитесь за помощью fantomas2213@gmail.com";
-
-                return View("Error");
+                var newModel = error.GetError("Ошибка", "Не удалось найти Email Claim");
+                return View("Error", newModel);
             }
         }
     }

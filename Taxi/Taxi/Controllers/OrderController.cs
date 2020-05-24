@@ -44,6 +44,7 @@ namespace Taxi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateOrder(CreateOrderViewModel model)
         {
+            IError error = new Error();
             if (model.Id == null)
                 return NotFound();
             IOrderController repository = new Orders(context, locationService);
@@ -52,7 +53,8 @@ namespace Taxi.Controllers
                 await repository.Create(model.LocationFrom, model.LocationTo, model.Time, model.CountOfPeople, model.Id);
                 return RedirectToAction("Index");
             }
-            return View("Error");
+            var errorModel = error.GetError("Ошибка", "Ошибка в данных, убедитесь, что все поля были заполнены");
+            return View("Error", errorModel);
         }
          
         public IActionResult Order(int? id)

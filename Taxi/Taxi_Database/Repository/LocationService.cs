@@ -48,6 +48,22 @@ namespace Taxi_Database.Repository
             return newLocation.Id;
         }
 
+        public async Task<Location> GetLocation(string location)
+        {
+            Location newLocation = null;
+            if (!cache.TryGetValue(location, out newLocation))
+            {
+                newLocation = await db.Location.Where(x => x.NameOfLocation == location)
+                    .FirstOrDefaultAsync();
+                if (newLocation != null)
+                {
+                    cache.Set(newLocation.NameOfLocation, newLocation,
+                    new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(5)));
+                }
+            }
+            return newLocation;
+        }
+
         public IEnumerable<Location> GetLocations()
         {
             var locations = db.Location.Select(x => x);

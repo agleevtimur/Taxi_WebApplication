@@ -48,6 +48,7 @@ namespace Taxi_Database.Repository
     {
         Task SaveLocation(Location location);
         Task<int> GetLocationId(string location);
+        Task<Location> GetLocation(string location);
         IEnumerable<Location> GetLocations();
 
     }

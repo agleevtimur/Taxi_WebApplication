@@ -79,6 +79,7 @@ namespace BusinessLogic
         IEnumerable<Location> Index();
         IEnumerable<HistoryOfLocation> History();
         Task SavePost(string name, string googleCode, string yandexCode, string twoGisCode);
+        Task<bool> IsInLocations(string locationName);
     }
 
     public interface IHomeController
@@ -91,5 +92,10 @@ namespace BusinessLogic
         Task<User> GetUser(ClaimsPrincipal user);
         Task<List<Message>> GetMessages();
         Task Messages(ClaimsPrincipal user, Message message);
+    }
+
+    public interface IError
+    {
+        ErrorViewModel GetError(string title, string text);
     }
 }
