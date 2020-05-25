@@ -1,5 +1,8 @@
+using JavaScriptEngineSwitcher.ChakraCore;
+using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -7,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using React.AspNet;
 using Services;
 using Services.Validation;
 using System.IO.Compression;
@@ -28,6 +32,11 @@ namespace Taxi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMemoryCache();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddReact();
+            services.AddJsEngineSwitcher(options => options.DefaultEngineName = ChakraCoreJsEngine.EngineName).AddChakraCore();
+
             services.AddResponseCompression(options => options.EnableForHttps = true);
             services.AddSignalR();
             services.AddTransient<LocationService>();
@@ -73,6 +82,10 @@ namespace Taxi
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseDeveloperExceptionPage();
+
+            app.UseReact(config => { });
+            app.UseDefaultFiles();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -84,6 +97,7 @@ namespace Taxi
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers();
                 endpoints.MapHub<ChatHub>("/Chat/Index");
                 endpoints.MapControllerRoute(
                     name: "default",
