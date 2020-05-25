@@ -50,6 +50,7 @@ namespace Taxi_Database.Repository
         Task<int> GetLocationId(string location);
         Task<Location> GetLocation(string location);
         IEnumerable<Location> GetLocations();
+        string GetLocationNameById(int id);
 
     }
 }

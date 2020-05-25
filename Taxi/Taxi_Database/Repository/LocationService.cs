@@ -64,6 +64,11 @@ namespace Taxi_Database.Repository
             return newLocation;
         }
 
+        public string GetLocationNameById(int id)
+        {
+            return db.Location.Find(id).NameOfLocation;
+        }
+
         public IEnumerable<Location> GetLocations()
         {
             var locations = db.Location.Select(x => x);

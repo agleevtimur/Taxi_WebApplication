@@ -41,6 +41,7 @@ namespace Taxi.Controllers
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult Clients()
         {
             IUserController repository = new Users(_userManager, context);

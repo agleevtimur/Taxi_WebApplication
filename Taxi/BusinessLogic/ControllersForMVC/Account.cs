@@ -79,7 +79,7 @@ namespace BusinessLogic.ControllersForMVC
             return new LoginViewModel
             {
                 ReturnUrl = returnUrl,
-                ExternaLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+                ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
             };
         }
 
