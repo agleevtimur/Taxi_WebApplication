@@ -3,6 +3,7 @@ using BusinessLogic.ControllersForMVC;
 using BusinessLogic.ModelsForControllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Serialization;
 using System.Threading.Tasks;
 using Taxi_Database.Context;
 using Taxi_Database.Repository;
@@ -26,7 +27,7 @@ namespace Taxi.Controllers
         {
             IOrderController repository = new Orders(context, locationService);
             var model = repository.Index();
-            return View(model);
+            return Json(model);
         }
 
         [HttpPost]
@@ -70,7 +71,7 @@ namespace Taxi.Controllers
                 return NotFound();
 
             var model = repository.GetOrder((int)id);
-            return View(model);
+            return Json(model);
         }
 
         public IActionResult ReadyOrders(string id)
@@ -84,7 +85,7 @@ namespace Taxi.Controllers
             if (orders == null)
                 return NotFound();
 
-            return View(orders);
+            return Json(orders);
         }
 
         [Authorize(Roles = "admin")]
@@ -99,11 +100,10 @@ namespace Taxi.Controllers
             if (orders == null)
                 return NotFound();
 
-            return View(orders);
+            return Json(orders);
         }
 
-        [Authorize(Roles = "admin")]
-        [HttpGet]
+        [HttpDelete]
         public IActionResult Delete(int? id)
         {
             IOrderController repository = new Orders(context, locationService);
@@ -114,17 +114,8 @@ namespace Taxi.Controllers
             var order = repository.GetReadyOrderId((int)id);
             if (order == null)
                 return NotFound();
-            return View(order);
-        }
-
-        [Authorize(Roles = "admin")]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
-        {
-            IOrderController repository = new Orders(context, locationService);
-            repository.DeleteOrder(id);
-            return RedirectToAction("Index");
+            repository.DeleteOrder((int)id);
+            return Json(order);
         }
 
         [HttpPost]
