@@ -50,7 +50,7 @@
     <div class="container-sm p-4 " style="max-width: 40em; margin-top: 50px">
         <h1 class="title  mb-5 mt-3">Добавление локации</h1>
         <form method="post" asp-controller="Location" asp-action="Add" novalidate>
-            <div asp-validation-summary="ModelOnly"></div>
+            <div asp-validation-summary="None"></div>
             <div class="form-group">
                 <label asp-for="Name">Введите название</label>
                 <div class="input-group mb-3">
@@ -116,5 +116,7 @@
             <button type="submit" class="container-fluid btn btn-primary mt-2">Добавить</button>
         </form>
     </div>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 </body>
 </html>

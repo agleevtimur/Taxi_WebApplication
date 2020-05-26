@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Services.Aop;
 using System.Linq;
 using System.Threading.Tasks;
 using Taxi.ViewModels.Login;
@@ -21,15 +23,17 @@ namespace Taxi.Controllers
         private readonly IEmailSender _emailSender;
         private readonly IPasswordValidator<User> _passwordValidator;
         private readonly ApplicationContext context;
+        private readonly ILogger<AccountController> _logger;
 
         public AccountController(UserManager<User> userManager, SignInManager<User> signInManager,
-            IEmailSender emailSender, IPasswordValidator<User> passwordValidator, ApplicationContext context)
+            IEmailSender emailSender, IPasswordValidator<User> passwordValidator, ApplicationContext context, ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _passwordValidator = passwordValidator;
             this.context = context;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -41,8 +45,9 @@ namespace Taxi.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            IAccountController repository = new Account(_userManager, 
+            IAccountController account = new Account(_userManager,
                 _signInManager, _emailSender, _passwordValidator, context);
+            IAccountController repository = new AccountFactory(_logger, account as Account).Create();
 
             if (ModelState.IsValid)
             {
@@ -76,8 +81,9 @@ namespace Taxi.Controllers
         public async Task<IActionResult> ConfirmEmail(string userId, string code)
         {
             IError error = new Error();
-            IAccountController repository = new Account(_userManager,
-                _signInManager, _emailSender, _passwordValidator, context);
+            IAccountController account = new Account(_userManager,
+                 _signInManager, _emailSender, _passwordValidator, context);
+            IAccountController repository = new AccountFactory(_logger, account as Account).Create();
 
             if (userId == null || code == null)
             {
@@ -105,8 +111,9 @@ namespace Taxi.Controllers
         [HttpGet]
         public async Task<IActionResult> LoginAsync(string returnUrl = null)
         {
-            IAccountController repository = new Account(_userManager,
+            IAccountController account = new Account(_userManager,
                 _signInManager, _emailSender, _passwordValidator, context);
+            IAccountController repository = new AccountFactory(_logger, account as Account).Create();
             var model = await repository.LoginGet(returnUrl);
 
             return View(model);
@@ -116,14 +123,19 @@ namespace Taxi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            IAccountController repository = new Account(_userManager,
-                _signInManager, _emailSender, _passwordValidator, context);
-
+            IAccountController account = new Account(_userManager,
+                 _signInManager, _emailSender, _passwordValidator, context);
+            IAccountController repository = new AccountFactory(_logger, account as Account).Create();
+            
             if (ModelState.IsValid)
             {
                 var result = await repository.LoginPost(model);
                 if (result.Succeeded)
                 {
+                    if (model.Login == "admin")
+                        return RedirectToAction(actionName: "Admin", controllerName: "Users");
+                    if (model.Login == "employee")
+                        return RedirectToAction(actionName: "Index", controllerName: "Home");
                     // проверяем, принадлежит ли URL приложению
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
                         return Redirect(model.ReturnUrl);
@@ -141,7 +153,7 @@ namespace Taxi.Controllers
                 else
                     ModelState.AddModelError("", "Неправильный логин и (или) пароль");
             }
-
+            model.ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             return View(model);
         }
 
@@ -168,8 +180,9 @@ namespace Taxi.Controllers
         [AcceptVerbs("Get", "Post")]
         public async Task<IActionResult> EmailInUse(string email)
         {
-            IAccountController repository = new Account(_userManager,
+            IAccountController account = new Account(_userManager,
                 _signInManager, _emailSender, _passwordValidator, context);
+            IAccountController repository = new AccountFactory(_logger, account as Account).Create();
             var user = await repository.EmailInUse(email);
             return user == null ? Json(true) : Json($"Почта '{email}' уже занята");
         }
@@ -177,8 +190,9 @@ namespace Taxi.Controllers
         [AcceptVerbs("Get", "Post")]
         public async Task<IActionResult> UserNameInUse(string userName)
         {
-            IAccountController repository = new Account(_userManager,
+            IAccountController account = new Account(_userManager,
                 _signInManager, _emailSender, _passwordValidator, context);
+            IAccountController repository = new AccountFactory(_logger, account as Account).Create();
 
             if (userName == null) 
                 return Json("Имя пользователя не корректно");
@@ -190,8 +204,9 @@ namespace Taxi.Controllers
         [AcceptVerbs("Get", "Post")]
         public async Task<IActionResult> PasswordIsStrong(string password)
         {
-            IAccountController repository = new Account(_userManager,
+            IAccountController account = new Account(_userManager,
                 _signInManager, _emailSender, _passwordValidator, context);
+            IAccountController repository = new AccountFactory(_logger, account as Account).Create();
             var result = await repository.PasswordIsStrong(password);
             if (result.Succeeded) 
                 return Json(true);
@@ -211,8 +226,9 @@ namespace Taxi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
-            IAccountController repository = new Account(_userManager,
-                _signInManager, _emailSender, _passwordValidator, context);
+            IAccountController account = new Account(_userManager,
+                 _signInManager, _emailSender, _passwordValidator, context);
+            IAccountController repository = new AccountFactory(_logger, account as Account).Create();
 
             if (ModelState.IsValid)
             {
@@ -257,8 +273,9 @@ namespace Taxi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
         {
-            IAccountController repository = new Account(_userManager,
+            IAccountController account = new Account(_userManager,
                 _signInManager, _emailSender, _passwordValidator, context);
+            IAccountController repository = new AccountFactory(_logger, account as Account).Create();
 
             if (!ModelState.IsValid)
                 return View(model);
@@ -280,16 +297,18 @@ namespace Taxi.Controllers
         [HttpPost]
         public IActionResult ExternalLogin(string provider, string returnUrl)
         {
-            IAccountController repository = new Account(_userManager,
+            IAccountController account = new Account(_userManager,
                 _signInManager, _emailSender, _passwordValidator, context);
+            IAccountController repository = new AccountFactory(_logger, account as Account).Create();
             var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
             return repository.ExternalLogin(provider, redirectUrl);            
         }
 
         public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
         {
-            IAccountController repository = new Account(_userManager,
+            IAccountController account = new Account(_userManager,
                 _signInManager, _emailSender, _passwordValidator, context);
+            IAccountController repository = new AccountFactory(_logger, account as Account).Create();
             returnUrl = returnUrl ?? Url.Content("~/");
             IError error = new Error();
 

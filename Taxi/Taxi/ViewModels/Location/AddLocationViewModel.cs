@@ -1,17 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace Taxi.ViewModels.Location
 {
     public class AddLocationViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Введите название локации")]
         [MaxLength(80)]
+        [Remote(action: "LocationInUse", controller: "Location")]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Введите код")]
         public string GoogleCode { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Введите код")]
         public string YandexCode { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Введите код")]
         public string TwoGisCode { get; set; }
     }
 }

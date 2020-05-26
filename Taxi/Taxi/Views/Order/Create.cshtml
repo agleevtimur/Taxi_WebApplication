@@ -79,6 +79,7 @@
                             }
                         </select>
                     </div>
+                    <span asp-validation-for="LocationFrom"></span>
                 </div>
                 <div class="ml-sm-3 mr-sm-4">
                     <svg class="bi bi-arrow-right" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor"
@@ -99,6 +100,7 @@
                             }
                         </select>
                     </div>
+                    <span asp-validation-for="LocationTo"></span>
                 </div>
             </div>
             <div class="form-group-sm mt-3 mb-3">
@@ -190,49 +192,52 @@
         </iframe>
     </div>
 
-    <script>$(".subscribe").hover(
-        function () {
-            $(this).removeClass('pr-sm-4 pl-sm-4');
-            $(this).addClass('pr-sm-5 pl-sm-5')
-        },
-        function () {
-            $(this).removeClass('pr-sm-5 pl-sm-5');
-            $(this).addClass('pr-sm-4 pl-sm-4');
-        }
-    );
+    <script>
+    $(".subscribe").hover(
+            function () {
+                $(this).removeClass('pr-sm-4 pl-sm-4');
+                $(this).addClass('pr-sm-5 pl-sm-5')
+            },
+            function () {
+                $(this).removeClass('pr-sm-5 pl-sm-5');
+                $(this).addClass('pr-sm-4 pl-sm-4');
+            }
+        );
 
-    $("#iframe").load(function () {
-        $("#spinner").fadeOut(600);
-        $(this).show(600);
-        $(this).fadeTo( 600 , 1);
-    });
+        $("#iframe").load(function () {
+            $("#spinner").fadeOut(600);
+            $(this).show(600);
+            $(this).fadeTo(600, 1);
+        });
 
-    $("#nav-button").click(function () {
-        $(".find").parent().toggleClass("d-flex flex-fill");
-        $(".subscribe").parent().toggleClass("d-flex flex-fill");
-        $(".find").parent().parent().toggleClass("mr-sm-0");
-    });
-    $('.radio-group .radio').click(function () {
-        $(this).parent().find('.radio').children().attr("width", "1em");
-        $(this).parent().find('.radio').children().attr("height", "1em");
-        $(this).parent().find('.radio').children().attr("fill", "currentColor");
-        $(this).parent().find('.radio').removeClass("selected");
-        $(this).children().attr('width', "1.4em");
-        $(this).children().attr('height', "1.4em");
-        $(this).children().attr("fill", "#0069d9");
-        $(this).addClass("selected");
-        var val = $(this).attr('data-value');
-        $(this).parent().parent().find('#radio-value').val(val);
-    });
-    $('.radio-group .radio').hover(
-        function () {
-            if (!$(this).hasClass("selected"))
-                $(this).children().attr("fill", "#017cff");
-        },
-        function () {
-            if (!$(this).hasClass("selected"))
-                $(this).children().attr("fill", "currentColor");
-        }
-    );</script>
+        $("#nav-button").click(function () {
+            $(".find").parent().toggleClass("d-flex flex-fill");
+            $(".subscribe").parent().toggleClass("d-flex flex-fill");
+            $(".find").parent().parent().toggleClass("mr-sm-0");
+        });
+        $('.radio-group .radio').click(function () {
+            $(this).parent().find('.radio').children().attr("width", "1em");
+            $(this).parent().find('.radio').children().attr("height", "1em");
+            $(this).parent().find('.radio').children().attr("fill", "currentColor");
+            $(this).parent().find('.radio').removeClass("selected");
+            $(this).children().attr('width', "1.4em");
+            $(this).children().attr('height', "1.4em");
+            $(this).children().attr("fill", "#0069d9");
+            $(this).addClass("selected");
+            var val = $(this).attr('data-value');
+            $(this).parent().parent().find('#radio-value').val(val);
+        });
+        $('.radio-group .radio').hover(
+            function () {
+                if (!$(this).hasClass("selected"))
+                    $(this).children().attr("fill", "#017cff");
+            },
+            function () {
+                if (!$(this).hasClass("selected"))
+                    $(this).children().attr("fill", "currentColor");
+            }
+        );</script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 </body>
 </html>

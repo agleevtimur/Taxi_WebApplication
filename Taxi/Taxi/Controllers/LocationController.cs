@@ -1,7 +1,10 @@
 ﻿using BusinessLogic;
 using BusinessLogic.ControllersForMVC;
+using DnsClient.Internal;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Services.Aop;
 using System.Threading.Tasks;
 using Taxi.ViewModels.Location;
 using Taxi_Database.Context;
@@ -9,29 +12,33 @@ using Taxi_Database.Repository;
 
 namespace Taxi.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "admin, employee")]
     public class LocationController : Controller
     {
         private readonly LocationService locationService;
         private readonly ApplicationContext context;
+        private readonly ILogger<LocationController> _logger;
 
-        public LocationController(LocationService locationService, ApplicationContext context)
+        public LocationController(LocationService locationService, ApplicationContext context, ILogger<LocationController> logger)
         {
             this.locationService = locationService;
             this.context = context;
+            _logger = logger;
         }
-
+        [Authorize(Roles = "admin, employee")]
         public IActionResult Index()
         {
-            ILocationController repository = new Locations(locationService, context);
+            var location = new Locations(locationService, context);
+            ILocationController repository = new Factory<ILocationController, Locations>(_logger, location).Create();
             var model = repository.Index();
             return View(model);
         }
 
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin, employee")]
         public IActionResult History()
         {
-            ILocationController repository = new Locations(locationService, context);
+            var location = new Locations(locationService, context);
+            ILocationController repository = new Factory<ILocationController, Locations>(_logger, location).Create();
             var model = repository.History();
             return View(model);
         }
@@ -49,7 +56,8 @@ namespace Taxi.Controllers
         public async Task<IActionResult> Add(AddLocationViewModel model)
         {
             IError error = new Error();
-            ILocationController repository = new Locations(locationService, context);
+            var location = new Locations(locationService, context);
+            ILocationController repository = new Factory<ILocationController, Locations>(_logger, location).Create();
             if (ModelState.IsValid)
             {
                 if(await repository.IsInLocations(model.Name) == true)
@@ -62,6 +70,14 @@ namespace Taxi.Controllers
             }
             var newmodel = error.GetError("Ошибка", "Ошибка в данных, убедитесь, что все поля были заполнены");
             return View("Error", newmodel);
+        }
+        [AcceptVerbs("GET", "POST")]
+        public async Task<IActionResult> LocationInUse([Bind(Prefix = "Name")]string location)
+        {
+            var locationProxy = new Locations(locationService, context);
+            ILocationController repository = new Factory<ILocationController, Locations>(_logger, locationProxy).Create();
+            if (await repository.IsInLocations(location)) return Json("Данная локация уже используется");
+            else return Json(true);
         }
     }
 }

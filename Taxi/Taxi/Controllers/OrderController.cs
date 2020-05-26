@@ -1,8 +1,11 @@
 ﻿using BusinessLogic;
 using BusinessLogic.ControllersForMVC;
 using BusinessLogic.ModelsForControllers;
+using DnsClient.Internal;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Services.Aop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,13 +48,16 @@ namespace Taxi.Controllers
     {
         private readonly ApplicationContext context;
         private readonly LocationService locationService;
+        private readonly ILogger<OrderController> _logger;
 
         static List<CardOrder> actuals;
-        public OrderController(ApplicationContext context, LocationService locationService)
+        public OrderController(ApplicationContext context, LocationService locationService, ILogger<OrderController> logger)
         {
             this.context = context;
             this.locationService = locationService;
-            IOrderController repository = new Orders(context, locationService);
+            _logger = logger;
+            var order = new Orders(context, locationService);
+            IOrderController repository = new Factory<IOrderController, Orders>(_logger, order).Create();
             actuals = repository.Index().Orders.Select(x => new CardOrder(x.Id, "start", "finish", x.DepartureTime, x.OrderTime, x.Priority, x.UserId)).ToList();
         }
 
@@ -68,7 +74,8 @@ namespace Taxi.Controllers
         [HttpDelete]
         public IActionResult Delete(string id)
         {
-            IOrderController repository = new Orders(context, locationService);
+            var order = new Orders(context, locationService);
+            IOrderController repository = new Factory<IOrderController, Orders>(_logger, order).Create();
             repository.DeleteOrder(int.Parse(id));
             return Ok();
         }
@@ -79,7 +86,8 @@ namespace Taxi.Controllers
         {
             if (id == null)
                 return NotFound();
-            IOrderController repository = new Orders(context, locationService);
+            var order = new Orders(context, locationService);
+            IOrderController repository = new Factory<IOrderController, Orders>(_logger, order).Create();
             var model = repository.CreateGet(id);
             return View(model);
         }
@@ -91,7 +99,8 @@ namespace Taxi.Controllers
             IError error = new Error();
             if (model.Id == null)
                 return NotFound();
-            IOrderController repository = new Orders(context, locationService);
+            var order = new Orders(context, locationService);
+            IOrderController repository = new Factory<IOrderController, Orders>(_logger, order).Create();
             if (ModelState.IsValid)
             {
                 if (model.LocationFrom == model.LocationTo)
@@ -108,7 +117,8 @@ namespace Taxi.Controllers
 
         public IActionResult Order(int? id)
         {
-            IOrderController repository = new Orders(context, locationService);
+            var order = new Orders(context, locationService);
+            IOrderController repository = new Factory<IOrderController, Orders>(_logger, order).Create();
 
             if (id == null)
                 return NotFound();
@@ -119,7 +129,8 @@ namespace Taxi.Controllers
 
         public IActionResult ReadyOrders(string id)
         {
-            IOrderController repository = new Orders(context, locationService);
+            var order = new Orders(context, locationService);
+            IOrderController repository = new Factory<IOrderController, Orders>(_logger, order).Create();
             if (id == null)
                 return NotFound();
 
@@ -134,7 +145,8 @@ namespace Taxi.Controllers
         [Authorize(Roles = "admin")]
         public IActionResult Requests(string id)
         {
-            IOrderController repository = new Orders(context, locationService);
+            var order = new Orders(context, locationService);
+            IOrderController repository = new Factory<IOrderController, Orders>(_logger, order).Create();
             if (id == null)
                 return NotFound();
 
@@ -178,5 +190,15 @@ namespace Taxi.Controllers
         //    await repository.Rating(whoId, whomId, orderId, newRating);
         //    return RedirectToAction("Index");
         //}
+        public IActionResult DestinationIsDifferent([Bind(Prefix = "LocationFrom")] string from, [Bind(Prefix = "LocationTo")] string to)
+        {
+            if (from == to) return Json("Смените место назначения");
+            else return Json(true);
+        }
+        public IActionResult StartIsDifferent([Bind(Prefix ="LocationFrom")] string from, [Bind(Prefix = "LocationTo")] string to)
+        {
+            if (from == to) return Json("Смените место отправки");
+            else return Json(true);
+        }
     }
 }

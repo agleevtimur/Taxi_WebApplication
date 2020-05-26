@@ -1,8 +1,11 @@
 ﻿using BusinessLogic;
 using BusinessLogic.ControllersForMVC;
+using DnsClient.Internal;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Services.Aop;
 using System.Threading.Tasks;
 using Taxi_Database.Context;
 using Taxi_Database.Models;
@@ -14,15 +17,18 @@ namespace Taxi.Controllers
     {
         private readonly IdentityContext _context;
         private readonly UserManager<User> _userManager;
-        public ChatController(IdentityContext context, UserManager<User> userManager)
+        private readonly ILogger<ChatController> _logger;
+        public ChatController(IdentityContext context, UserManager<User> userManager, ILogger<ChatController> logger)
         {
             _context = context;
             _userManager = userManager;
+            _logger = logger;
         }
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            IChatController repository = new Chat(_context, _userManager);
+            var chat = new Chat(_context, _userManager);
+            IChatController repository = new Factory<IChatController, Chat>(_logger,chat).Create();
             var currentUser = await repository.GetUser(User);
             ViewBag.CurrentUserName = currentUser.UserName;
             var messages = await repository.GetMessages();
@@ -32,7 +38,8 @@ namespace Taxi.Controllers
         public async Task<IActionResult> Create(Message message)
         {
             IError error = new Error();
-            IChatController repository = new Chat(_context, _userManager);
+            var chat = new Chat(_context, _userManager);
+            IChatController repository = new Factory<IChatController, Chat>(_logger, chat).Create();
             if (ModelState.IsValid)
             {
                 await repository.Messages(User, message);

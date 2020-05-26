@@ -3,6 +3,7 @@ using BusinessLogic;
 using BusinessLogic.ControllersForMVC;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Services.Aop;
 using Taxi_Database.Context;
 using Taxi_Database.Models;
 
@@ -21,7 +22,8 @@ namespace Taxi.Controllers
 
         public IActionResult Index()
         {
-            IHomeController repository = new Home(context);
+            var home = new Home(context);
+            IHomeController repository = new Factory<IHomeController, Home>(_logger, home).Create();
             var model = repository.Index();
             return View(model);
         }
