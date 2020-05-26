@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model BusinessLogic.ModelsForControllers.OrderIndexViewModel
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -102,16 +103,24 @@
             </div>
             <ul class="navbar-nav ml-sm-2">
                 <li class="nav-item ">
-                    <a class="nav-link flex-nowrap nowrap text-right" href="#">О Проекте<span class="sr-only"></span></a>
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-action="Index" asp-controller="Home">О Проекте<span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link flex-nowrap nowrap text-right" href="#">Мои заказы<span class="sr-only"></span></a>
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-action="ReadyOrders" asp-controller="Order" asp-route-id="@Model.Id">Мои заказы<span class="sr-only"></span></a>
                 </li>
 
                 <li class="nav-item ">
-                    <a class="nav-link flex-nowrap nowrap text-right" href="#">Мой профиль<span class="sr-only"></span></a>
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-action="Index" asp-controller="Users" asp-route-id="@Model.Id">Мой профиль<span class="sr-only"></span></a>
                 </li>
             </ul>
+            <div class="col-auto  pl-md-0 pr-sm-2  align-content-center pb-0 transition">
+                <form asp-action="Logout" asp-controller="Account" method="post">
+                    <button type="submit"
+                            class="flex-fill btn btn-primary  pr-sm-4 pl-sm-4 pb-auto mb-0 font-weight-bold text-center find">
+                        Выход
+                    </button>
+                </form>
+            </div>
         </div>
     </nav>
     <div id="content" class="container-sm p-4 mt-sm-5 transition" style="max-width: 40em; margin-top: 50px"></div>

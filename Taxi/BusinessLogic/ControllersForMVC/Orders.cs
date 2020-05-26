@@ -17,6 +17,11 @@ namespace BusinessLogic.ControllersForMVC
             this.context = context;
             this.locationService = locationService;
         }
+        
+        public OrderIndexViewModel GetModel(string id)
+        {
+            return new OrderIndexViewModel { Id = id };
+        }
 
         public IndexOrderViewModel Index()
         {

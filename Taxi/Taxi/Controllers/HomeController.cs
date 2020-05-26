@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using BusinessLogic;
+﻿using BusinessLogic;
 using BusinessLogic.ControllersForMVC;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

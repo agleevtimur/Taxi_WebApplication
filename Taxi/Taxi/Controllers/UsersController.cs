@@ -2,7 +2,6 @@
 using BusinessLogic;
 using BusinessLogic.ControllersForMVC;
 using BusinessLogic.ModelsForControllers;
-using DnsClient.Internal;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -25,14 +24,15 @@ namespace Taxi.Controllers
         public UsersController(UserManager<User> userManager, ApplicationContext context, ILogger<UsersController> logger)
         {
             _userManager = userManager;
-            this.context = context;
+             this.context = context;
             _logger = logger;
         }
+
         [Authorize]
         public async Task<IActionResult> Index(string id)
         {
             if (User.IsInRole("admin")) return RedirectToAction(actionName: "Admin", controllerName: "Users");
-            if (User.IsInRole("employee")) return RedirectToAction(actionName: "Index", controllerName: "Home");
+            if (User.IsInRole("employee")) return RedirectToAction(actionName: "Employee", controllerName: "Users");
             var user = new Users(_userManager, context);
             IUserController repository = new Factory<IUserController, Users>(_logger, user).Create();
 
@@ -45,6 +45,12 @@ namespace Taxi.Controllers
 
         [Authorize(Roles = "admin")]
         public IActionResult Admin()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "employee")]
+        public IActionResult Employee()
         {
             return View();
         }
@@ -62,10 +68,27 @@ namespace Taxi.Controllers
         [HttpGet]
         public IActionResult Create() => View();
 
-        
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateUserViewModel model)
+        {
+            var user = new Users(_userManager, context);
+            IUserController repository = new Factory<IUserController, Users>(_logger, user).Create();
+
+            if (ModelState.IsValid)
+            {
+                var result = await repository.Create(model.Email, model.Login, model.Password);
+                if (result.Succeeded)
+                    return RedirectToAction("Index");
+
+                else
+                    foreach (var error in result.Errors)
+                        ModelState.AddModelError(string.Empty, error.Description);
+            }
+
+            return View(model);
+        }
 
         [HttpGet]
-        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(string id)
         {
             var userProxy = new Users(_userManager, context);
@@ -80,7 +103,6 @@ namespace Taxi.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(EditUserViewModel model)
         {
             var userProxy = new Users(_userManager, context);
@@ -109,11 +131,11 @@ namespace Taxi.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(string id)
         {
             var user = new Users(_userManager, context);
             IUserController repository = new Factory<IUserController, Users>(_logger, user).Create();
+
             var result = await repository.Delete(id);
             return RedirectToAction("Index");
         }
@@ -177,6 +199,5 @@ namespace Taxi.Controllers
             repository.Subscription(model.Priority, model.CountOfTravels, model.Id);
             return RedirectToAction("Index");
         }
-        
     }
 }

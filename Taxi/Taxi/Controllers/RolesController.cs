@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Taxi_Database.Models;
 using BusinessLogic;
 using BusinessLogic.ControllersForMVC;
-using DnsClient.Internal;
 using Microsoft.Extensions.Logging;
 using Services.Aop;
 

@@ -38,11 +38,16 @@
         <div class="collapse navbar-collapse  justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav ml-sm-2">
                 <li class="nav-item ">
-                    <a class="nav-link flex-nowrap nowrap text-right" href="#">О Проекте<span class="sr-only"></span></a>
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-controller="Location" asp-action="Add">Добавить локацию</a>
                 </li>
-
                 <li class="nav-item ">
-                    <a class="nav-link flex-nowrap nowrap text-right" href="#">Вход<span class="sr-only"></span></a>
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-action="History" asp-controller="Location">История местоположений<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-controller="Users" asp-action="Clients">Пользователи</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-controller="Roles" asp-action="Create">Создать роль</a>
                 </li>
             </ul>
         </div>
