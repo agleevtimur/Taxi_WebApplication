@@ -5,8 +5,7 @@ namespace Taxi.ViewModels.Subscription
     public class GetSubscriptionViewModel
     {
         public string Id { get; set; }
-        public int Priority { get; set; }
-        public int CountOfTravels { get; set; }
+        public int CardNumber { get; set; }
 
         [Required]
         [MaxLength(19)]
@@ -21,6 +20,10 @@ namespace Taxi.ViewModels.Subscription
 
         [Required]
         [MaxLength(100)]
-        public string Name { get; set; }
+        public string FirstName{ get; set; }
+
+        [Required]
+        [MaxLength(100)]
+        public string SecondName { get; set; }
     }
 }

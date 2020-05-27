@@ -27,7 +27,7 @@ namespace Taxi_Database.Repository
         Task<int> GetSaveOrderId(ReadyOrders order);
         IEnumerable<ReadyOrders> GetOrders();
         ReadyOrders GetOrder(int id);
-        List<ReadyOrders> GetOrdersByClientId(int id);
+        IEnumerable<ReadyOrders> GetOrdersByClientId(int id);
         ReadyOrders GetReadyOrderId(int id);
         Task DeleteOrder(int id);
         List<Client> GetPassengers(int id);

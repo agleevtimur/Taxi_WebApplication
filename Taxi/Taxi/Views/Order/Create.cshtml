@@ -84,18 +84,19 @@
         </button>
         <div class="collapse navbar-collapse  justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav ml-sm-2">
-                <ul class="navbar-nav ml-sm-2">
-                    <li class="nav-item ">
-                        <a class="nav-link flex-nowrap nowrap text-right" asp-action="Index" asp-controller="Home">О Проекте<span class="sr-only"></span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link flex-nowrap nowrap text-right" asp-action="ReadyOrders" asp-controller="Order" asp-route-id="@Model.Id">Мои заказы<span class="sr-only"></span></a>
-                    </li>
+                <li class="nav-item ">
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-action="Locations" asp-controller="Order">Список локаций<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-action="Index" asp-controller="Home">О Проекте<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-action="Index" asp-controller="Order" asp-route-id="@Model.Id">Заказы<span class="sr-only"></span></a>
+                </li>
 
-                    <li class="nav-item ">
-                        <a class="nav-link flex-nowrap nowrap text-right" asp-action="Index" asp-controller="Users" asp-route-id="@Model.Id">Мой профиль<span class="sr-only"></span></a>
-                    </li>
-                </ul>
+                <li class="nav-item ">
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-action="Index" asp-controller="Users" asp-route-id="@Model.Id">Мой профиль<span class="sr-only"></span></a>
+                </li>
             </ul>
         </div>
         <div class="col-auto  pl-md-0 pr-sm-2  align-content-center pb-0 transition">

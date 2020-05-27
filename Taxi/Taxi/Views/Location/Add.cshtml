@@ -47,9 +47,17 @@
                     <a class="nav-link flex-nowrap nowrap text-right" asp-controller="Users" asp-action="Clients">Пользователи</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link flex-nowrap nowrap text-right" asp-controller="Roles" asp-action="Create">Создать роль</a>
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-controller="Roles" asp-action="Index">Роли</a>
                 </li>
             </ul>
+            <div class="col-auto  pl-md-0 pr-sm-2  align-content-center pb-0 transition">
+                <form asp-action="Logout" asp-controller="Account" method="post">
+                    <button type="submit"
+                            class="flex-fill btn btn-primary  pr-sm-4 pl-sm-4 pb-auto mb-0 font-weight-bold text-center find">
+                        Выход
+                    </button>
+                </form>
+            </div>
         </div>
     </nav>
     <div class="container-sm p-4 " style="max-width: 40em; margin-top: 50px">

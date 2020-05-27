@@ -23,12 +23,12 @@ namespace BusinessLogic.ControllersForMVC
             return new OrderIndexViewModel { Id = id };
         }
 
-        public IndexOrderViewModel Index()
+        public IndexOrderViewModel Index(string id)
         {
             IRepository repository = new Repository(context);
             var orders = repository.GetRequests();
             var readyOrders = repository.GetOrders();
-            return new IndexOrderViewModel { Orders = orders, ReadyOrders = readyOrders};
+            return new IndexOrderViewModel { Id = id, Orders = orders, ReadyOrders = readyOrders};
         }
 
         public CreateOrderViewModel CreateGet(string id)
@@ -38,8 +38,14 @@ namespace BusinessLogic.ControllersForMVC
             var list = new List<string>();
             foreach (var location in locations)
                 list.Add(location.NameOfLocation);
-
             return new CreateOrderViewModel { Id = id, LocationsFrom = list, LocationsTo = list};
+        }
+
+        public IEnumerable<Location> Locations()
+        {
+            ILocationController repository = new Locations(locationService, context);
+            var locations = repository.Index();
+            return locations;
         }
 
         public async Task Create(string locationFrom, string locationTo, string time, int countOfPeople, string id)
@@ -69,11 +75,13 @@ namespace BusinessLogic.ControllersForMVC
             return new OrderWithClientViewModel { ReadyOrder = order, Clients = passengers };
         }
 
-        public List<ReadyOrders> GetOrdersByClientId(string id)
+        public ReadyOrdersViewModel GetOrdersByClientId(string id)
         {
+            var readyOrders = new List<ReadyOrders>();
             IRepository repository = new Repository(context);
             var client = repository.GetClient(id);
-            return repository.GetOrdersByClientId(client.Id);
+            var orders = repository.GetOrdersByClientId(client.Id);
+            return new ReadyOrdersViewModel { Id = id, ReaddyOrders = orders};
         }
 
         public IEnumerable<Order> GetRequestsByClientId(string id)

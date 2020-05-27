@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Taxi_Database.Context;
 using Taxi_Database.Models;
@@ -156,30 +157,12 @@ namespace Taxi_Database.Repository
             return db.ReadyOrders.Find(id);
         }
 
-        public List<ReadyOrders> GetOrdersByClientId (int id)
+        public IEnumerable<ReadyOrders> GetOrdersByClientId (int id)
         {
-            var readyOrders = new List<ReadyOrders>();
-            var ordersId = GetOrdersId(id);
-            foreach (var orderId in ordersId) 
-                readyOrders.Add(db.ReadyOrders.Find(orderId));
-            return readyOrders;
-        }
-
-        private List<int> GetOrdersId(int id)
-        {
-            var ordersId = new List<int>();
-            var passengers = db.Passengers;
-            foreach (var passenger in passengers)
-            {
-                lock (passenger)
-                {
-                    if (passenger.FirstId == id || passenger.SecondId == id
-                        || passenger.ThirdId == id || passenger.ForthId == id)
-                        ordersId.Add(passenger.OrderId);
-                }
-            }
-
-            return ordersId;
+            var orders = db.Passengers.Where(x => x.FirstId == id || x.SecondId == id
+                || x.ThirdId == id || x.ForthId == id)
+                .Select(x => db.ReadyOrders.Find(x.OrderId));
+            return orders;
         }
 
         public ReadyOrders GetReadyOrderId(int id)
@@ -199,10 +182,14 @@ namespace Taxi_Database.Repository
             var list = new List<Client>();
             var passengers = db.Passengers.Where(x => x.OrderId == id);
             var newpassengers = passengers.FirstOrDefault();
-            list.Add(db.Client.Find(newpassengers.FirstId));
-            list.Add(db.Client.Find(newpassengers.SecondId));
-            list.Add(db.Client.Find(newpassengers.ThirdId));
-            list.Add(db.Client.Find(newpassengers.ForthId));
+            if(newpassengers.FirstId != 0)
+                list.Add(db.Client.Find(newpassengers.FirstId));
+            if (newpassengers.SecondId != 0)
+                list.Add(db.Client.Find(newpassengers.SecondId));
+            if (newpassengers.ThirdId != 0)
+                list.Add(db.Client.Find(newpassengers.ThirdId));
+            if(newpassengers.ForthId != 0)
+                list.Add(db.Client.Find(newpassengers.ForthId));
             return list;
         }
 

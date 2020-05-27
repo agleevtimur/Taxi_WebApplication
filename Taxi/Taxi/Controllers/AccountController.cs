@@ -62,8 +62,7 @@ namespace Taxi.Controllers
                     await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
                         $"Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>link</a>");
 
-                    return Content("Для завершения регистрации проверьте электронную почту " +
-                        "и перейдите по ссылке, указанной в письме");
+                    return Content("На вашу почту пришло уведомление о регистрации");
 
                 }
 

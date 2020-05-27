@@ -64,15 +64,16 @@ namespace BusinessLogic
     public interface IOrderController
     {
         OrderIndexViewModel GetModel(string id);
-        IndexOrderViewModel Index();
+        IndexOrderViewModel Index(string id);
         CreateOrderViewModel CreateGet(string id);
         Task Create(string locationFrom, string locationTo, string time, int countOfPeople, string id);
         OrderWithClientViewModel GetOrder(int id);
-        List<ReadyOrders> GetOrdersByClientId(string id);
+        ReadyOrdersViewModel GetOrdersByClientId(string id);
         IEnumerable<Order> GetRequestsByClientId(string id);
         ReadyOrders GetReadyOrderId(int id);
         Task DeleteOrder(int id);
         Task Rating(string whoId, string whomId, int orderId, int newRating);
+        IEnumerable<Location> Locations();
     }
 
     public interface ILocationController

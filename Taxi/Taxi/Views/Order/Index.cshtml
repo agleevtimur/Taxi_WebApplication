@@ -1,9 +1,271 @@
-﻿@model BusinessLogic.ModelsForControllers.OrderIndexViewModel
+﻿@*@model BusinessLogic.ModelsForControllers.OrderIndexViewModel
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Мои заказы</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+              integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+                integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+                crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+                crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+                integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+                crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+        <style>
+            .nowrap {
+                white-space: nowrap
+            }
+
+            .find {
+                display: block;
+                transition: all 300ms ease-out;
+            }
+
+            .transition {
+                transition: all 300ms ease-out;
+            }
+
+            .subscribe {
+                display: block;
+                transition: all 300ms ease-out;
+            }
+
+            .card {
+                transition: all 600ms ease-out;
+            }
+
+            .card-hover {
+                border-color: #000000;
+                -moz-box-shadow: 0 0 12px #000000;
+                -webkit-box-shadow: 0 0 12px #000000;
+                box-shadow: 0 0 12px #000000;
+            }
+            .high {
+                background: #5a28b3;
+                font-weight: 500;
+            }
+            .medium {
+                font-weight: 500;
+            }
+            .low {
+                font-weight: 500;
+            }
+        </style>
+
+    </head>
+    <body>
+        <nav id="nav" class="navbar navbar-expand-lg  navbar-dark bg-dark fixed-top ">
+            <div class="row  row-cols-2  ml-md-0 mr-md-0 mb-1 mt-1 align-content-stretch d-flex  flex-fill ">
+                <div class="col-auto  pl-md-0 pr-sm-2  align-content-center pb-0 transition">
+                    <button type="button"
+                            class="flex-fill btn btn-primary  pr-sm-4 pl-sm-4 pb-auto mb-0 font-weight-bold text-center find">
+                        Найти попутчиков
+                    </button>
+                </div>
+                <div class="col-auto mr-2 pl-sm-2 pr-sm-0 align-content-stretch transition">
+                    <button type="button"
+                            class="flex-fill btn btn-outline-light mr-sm-0 pl-sm-4 pr-sm-4 pb-auto mb-sm-0  font-weight-light  subscribe">
+                        Подписаться
+                    </button>
+                </div>
+                <div class="mr-sm-3 ml-sm-3"></div>
+            </div>
+            <button class="navbar-toggler ml-auto" id="nav-button" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse  justify-content-end" id="navbarSupportedContent">
+                <div class="ml-auto  align-content-stretch  ">
+                    <div class="input-group mb-1 mt-1 ">
+                        <input type="text" id="search" class="form-control bg-light border-light transition  flex-nowrap"
+                               placeholder="Поиск..."
+                               aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                            <span class="input-group-text bg-light border-light" id="basic-addon1">
+                                <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M10.442 10.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z"
+                                          clip-rule="evenodd" />
+                                    <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM13 6.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"
+                                          clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <ul class="navbar-nav ml-sm-2">
+                    <li class="nav-item ">
+                        <a class="nav-link flex-nowrap nowrap text-right" asp-action="Index" asp-controller="Home">О Проекте<span class="sr-only"></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link flex-nowrap nowrap text-right" asp-action="ReadyOrders" asp-controller="Order" asp-route-id="@Model.Id">Мои заказы<span class="sr-only"></span></a>
+                    </li>
+
+                    <li class="nav-item ">
+                        <a class="nav-link flex-nowrap nowrap text-right" asp-action="Index" asp-controller="Users" asp-route-id="@Model.Id">Мой профиль<span class="sr-only"></span></a>
+                    </li>
+                </ul>
+                <div class="col-auto  pl-md-0 pr-sm-2  align-content-center pb-0 transition">
+                    <form asp-action="Logout" asp-controller="Account" method="post">
+                        <button type="submit"
+                                class="flex-fill btn btn-primary  pr-sm-4 pl-sm-4 pb-auto mb-0 font-weight-bold text-center find">
+                            Выход
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <div id="content" class="container-sm p-4 mt-sm-5 transition" style="max-width: 40em; margin-top: 50px"></div>
+        <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/16.11.0/umd/react.development.js"></script>
+        <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js"></script>
+        <script src="js/order.jsx"></script>
+        <script>if ($('.toscroll ').is('.toscroll ')) {
+                let offset = $('.toscroll').offset().top - 70;//применяетмя при переходе с профиля>совершенные поездк
+                $('html, body').animate({ scrollTop: offset }, 1000);
+            }
+            $('.card ').hover(
+                function () {
+                    $(this).addClass('border-dark card-hover')
+                },
+                function () {
+                    $(this).removeClass('border-dark card-hover')
+                }
+            );
+            $('.radio-group .radio ').hover(
+                function () {
+                    $(this).children().addClass('pl-sm-4 pr-sm-4 radio-hover')
+                },
+                function () {
+                    $(this).children().removeClass(' pl-sm-4 pr-sm-4 radio-hover')
+                }
+            );
+
+            $('.radio-group .radio').click(function () {
+                let alreadyselected = $(this).children().hasClass('selected');
+                $(this).parent().find('.radio').children().removeClass('selected pt-2 pb-2');
+                if (alreadyselected) {
+                    $(this).parent().find('input').val("");
+                    search(false);
+                } else {
+                    $(this).children().addClass('selected pt-2 pb-2');
+                    var val = $(this).attr('data-value');
+                    $(this).parent().find('input').val(val);
+                    search(true);
+                }
+            });
+
+
+            $(".subscribe").hover(
+                function () {
+                    $(".find").removeClass('pr-sm-4 pl-sm-4');
+                    $(this).removeClass('pr-sm-4 pl-sm-4');
+                    $(".find").addClass('pr-sm-2 pl-sm-2');
+                    $(this).addClass('pr-sm-5 pl-sm-5')
+                },
+                function () {
+                    $(".find").removeClass('pr-sm-2 pl-sm-2');
+                    $(this).removeClass('pr-sm-5 pl-sm-5');
+                    $(".find").addClass('pr-sm-4 pl-sm-4');
+                    $(this).addClass('pr-sm-4 pl-sm-4');
+                }
+            );
+            $(".find").hover(
+                function () {
+                    $(".subscribe").removeClass('pr-sm-4 pl-sm-4');
+                    $(this).removeClass('pr-sm-4 pl-sm-4');
+                    $(".subscribe").addClass('pr-sm-2 pl-sm-2');
+                    $(this).addClass('pr-sm-5 pl-sm-5')
+                },
+                function () {
+                    $(".subscribe").removeClass('pr-sm-2 pl-sm-2');
+                    $(this).removeClass('pr-sm-5 pl-sm-5');
+                    $(".subscribe").addClass('pr-sm-4 pl-sm-4');
+                    $(this).addClass('pr-sm-4 pl-sm-4');
+                }
+            );
+            $("#nav-button").click(function () {
+                $(".find").parent().toggleClass("d-flex flex-fill");
+                $(".subscribe").parent().toggleClass("d-flex flex-fill");
+                $(".find").parent().parent().toggleClass("mr-sm-0");
+            });
+            $(document).ready(function () {
+                $("#titlesearch").hide();
+                $("#search").keyup(search);
+            });
+
+            function search(withFilter) {
+                let value = $("#search").val().toLowerCase();
+                let words = value.split(" ");
+                let count = 0;
+                let searching = value.length !== 0;
+
+                $(".card").filter(function () {
+                    let totalFilter = true;
+                    let thisText = $(this).text().toLowerCase();
+                    for (let i = 0; i < words.length; i++) {
+                        totalFilter = totalFilter && (thisText.indexOf(words[i]) > -1);
+                    }
+                    let priorityFilter = true;
+                    if (searching && withFilter) {
+
+                        let priority = $("#priorityfilter").val();
+                        priorityFilter = (thisText.indexOf(priority) > -1);
+                    }
+                    if (totalFilter && priorityFilter) {
+                        count++;
+                    }
+                    $(this).toggle(totalFilter && priorityFilter);
+                });
+                if (searching) {//searching
+                    hideTitles(count, 400);
+                } else {//stop searching
+                    showTitles(400);
+                }
+            }
+
+            function hideTitles(count, delay) {
+                $("#titlesearch h1 span").text(count);
+                $("#titleactual").hide();
+                $("#titlesearch").show();
+                $("#titlehistory").hide();
+            }
+
+            function showTitles(delay) {
+                $("#titlesearch").hide();
+                $("#titleactual").show();
+                $("#titlehistory").show();
+            }
+
+            $("#search").hover(
+                function () {
+                    $(this).addClass('pr-sm-5');
+                },
+                function () {
+                    $(this).removeClass('pr-sm-5');
+                }
+            );
+            $("#search").focus(
+                function () {
+                },
+                function () {
+                }
+            );</script>
+    </body>
+    </html>*@
+@model BusinessLogic.ModelsForControllers.IndexOrderViewModel
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>Мои заказы</title>
+    <meta charset="UTF-8">
+    <title>Заявки и заказы</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -16,8 +278,11 @@
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
 
     <style>
+
+
         .nowrap {
             white-space: nowrap
         }
@@ -36,6 +301,15 @@
             transition: all 300ms ease-out;
         }
 
+        .high {
+            background: #5a28b3;
+            color: white;
+        }
+
+        .text-black {
+            color: black;
+        }
+
         .card {
             transition: all 600ms ease-out;
         }
@@ -46,33 +320,26 @@
             -webkit-box-shadow: 0 0 12px #000000;
             box-shadow: 0 0 12px #000000;
         }
-        .high {
-            background: #5a28b3;
-            font-weight: 500;
-        }
-        .medium {
-            font-weight: 500;
-        }
-        .low {
-            font-weight: 500;
-        }
     </style>
-
 </head>
 <body>
     <nav id="nav" class="navbar navbar-expand-lg  navbar-dark bg-dark fixed-top ">
         <div class="row  row-cols-2  ml-md-0 mr-md-0 mb-1 mt-1 align-content-stretch d-flex  flex-fill ">
             <div class="col-auto  pl-md-0 pr-sm-2  align-content-center pb-0 transition">
-                <button type="button"
-                        class="flex-fill btn btn-primary  pr-sm-4 pl-sm-4 pb-auto mb-0 font-weight-bold text-center find">
-                    Найти попутчиков
-                </button>
+                <form asp-action="Create" asp-controller="Order" method="post" asp-route-id="@Model.Id">
+                    <button type="submit"
+                            class="flex-fill btn btn-primary  pr-sm-4 pl-sm-4 pb-auto mb-0 font-weight-bold text-center find">
+                        Найти попутчиков
+                    </button>
+                </form>
             </div>
-            <div class="col-auto mr-2 pl-sm-2 pr-sm-0 align-content-stretch transition">
-                <button type="button"
-                        class="flex-fill btn btn-outline-light mr-sm-0 pl-sm-4 pr-sm-4 pb-auto mb-sm-0  font-weight-light  subscribe">
-                    Подписаться
-                </button>
+            <div class="col-auto mr-0 pl-sm-2 pr-sm-0 align-content-stretch transition">
+                <form asp-action="Subscription" asp-controller="Users" method="post" asp-route-id="@Model.Id">
+                    <button type="submit"
+                            class="flex-fill btn btn-outline-light mr-sm-0 pl-sm-4 pr-sm-4 pb-auto mb-sm-0  font-weight-light  subscribe">
+                        Подписаться
+                    </button>
+                </form>
             </div>
             <div class="mr-sm-3 ml-sm-3"></div>
         </div>
@@ -82,55 +349,113 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse  justify-content-end" id="navbarSupportedContent">
-            <div class="ml-auto  align-content-stretch  ">
-                <div class="input-group mb-1 mt-1 ">
-                    <input type="text" id="search" class="form-control bg-light border-light transition  flex-nowrap"
-                           placeholder="Поиск..."
-                           aria-describedby="button-addon2">
-                    <div class="input-group-append">
-                        <span class="input-group-text bg-light border-light" id="basic-addon1">
-                            <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M10.442 10.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z"
-                                      clip-rule="evenodd" />
-                                <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM13 6.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"
-                                      clip-rule="evenodd" />
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-            </div>
             <ul class="navbar-nav ml-sm-2">
-                <li class="nav-item ">
-                    <a class="nav-link flex-nowrap nowrap text-right" asp-action="Index" asp-controller="Home">О Проекте<span class="sr-only"></span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link flex-nowrap nowrap text-right" asp-action="ReadyOrders" asp-controller="Order" asp-route-id="@Model.Id">Мои заказы<span class="sr-only"></span></a>
-                </li>
+                    <li class="nav-item ">
+                        <a class="nav-link flex-nowrap nowrap text-right" asp-action="Index" asp-controller="Home">О Проекте<span class="sr-only"></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link flex-nowrap nowrap text-right" asp-action="Index" asp-controller="Order" asp-route-id="@Model.Id">Заказы<span class="sr-only"></span></a>
+                    </li>
 
-                <li class="nav-item ">
-                    <a class="nav-link flex-nowrap nowrap text-right" asp-action="Index" asp-controller="Users" asp-route-id="@Model.Id">Мой профиль<span class="sr-only"></span></a>
-                </li>
-            </ul>
-            <div class="col-auto  pl-md-0 pr-sm-2  align-content-center pb-0 transition">
-                <form asp-action="Logout" asp-controller="Account" method="post">
-                    <button type="submit"
-                            class="flex-fill btn btn-primary  pr-sm-4 pl-sm-4 pb-auto mb-0 font-weight-bold text-center find">
-                        Выход
-                    </button>
-                </form>
-            </div>
+                    <li class="nav-item ">
+                        <a class="nav-link flex-nowrap nowrap text-right" asp-action="Index" asp-controller="Users" asp-route-id="@Model.Id">Мой профиль<span class="sr-only"></span></a>
+                    </li>
+                </ul>
+        </div>
+        <div class="col-auto  pl-md-0 pr-sm-2  align-content-center pb-0 transition">
+            <form asp-action="Logout" asp-controller="Account" method="post">
+                <button type="submit"
+                        class="flex-fill btn btn-primary  pr-sm-4 pl-sm-4 pb-auto mb-0 font-weight-bold text-center find">
+                    Выход
+                </button>
+            </form>
         </div>
     </nav>
-    <div id="content" class="container-sm p-4 mt-sm-5 transition" style="max-width: 40em; margin-top: 50px"></div>
-    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/16.11.0/umd/react.development.js"></script>
-    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js"></script>
-    <script src="js/order.jsx"></script>
-    <script>if ($('.toscroll ').is('.toscroll ')) {
-            let offset = $('.toscroll').offset().top - 70;//применяетмя при переходе с профиля>совершенные поездк
-            $('html, body').animate({ scrollTop: offset }, 1000);
+    <div class="container-sm p-4 " style="max-width: 40em; margin-top: 50px">
+        <div id="titleactual">
+            <h1 class="title mt-3 mb-5 ">Заявки</h1>
+        </div>
+        @foreach (var item in Model.Orders)
+        {
+            <div class="card mt-4 mb-4">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Название</th>
+                                <th scope="col">Данные</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Откуда</td>
+                                <td>@item.StartPointId</td>
+                            </tr>
+                            <tr>
+                                <td>Куда</td>
+                                <td>@item.FinishPointId</td>
+                            </tr>
+                            <tr>
+                                <td>Сколько человек</td>
+                                <td>@item.CountOfPeople</td>
+                            </tr>
+                            <tr>
+                                <td>Во сколько</td>
+                                <td>@item.OrderTime</td>
+                            </tr>
+                            <tr>
+                                <td>Время оформления</td>
+                                <td>@item.DepartureTime</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         }
+        <div id="titleactual">
+            <h1 class="title mt-3 mb-5 ">Готовые заказы</h1>
+        </div>
+        @foreach (var item in Model.ReadyOrders)
+        {
+            <div class="card mt-4 mb-4">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Название</th>
+                                <th scope="col">Данные</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Информация</td>
+                                <td><div class="col d-inline-flex ml-0 pl-0 mr-0 pr-0  pb-0 mb-0">
+    <a class="col card-link ml-0 pb-0 mr-0 pr-0 mb-0" asp-action="Order" asp-route-id="@item.Id">Подробнее</a>
+</div></td>
+                            </tr>
+                            <tr>
+                                <td>Откуда</td>
+                                <td>@item.StartPointId</td>
+                            </tr>
+                            <tr>
+                                <td>Куда</td>
+                                <td>@item.FinishPointId</td>
+                            </tr>
+                            <tr>
+                                <td>Во сколько</td>
+                                <td>@item.OrderTime</td>
+                            </tr>
+                            <tr>
+                                <td>Время офромления</td>
+                                <td>@item.CompleteTime</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+    </div>
+    <script>
         $('.card ').hover(
             function () {
                 $(this).addClass('border-dark card-hover')
@@ -139,28 +464,6 @@
                 $(this).removeClass('border-dark card-hover')
             }
         );
-        $('.radio-group .radio ').hover(
-            function () {
-                $(this).children().addClass('pl-sm-4 pr-sm-4 radio-hover')
-            },
-            function () {
-                $(this).children().removeClass(' pl-sm-4 pr-sm-4 radio-hover')
-            }
-        );
-
-        $('.radio-group .radio').click(function () {
-            let alreadyselected = $(this).children().hasClass('selected');
-            $(this).parent().find('.radio').children().removeClass('selected pt-2 pb-2');
-            if (alreadyselected) {
-                $(this).parent().find('input').val("");
-                search(false);
-            } else {
-                $(this).children().addClass('selected pt-2 pb-2');
-                var val = $(this).attr('data-value');
-                $(this).parent().find('input').val(val);
-                search(true);
-            }
-        });
 
 
         $(".subscribe").hover(
@@ -213,16 +516,10 @@
                 for (let i = 0; i < words.length; i++) {
                     totalFilter = totalFilter && (thisText.indexOf(words[i]) > -1);
                 }
-                let priorityFilter = true;
-                if (searching && withFilter) {
-
-                    let priority = $("#priorityfilter").val();
-                    priorityFilter = (thisText.indexOf(priority) > -1);
-                }
-                if (totalFilter && priorityFilter) {
+                if (totalFilter) {
                     count++;
                 }
-                $(this).toggle(totalFilter && priorityFilter);
+                $(this).toggle(totalFilter);
             });
             if (searching) {//searching
                 hideTitles(count, 400);

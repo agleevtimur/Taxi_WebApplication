@@ -39,26 +39,28 @@
     </style>
 </head>
    <body>
-        <nav id="nav" class="navbar navbar-expand-lg  navbar-dark bg-dark fixed-top ">
-            <button class="navbar-toggler ml-auto" id="nav-button" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse  justify-content-end" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-sm-2">
-                    <li class="nav-item ">
-                        <a class="nav-link flex-nowrap nowrap text-right" asp-action="Index" asp-controller="Home">О Проекте<span class="sr-only"></span></a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link flex-nowrap nowrap text-right" asp-action="Login" asp-controller="Account">Войти<span class="sr-only"></span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link flex-nowrap nowrap text-right" asp-action="Register" asp-controller="Account">Зарегестрироваться<span class="sr-only"></span></a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+       <nav id="nav" class="navbar navbar-expand-lg  navbar-dark bg-dark fixed-top ">
+           <button class="navbar-toggler ml-auto" id="nav-button" type="button" data-toggle="collapse"
+                   data-target="#navbarSupportedContent"
+                   aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon"></span>
+           </button>
+           <div class="collapse navbar-collapse  justify-content-end" id="navbarSupportedContent">
+               <ul class="navbar-nav ml-sm-2">
+                   <li class="nav-item ">
+                       <a class="nav-link flex-nowrap nowrap text-right" asp-action="Index" asp-controller="Home">О Проекте<span class="sr-only"></span></a>
+                   </li>
+               </ul>
+           </div>
+           <div class="col-auto  pl-md-0 pr-sm-2  align-content-center pb-0 transition">
+               <form asp-action="Logout" asp-controller="Account" method="post">
+                   <button type="submit"
+                           class="flex-fill btn btn-primary  pr-sm-4 pl-sm-4 pb-auto mb-0 font-weight-bold text-center find">
+                       Выход
+                   </button>
+               </form>
+           </div>
+       </nav>
         <div class="container">
             <div class="container-sm p-4 " style="max-width: 40em; margin-top: 50px">
                 <h2 class="text-center text-primary">

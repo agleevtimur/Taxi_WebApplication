@@ -70,26 +70,20 @@
         <div class="collapse navbar-collapse  justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav ml-sm-2">
                 <li class="nav-item ">
-                    <a class="nav-link flex-nowrap nowrap text-right" asp-controller="Location" asp-action="Add">Добавить локацию</a>
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-action="Locations" asp-controller="Order">Список локаций<span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link flex-nowrap nowrap text-right" asp-action="History" asp-controller="Location">История местоположений<span class="sr-only"></span></a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link flex-nowrap nowrap text-right" asp-controller="Users" asp-action="Clients">Пользователи</a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link flex-nowrap nowrap text-right" asp-controller="Roles" asp-action="Index">Роли</a>
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-action="Index" asp-controller="Home">О Проекте<span class="sr-only"></span></a>
                 </li>
             </ul>
-            <div class="col-auto  pl-md-0 pr-sm-2  align-content-center pb-0 transition">
-                <form asp-action="Logout" asp-controller="Account" method="post">
-                    <button type="submit"
-                            class="flex-fill btn btn-primary  pr-sm-4 pl-sm-4 pb-auto mb-0 font-weight-bold text-center find">
-                        Выход
-                    </button>
-                </form>
-            </div>
+        </div>
+        <div class="col-auto  pl-md-0 pr-sm-2  align-content-center pb-0 transition">
+            <form asp-action="Logout" asp-controller="Account" method="post">
+                <button type="submit"
+                        class="flex-fill btn btn-primary  pr-sm-4 pl-sm-4 pb-auto mb-0 font-weight-bold text-center find">
+                    Выход
+                </button>
+            </form>
         </div>
     </nav>
     <div class="container-sm p-4 " style="max-width: 40em; margin-top: 50px">
@@ -107,26 +101,17 @@
         {
             <div class="card mt-4 mb-4">
                 <div class="card-body">
-                    <h5 class="card-title">@item.Id - @item.NameOfLocation</h5>
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">Map</th>
-                                <th scope="col">Code</th>
+                                <th scope="col">Номер</th>
+                                <th scope="col">Название</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Yandex</td>
-                                <td>@item.YandexCode</td>
-                            </tr>
-                            <tr>
-                                <td>2Gis</td>
-                                <td>@item.TwoGisCode.</td>
-                            </tr>
-                            <tr>
-                                <td>Google</td>
-                                <td>@item.GoogleCode</td>
+                                <td>@item.Id</td>
+                                <td>@item.NameOfLocation</td>
                             </tr>
                         </tbody>
                     </table>
@@ -237,3 +222,4 @@
         );</script>
 </body>
 </html>
+
