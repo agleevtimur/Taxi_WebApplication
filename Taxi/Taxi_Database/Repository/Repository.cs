@@ -160,7 +160,7 @@ namespace Taxi_Database.Repository
         {
             var readyOrders = new List<ReadyOrders>();
             var ordersId = GetOrdersId(id);
-            foreach (var orderId in ordersId)
+            foreach (var orderId in ordersId) 
                 readyOrders.Add(db.ReadyOrders.Find(orderId));
             return readyOrders;
         }
@@ -171,9 +171,12 @@ namespace Taxi_Database.Repository
             var passengers = db.Passengers;
             foreach (var passenger in passengers)
             {
-                if (passenger.FirstId == id || passenger.SecondId == id
-                    || passenger.ThirdId == id || passenger.ForthId == id)
-                    ordersId.Add(passenger.OrderId);
+                lock (passenger)
+                {
+                    if (passenger.FirstId == id || passenger.SecondId == id
+                        || passenger.ThirdId == id || passenger.ForthId == id)
+                        ordersId.Add(passenger.OrderId);
+                }
             }
 
             return ordersId;
@@ -194,12 +197,12 @@ namespace Taxi_Database.Repository
         public List<Client> GetPassengers(int id)
         {
             var list = new List<Client>();
-            var passengers = db.Passengers.Where(x => x.OrderId == id)
-                .FirstOrDefault();
-            list.Add(db.Client.Find(passengers.FirstId));
-            list.Add(db.Client.Find(passengers.SecondId));
-            list.Add(db.Client.Find(passengers.ThirdId));
-            list.Add(db.Client.Find(passengers.ForthId));
+            var passengers = db.Passengers.Where(x => x.OrderId == id);
+            var newpassengers = passengers.FirstOrDefault();
+            list.Add(db.Client.Find(newpassengers.FirstId));
+            list.Add(db.Client.Find(newpassengers.SecondId));
+            list.Add(db.Client.Find(newpassengers.ThirdId));
+            list.Add(db.Client.Find(newpassengers.ForthId));
             return list;
         }
 

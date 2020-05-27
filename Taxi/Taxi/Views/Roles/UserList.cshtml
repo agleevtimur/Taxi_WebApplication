@@ -64,21 +64,6 @@
 </head>
 <body>
     <nav id="nav" class="navbar navbar-expand-lg  navbar-dark bg-dark fixed-top ">
-        <div class="row  row-cols-2  ml-md-0 mr-md-0 mb-1 mt-1 align-content-stretch d-flex  flex-fill ">
-            <div class="col-auto  pl-md-0 pr-sm-2  align-content-center pb-0 transition">
-                <button type="button"
-                        class="flex-fill btn btn-primary  pr-sm-4 pl-sm-4 pb-auto mb-0 font-weight-bold text-center find">
-                    Добавить локацию
-                </button>
-            </div>
-            <div class="col-auto mr-2 pl-sm-2 pr-sm-0 align-content-stretch transition">
-                <button type="button"
-                        class="flex-fill btn btn-outline-light mr-sm-0 pl-sm-4 pr-sm-4 pb-auto mb-sm-0  font-weight-light  subscribe">
-                    Подписаться
-                </button>
-            </div>
-            <div class="mr-sm-3 ml-sm-3"></div>
-        </div>
         <button class="navbar-toggler ml-auto" id="nav-button" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -106,18 +91,28 @@
             </div>
             <ul class="navbar-nav ml-sm-2">
                 <li class="nav-item ">
-                    <a class="nav-link flex-nowrap nowrap text-right" href="#">О Проекте<span class="sr-only"></span></a>
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-controller="Location" asp-action="Add">Добавить локацию</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link flex-nowrap nowrap text-right" href="#">Мои заказы<span class="sr-only"></span></a>
+                <li class="nav-item ">
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-action="History" asp-controller="Location">История местоположений<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-controller="Users" asp-action="Clients">Пользователи</a>
                 </li>
 
                 <li class="nav-item ">
-                    <a class="nav-link flex-nowrap nowrap text-right" href="#">Мой профиль<span class="sr-only"></span></a>
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-controller="Roles" asp-action="Index">Роли</a>
                 </li>
             </ul>
+            <div class="col-auto  pl-md-0 pr-sm-2  align-content-center pb-0 transition">
+                <form asp-action="Logout" asp-controller="Account" method="post">
+                    <button type="submit"
+                            class="flex-fill btn btn-primary  pr-sm-4 pl-sm-4 pb-auto mb-0 font-weight-bold text-center find">
+                        Выход
+                    </button>
+                </form>
+            </div>
         </div>
-
     </nav>
     <div class="container-sm p-4 " style="max-width: 40em; margin-top: 50px">
         <div id="titlesearch">
@@ -130,19 +125,22 @@
         <div id="titleactual">
             <h1 class="title mt-3 mb-5 ">Локации<span class="badge badge-primary ml-sm-3 ">@Model.Count()</span></h1>
         </div>
+        <h2>Список пользователей</h2>
         @foreach (var item in Model)
         {
-            <h2>Список пользователей</h2>
-
             <div class="card mt-4 mb-4">
                 <div class="card-body">
                     <div class="d-flex row">
                         <div class="col">
                             <h5 class="card-title">@item.UserName</h5>
                         </div>
-                        <div class="col-auto">
-                            <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-userid="@item.Id">Права доступа</a>
+                        @*<div class="col d-inline-flex ml-0 pl-0 mr-0 pr-0  pb-0 mb-0">
+                            <a class="col card-link ml-0 pb-0 mr-0 pr-0 mb-0" asp-controller="Roles" asp-action="Edit" asp-route-id="@item.Id">редактировать</a>
                         </div>
+                        <div class="col d-inline-flex ml-0 pl-0  pb-0 mb-0">
+                            <a data-toggle="modal" data-target="#staticBackdrop"
+                               class="col card-link text-danger ml-0 pb-0 mb-0" asp-action="Delete" asp-controller="Roles" asp-route-id="@item.Id">удалить</a>
+                        </div>*@
                     </div>
                 </div>
             </div>

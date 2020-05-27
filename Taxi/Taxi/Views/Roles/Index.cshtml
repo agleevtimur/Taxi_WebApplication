@@ -66,21 +66,6 @@
 </head>
 <body>
     <nav id="nav" class="navbar navbar-expand-lg  navbar-dark bg-dark fixed-top ">
-        <div class="row  row-cols-2  ml-md-0 mr-md-0 mb-1 mt-1 align-content-stretch d-flex  flex-fill ">
-            <div class="col-auto  pl-md-0 pr-sm-2  align-content-center pb-0 transition">
-                <button type="button"
-                        class="flex-fill btn btn-primary  pr-sm-4 pl-sm-4 pb-auto mb-0 font-weight-bold text-center find">
-                    Добавить роль
-                </button>
-            </div>
-            <div class="col-auto mr-2 pl-sm-2 pr-sm-0 align-content-stretch transition">
-                <button type="button"
-                        class="flex-fill btn btn-outline-light mr-sm-0 pl-sm-4 pr-sm-4 pb-auto mb-sm-0  font-weight-light  subscribe">
-                    Подписаться
-                </button>
-            </div>
-            <div class="mr-sm-3 ml-sm-3"></div>
-        </div>
         <button class="navbar-toggler ml-auto" id="nav-button" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -108,19 +93,28 @@
             </div>
             <ul class="navbar-nav ml-sm-2">
                 <li class="nav-item ">
-                    <a class="nav-link flex-nowrap nowrap text-right" href="#">О Проекте<span class="sr-only"></span></a>
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-controller="Roles" asp-action="UserList">Роли пользователей</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link flex-nowrap nowrap text-right" href="#">Мои заказы<span class="sr-only"></span></a>
-                </li>
-
                 <li class="nav-item ">
-                    <a class="nav-link flex-nowrap nowrap text-right" href="#">Мой профиль<span class="sr-only"></span></a>
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-action="Create" asp-controller="Roles">Создать роль<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-controller="Users" asp-action="Clients">Пользователи</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-controller="Roles" asp-action="Index">Роли</a>
                 </li>
             </ul>
-        </div>
-
-    </nav>
+            <div class="col-auto  pl-md-0 pr-sm-2  align-content-center pb-0 transition">
+                <form asp-action="Logout" asp-controller="Account" method="post">
+                    <button type="submit"
+                            class="flex-fill btn btn-primary  pr-sm-4 pl-sm-4 pb-auto mb-0 font-weight-bold text-center find">
+                        Выход
+                    </button>
+                </form>
+            </div>
+            </div>
+</nav>
     <div class="container-sm p-4 " style="max-width: 40em; margin-top: 50px">
         <div id="titlesearch">
             <div class="radio-group flex-row d-flex flex-row mt-3 mb-5 justify-content-between align-content-center">

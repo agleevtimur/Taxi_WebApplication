@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Taxi_Database.Context;
 using Taxi_Database.Models;
@@ -22,7 +23,8 @@ namespace BusinessLogic.ControllersForMVC
         public async Task<Client> Index(string id)
         {
             IRepository repository = new Repository(context);
-            return await repository.GetClient(id);
+            var client = await repository.GetClient(id);
+            return client;
         }
 
         public ClientAuthorizeViewModel Information(Client client)
@@ -136,13 +138,39 @@ namespace BusinessLogic.ControllersForMVC
             return result;
         }
         
-        public async Task Subscription(int priority, int countOfTravels, string id)
+        public async Task Subscription(int number, string id)
         {
             IRepository repository = new Repository(context);
-            var client = await repository.GetClient(id);
-            client.Priority = priority;
-            client.LeftOrdersPriority = countOfTravels;
-            await repository.EditClient(client);
+            var client = context.Client.Where(x => x.StringId == id)
+                .FirstOrDefault();
+            switch(number)
+            {
+                case 0:
+                    client.Priority = 2;
+                    client.LeftOrdersPriority = 30;
+                    break;
+                case 1:
+                    client.Priority = 2;
+                    client.LeftOrdersPriority = 50;
+                    break;
+                case 2:
+                    client.Priority = 2;
+                    client.LeftOrdersPriority =100;
+                    break;
+                case 3:
+                    client.Priority = 1;
+                    client.LeftOrdersPriority = 30;
+                    break;
+                case 4:
+                    client.Priority = 1;
+                    client.LeftOrdersPriority = 50;
+                    break;
+                case 5:
+                    client.Priority = 1;
+                    client.LeftOrdersPriority = 100;
+                    break;
+            }
+            await context.SaveChangesAsync();
         }
     }
 }

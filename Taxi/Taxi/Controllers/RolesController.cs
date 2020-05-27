@@ -73,6 +73,7 @@ namespace Taxi.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Edit(string userId)
         {
             var role = new Role(_roleManager, _userManager);
@@ -94,7 +95,7 @@ namespace Taxi.Controllers
         {
             var role = new Role(_roleManager, _userManager);
             IRoleController repository = new Factory<IRoleController, Role>(_logger, role).Create();
-
+            
             // получаем пользователя
             User user = await repository.FindUser(userId);
             if (user != null)

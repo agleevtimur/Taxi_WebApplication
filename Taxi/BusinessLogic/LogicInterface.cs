@@ -32,7 +32,7 @@ namespace BusinessLogic
         Task<IdentityResult> Delete(string id);
         ChangePasswordViewModel ChangeGet(string id);
         Task<IdentityResult> ChangePost(User user, string oldPassword, string newPassword);
-        Task Subscription(int priority, int countOfTravels, string id);
+        Task Subscription(int number, string id);
     }
 
     public interface IAccountController

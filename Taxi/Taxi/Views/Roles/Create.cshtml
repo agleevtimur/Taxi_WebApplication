@@ -38,13 +38,26 @@
         <div class="collapse navbar-collapse  justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav ml-sm-2">
                 <li class="nav-item ">
-                    <a class="nav-link flex-nowrap nowrap text-right" href="#">О Проекте<span class="sr-only"></span></a>
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-controller="Location" asp-action="Add">Добавить локацию</a>
                 </li>
-
                 <li class="nav-item ">
-                    <a class="nav-link flex-nowrap nowrap text-right" href="#">Вход<span class="sr-only"></span></a>
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-action="History" asp-controller="Location">История местоположений<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-controller="Users" asp-action="Clients">Пользователи</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-controller="Roles" asp-action="Index">Роли</a>
                 </li>
             </ul>
+            <div class="col-auto  pl-md-0 pr-sm-2  align-content-center pb-0 transition">
+                <form asp-action="Logout" asp-controller="Account" method="post">
+                    <button type="submit"
+                            class="flex-fill btn btn-primary  pr-sm-4 pl-sm-4 pb-auto mb-0 font-weight-bold text-center find">
+                        Выход
+                    </button>
+                </form>
+            </div>
         </div>
     </nav>
     <div class="container-sm p-4 " style="max-width: 40em; margin-top: 50px">

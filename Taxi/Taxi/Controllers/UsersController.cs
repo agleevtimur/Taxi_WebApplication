@@ -184,20 +184,33 @@ namespace Taxi.Controllers
             return View(model);
         }
 
-        [HttpGet]
-        public IActionResult Subscription()
+        [HttpPost]
+        public IActionResult Subscription(string id)
         {
-            return View();
+            var model = new GetSubscriptionViewModel { Id = id };
+            return View(model);
         }
 
         [HttpPost]
-        public IActionResult Subscription(GetSubscriptionViewModel model)
+        public IActionResult GetSubscription(GetSubscriptionViewModel model)
         {
             var userProxy = new Users(_userManager, context);
             IUserController repository = new Factory<IUserController, Users>(_logger, userProxy).Create();
-
-            repository.Subscription(model.Priority, model.CountOfTravels, model.Id);
-            return RedirectToAction("Index");
+            if (model.Id == null)
+                return NotFound();
+            if (ModelState.IsValid)
+            {
+                repository.Subscription(model.CardNumber, model.Id);
+                return RedirectToRoute(new
+                {
+                    controller = "Users",
+                    action = "Index",
+                    id = model.Id
+                });
+            }
+            IError error = new Error();
+            var errorModel = error.GetError("Ошибка", "Ошибка в данных, убедитесь, что все поля были заполнены правильно");
+            return View("Error", errorModel);
         }
     }
 }
