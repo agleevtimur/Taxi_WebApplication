@@ -56,6 +56,13 @@ namespace Taxi_Database.Repository
             await db.SaveChangesAsync();
         }
 
+        public async Task<string> GetClientIdByName(string name)
+        {
+            var client = await db.Client.Where(x => x.ClientName == name)
+                .FirstOrDefaultAsync();
+            return client.StringId;
+        }
+
         public async Task EditClient(Client client)
         {
             db.Client.Update(client);
@@ -157,11 +164,11 @@ namespace Taxi_Database.Repository
             return db.ReadyOrders.Find(id);
         }
 
-        public IEnumerable<ReadyOrders> GetOrdersByClientId (int id)
+        public IEnumerable<int> GetOrdersByClientId (int id)
         {
             var orders = db.Passengers.Where(x => x.FirstId == id || x.SecondId == id
                 || x.ThirdId == id || x.ForthId == id)
-                .Select(x => db.ReadyOrders.Find(x.OrderId));
+                .Select(x => x.OrderId);
             return orders;
         }
 

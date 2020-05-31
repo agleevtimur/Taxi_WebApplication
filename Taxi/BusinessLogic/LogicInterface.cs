@@ -73,6 +73,7 @@ namespace BusinessLogic
         ReadyOrders GetReadyOrderId(int id);
         Task DeleteOrder(int id);
         Task Rating(string whoId, string whomId, int orderId, int newRating);
+        Task<bool> Find(string name, string whomName, int orderId);
         IEnumerable<Location> Locations();
     }
 

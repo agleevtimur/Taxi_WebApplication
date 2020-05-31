@@ -8,6 +8,7 @@ namespace Taxi_Database.Repository
     {
         Task SaveClient(Client client);
         int CountOfClients();
+        Task<string> GetClientIdByName(string name);
         int CountOfClientsInMonth();
         int CountOfSubscription();
         Task UpdateClient(string clientId);
@@ -27,7 +28,7 @@ namespace Taxi_Database.Repository
         Task<int> GetSaveOrderId(ReadyOrders order);
         IEnumerable<ReadyOrders> GetOrders();
         ReadyOrders GetOrder(int id);
-        IEnumerable<ReadyOrders> GetOrdersByClientId(int id);
+        IEnumerable<int> GetOrdersByClientId(int id);
         ReadyOrders GetReadyOrderId(int id);
         Task DeleteOrder(int id);
         List<Client> GetPassengers(int id);
@@ -42,6 +43,7 @@ namespace Taxi_Database.Repository
     public interface IRating
     {
         Task Create(string whoId, string whomId, int orderId, int rating);
+        bool Find(string whoId, string whomId, int orderId);
     }
 
     public interface ILocationService

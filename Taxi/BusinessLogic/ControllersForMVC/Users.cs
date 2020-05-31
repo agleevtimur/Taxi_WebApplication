@@ -24,6 +24,7 @@ namespace BusinessLogic.ControllersForMVC
         {
             IRepository repository = new Repository(context);
             var client = await repository.GetClient(id);
+            client.Rating = Math.Round(client.Rating, 1);
             return client;
         }
 

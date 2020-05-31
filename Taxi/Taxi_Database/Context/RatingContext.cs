@@ -1,4 +1,5 @@
 ﻿using MongoDB.Driver;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Taxi_Database.Models;
@@ -8,7 +9,7 @@ namespace Taxi_Database.Context
 {
     public class RatingContext : IRating
     {
-        IMongoCollection<string> Rating; // коллекция в базе данных
+        private readonly IMongoCollection<string> Rating; // коллекция в базе данных
         public RatingContext()
         {
             // строка подключения
@@ -28,6 +29,18 @@ namespace Taxi_Database.Context
             var rate = new Rating(whoId, whomId, orderId, rating);
             string json = JsonSerializer.Serialize<Rating>(rate);
             await Rating.InsertOneAsync(json);
+        }
+        public bool Find(string whoId, string whomId, int orderId)
+        {
+            string filter = "";
+            var data = Rating.Find(filter).ToList();
+            foreach (var str in data)
+            {
+                var info = JsonSerializer.Deserialize<Rating>(str);
+                if (info.WhoId == whoId && info.WhomId == whomId && info.OrderId == orderId)
+                    return true;
+            }
+            return false;
         }
     }
 }

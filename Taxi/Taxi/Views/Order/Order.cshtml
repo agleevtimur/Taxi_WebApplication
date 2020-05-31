@@ -1,4 +1,9 @@
 ﻿@model BusinessLogic.ModelsForControllers.OrderWithClientViewModel
+@{
+    string userName = User.Identity.Name;
+    bool isName = false;
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,10 +74,10 @@
         </button>
         <div class="collapse navbar-collapse  justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav ml-sm-2">
-                    <li class="nav-item ">
-                        <a class="nav-link flex-nowrap nowrap text-right" asp-action="Index" asp-controller="Home">О Проекте<span class="sr-only"></span></a>
-                    </li>
-                </ul>
+                <li class="nav-item ">
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-action="Index" asp-controller="Home">О Проекте<span class="sr-only"></span></a>
+                </li>
+            </ul>
         </div>
         <div class="col-auto  pl-md-0 pr-sm-2  align-content-center pb-0 transition">
             <form asp-action="Logout" asp-controller="Account" method="post">
@@ -100,11 +105,23 @@
                     <tbody>
                         <tr>
                             <td>Откуда</td>
-                            <td>@Model.ReadyOrder.StartPointId</td>
+                            @foreach (var location in Model.Locations)
+                            {
+                                @if (location.Id == Model.ReadyOrder.StartPointId)
+                                {
+                                    <td>@location.NameOfLocation</td>
+                                }
+                            }
                         </tr>
                         <tr>
                             <td>Куда</td>
-                            <td>@Model.ReadyOrder.FinishPointId</td>
+                            @foreach (var location in Model.Locations)
+                            {
+                                @if (location.Id == Model.ReadyOrder.FinishPointId)
+                                {
+                                    <td>@location.NameOfLocation</td>
+                                }
+                            }
                         </tr>
                         <tr>
                             <td>Во сколько</td>
@@ -116,21 +133,63 @@
                         </tr>
                         @foreach (var user in Model.Clients)
                         {
+                            @if (user.ClientName == userName)
+                            {
+                                isName = true;
+                            }
                             <tr>
                                 <td>Попутчик</td>
                                 <td>@user.ClientName</td>
                             </tr>
+                            <tr>
+                                <td>Рейтинг @user.ClientName</td>
+                                <td>@user.Rating</td>
+                            </tr>
                         }
-                        @*<tr>
-                            <td>Чат</td>
-                            <td>
-                                <div class="col d-inline-flex ml-0 pl-0 mr-0 pr-0  pb-0 mb-0">
-                                    <a class="col card-link ml-0 pb-0 mr-0 pr-0 mb-0" asp-action="Index" asp-controller="Chat">Перейти в чат</a>
-                                </div>
-                            </td>
-                        </tr>*@
+                        @if (isName == true)
+                        {
+                            <tr>
+                                <td>Чат</td>
+                                <td>
+                                    <div class="col d-inline-flex ml-0 pl-0 mr-0 pr-0  pb-0 mb-0">
+                                        <a class="col card-link ml-0 pb-0 mr-0 pr-0 mb-0" asp-action="Index" asp-controller="Chat">Перейти в чат</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
+                @if (isName == true)
+                {
+                    <h1 class="title mt-3 mb-5 ">Оценка</h1>
+                    <form asp-action="Rating" asp-controller="Order" asp-route-id="@Model.ReadyOrder.Id" method="post">
+                        <input asp-for="UserName" value="@userName" hidden />
+                        <div asp-validation-summary="ModelOnly"></div>
+                        <div class="form-group-sm">
+                            <label asp-for="WhomName">Выберите ник</label>
+                            <select required class="form-control" asp-for="WhomName" id="exampleFormControlSelect1">
+                                @foreach (var client in Model.Clients)
+                                {
+                                    @if (client.ClientName != userName)
+                                    {
+                                        <option>@client.ClientName</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Rate">Введите оценку</label>
+                            <div class="input-group mb-3">
+                                <input type="number" asp-for="Rate" class="form-control" placeholder="somebody" aria-label="somebody"
+                                       aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <button type="submit"
+                                class="flex-fill btn btn-primary  pr-sm-4 pl-sm-4 pb-auto mb-0 font-weight-bold text-center find">
+                            Отправить
+                        </button>
+                    </form>
+                }
             </div>
         </div>
     </div>

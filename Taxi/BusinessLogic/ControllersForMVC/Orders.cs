@@ -26,9 +26,11 @@ namespace BusinessLogic.ControllersForMVC
         public IndexOrderViewModel Index(string id)
         {
             IRepository repository = new Repository(context);
+            ILocationController repository1 = new Locations(locationService, context);
+            var locations = repository1.Index();
             var orders = repository.GetRequests();
             var readyOrders = repository.GetOrders();
-            return new IndexOrderViewModel { Id = id, Orders = orders, ReadyOrders = readyOrders};
+            return new IndexOrderViewModel { Id = id, Orders = orders, ReadyOrders = readyOrders, Locations = locations};
         }
 
         public CreateOrderViewModel CreateGet(string id)
@@ -70,18 +72,22 @@ namespace BusinessLogic.ControllersForMVC
         public OrderWithClientViewModel GetOrder(int id)
         {
             IRepository repository = new Repository(context);
+            ILocationController repository1 = new Locations(locationService, context);
+            var locations = repository1.Index();
             var order = repository.GetOrder(id);
             var passengers = repository.GetPassengers(id);
-            return new OrderWithClientViewModel { ReadyOrder = order, Clients = passengers };
+            return new OrderWithClientViewModel { ReadyOrder = order, Clients = passengers, Locations = locations };
         }
 
         public ReadyOrdersViewModel GetOrdersByClientId(string id)
         {
-            var readyOrders = new List<ReadyOrders>();
+            ILocationController repository1 = new Locations(locationService, context);
+            var locations = repository1.Index();
             IRepository repository = new Repository(context);
             var client = repository.GetClient(id);
-            var orders = repository.GetOrdersByClientId(client.Id);
-            return new ReadyOrdersViewModel { Id = id, ReaddyOrders = orders};
+            var ordersId = repository.GetOrdersByClientId(client.Id);
+            return new ReadyOrdersViewModel { Id = id, OrdersId = ordersId, ReadyOrders = repository.GetOrders()
+            , Locations = locations};
         }
 
         public IEnumerable<Order> GetRequestsByClientId(string id)
@@ -103,12 +109,14 @@ namespace BusinessLogic.ControllersForMVC
             await repository.DeleteOrder(id);
         }
 
-        public async Task Rating(string whoId, string whomId, int orderId, int newRating)
+        public async Task Rating(string name, string whomName, int orderId, int newRating)
         {
             IRating rate = new RatingContext();
-            await rate.Create(whoId, whomId, orderId, newRating);
-
             IRepository repository = new Repository(context);
+            var id = await repository.GetClientIdByName(name);
+            var whomId = await repository.GetClientIdByName(whomName);
+            await rate.Create(id, whomId, orderId, newRating);
+
             var countOfRates = repository.GetCountOfRates(whomId);
             var rating = repository.GetRating(whomId);
 
@@ -117,6 +125,15 @@ namespace BusinessLogic.ControllersForMVC
             var ratingOfClient = newRate.GetNewRating(countOfRates, rating, newRating);
 
             await repository.UpdateRating(whomId, newCountOfRates, ratingOfClient);
+        }
+
+        public async Task<bool> Find(string name, string whomName, int orderId)
+        {
+            IRating rate = new RatingContext();
+            IRepository repository = new Repository(context);
+            var id = await repository.GetClientIdByName(name);
+            var whomId = await repository.GetClientIdByName(whomName);
+            return rate.Find(id, whomId, orderId);
         }
     }
 }
