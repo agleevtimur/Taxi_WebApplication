@@ -62,6 +62,12 @@ namespace Taxi.Controllers
                     var newModel = error.GetError("Ошибка", "Место отправления не может совпадать с местом назначения");
                     return View("Error", newModel);
                 }
+                if (model.CountOfPeople == 0)
+                {
+                    var newModel = error.GetError("Ошибка", "Не введено число людей, отправляющихся в путь");
+                    return View("Error", newModel);
+                }
+
                 await repository.Create(model.LocationFrom, model.LocationTo, model.Time, model.CountOfPeople, model.Id);
                 return RedirectToRoute(new
                 {
