@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Администратор</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
+
+    <style>
+
+        .nowrap {
+            white-space: nowrap
+        }
+
+        .find {
+            display: block;
+            transition: all 300ms ease-out;
+        }
+
+        .transition {
+            transition: all 300ms ease-out;
+        }
+
+        .subscribe {
+            display: block;
+            transition: all 300ms ease-out;
+        }
+
+        .high {
+            background: #5a28b3;
+            color: white;
+        }
+
+        .text-black {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <nav id="nav" class="navbar navbar-expand-lg  navbar-dark bg-dark fixed-top ">
+        <button class="navbar-toggler ml-auto" id="nav-button" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse  justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-sm-2">
+                <li class="nav-item ">
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-controller="Location" asp-action="Add">Добавить локацию</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-action="History" asp-controller="Location">История местоположений<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-controller="Users" asp-action="Clients">Пользователи</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-controller="Roles" asp-action="Create">Создать роль</a>
+                </li>
+            </ul>
+            <div class="col-auto  pl-md-0 pr-sm-2  align-content-center pb-0 transition">
+                <form asp-action="Logout" asp-controller="Account" method="post">
+                    <button type="submit"
+                            class="flex-fill btn btn-primary  pr-sm-4 pl-sm-4 pb-auto mb-0 font-weight-bold text-center find">
+                        Выход
+                    </button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="container-sm p-4 " style="max-width: 40em; margin-top: 50px">
+        <h1 class="title  mb-4 mt-4">Добро пожаловать, админ!</h1>
+        <p>Вы можете выполнить действия, которые представлены в шапке этой страницы<p>
+    </div>
+</body>
+</html>

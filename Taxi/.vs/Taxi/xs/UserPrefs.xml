@@ -1,0 +1,29 @@
+﻿<Properties StartupConfiguration="{8E5E869E-2BE5-4702-A072-1C4EF5158F44}|Default">
+  <MonoDevelop.Ide.ItemProperties.Taxi PreferredExecutionTarget="/Applications/Safari.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Taxi/Views/Chat/Index.cshtml">
+    <Files>
+      <File FileName="Taxi/Controllers/ChatController.cs" Line="1" Column="1" />
+      <File FileName="Taxi/Views/Chat/Index.cshtml" Line="90" Column="36" />
+      <File FileName="Taxi/wwwroot/js/site.js" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Taxi" expanded="True">
+            <Node name="Taxi" expanded="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="PackageDependencies" expanded="True" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

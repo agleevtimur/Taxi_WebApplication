@@ -1,0 +1,323 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Мои заказы</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <style>
+
+        .nowrap {
+            white-space: nowrap
+        }
+
+        .find {
+            display: block;
+            transition: all 300ms ease-out;
+        }
+
+        .transition {
+            transition: all 300ms ease-out;
+        }
+
+        .subscribe {
+            display: block;
+            transition: all 300ms ease-out;
+        }
+
+        .card {
+            transition: all 600ms ease-out;
+        }
+
+            .card:hover {
+                border-color: #000000;
+                -moz-box-shadow: 0 0 12px #000000;
+                -webkit-box-shadow: 0 0 12px #000000;
+                box-shadow: 0 0 12px #000000;
+            }
+
+        .high {
+            background: #5a28b3;
+            font-weight: 500;
+        }
+
+        .medium {
+            font-weight: 500;
+        }
+
+        .low {
+            font-weight: 500;
+        }
+    </style>
+
+</head>
+<body>
+    <nav id="nav" class="navbar navbar-expand-lg  navbar-dark bg-dark fixed-top ">
+        <div class="row  row-cols-2  ml-md-0 mr-md-0 mb-1 mt-1 align-content-stretch d-flex  flex-fill ">
+            <div class="col-auto  pl-md-0 pr-sm-2  align-content-center pb-0 transition">
+                <button type="button"
+                        class="flex-fill btn btn-primary  pr-sm-4 pl-sm-4 pb-auto mb-0 font-weight-bold text-center find">
+                    Найти попутчиков
+                </button>
+            </div>
+            <div class="col-auto mr-2 pl-sm-2 pr-sm-0 align-content-stretch transition">
+                <button type="button"
+                        class="flex-fill btn btn-outline-light mr-sm-0 pl-sm-4 pr-sm-4 pb-auto mb-sm-0  font-weight-light  subscribe">
+                    Подписаться
+                </button>
+            </div>
+            <div class="mr-sm-3 ml-sm-3"></div>
+        </div>
+        <button class="navbar-toggler ml-auto" id="nav-button" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse  justify-content-end" id="navbarSupportedContent">
+            <div class="ml-auto  align-content-stretch  ">
+                <div class="input-group mb-1 mt-1 ">
+                    <input type="text" id="search" class="form-control bg-light border-light transition  flex-nowrap"
+                           placeholder="Поиск..."
+                           aria-describedby="button-addon2">
+                    <div class="input-group-append">
+                        <span class="input-group-text bg-light border-light" id="basic-addon1">
+                            <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M10.442 10.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z"
+                                      clip-rule="evenodd" />
+                                <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM13 6.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"
+                                      clip-rule="evenodd" />
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <ul class="navbar-nav ml-sm-2">
+                <li class="nav-item ">
+                    <a class="nav-link flex-nowrap nowrap text-right" href="#">О Проекте<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link flex-nowrap nowrap text-right" href="#">Мои заказы<span class="sr-only"></span></a>
+                </li>
+
+                <li class="nav-item ">
+                    <a class="nav-link flex-nowrap nowrap text-right" href="#">Мой профиль<span class="sr-only"></span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="content" class="container-sm p-4 mt-sm-5 transition" style="max-width: 40em; margin-top: 50px"></div>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/16.11.0/umd/react.development.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js"></script>
+    <script src="js/order.jsx"></script>
+    <script>if ($('.toscroll ').is('.toscroll ')) {
+            let offset = $('.toscroll').offset().top - 70;
+            //применяетмя при переходе с профиля>совершенные поездк
+            $('html, body').animate({ scrollTop: offset }, 1000);
+        }
+
+        $('.card ').hover(
+            function () {
+                $(this).addClass('border-dark card-hover')
+            },
+            function () {
+                $(this).removeClass('border-dark card-hover')
+            }
+        );
+        $('.radio-group .radio ').hover(
+            function () {
+                $(this).children().addClass('pl-sm-4 pr-sm-4 radio-hover')
+            },
+            function () {
+                $(this).children().removeClass(' pl-sm-4 pr-sm-4 radio-hover')
+            }
+        );
+
+        $('.radio-group .radio').click(function () {
+            let alreadyselected = $(this).children().hasClass('selected');
+            $(this).parent().find('.radio').children().removeClass('selected pt-2 pb-2');
+            if (alreadyselected) {
+                $(this).parent().find('input').val("");
+                search(false);
+            } else {
+                $(this).children().addClass('selected pt-2 pb-2');
+                var val = $(this).attr('data-value');
+                $(this).parent().find('input').val(val);
+                search(true);
+            }
+        });
+
+
+        $(".subscribe").hover(
+            function () {
+                $(".find").removeClass('pr-sm-4 pl-sm-4');
+                $(this).removeClass('pr-sm-4 pl-sm-4');
+                $(".find").addClass('pr-sm-2 pl-sm-2');
+                $(this).addClass('pr-sm-5 pl-sm-5')
+            },
+            function () {
+                $(".find").removeClass('pr-sm-2 pl-sm-2');
+                $(this).removeClass('pr-sm-5 pl-sm-5');
+                $(".find").addClass('pr-sm-4 pl-sm-4');
+                $(this).addClass('pr-sm-4 pl-sm-4');
+            }
+        );
+        $(".find").hover(
+            function () {
+                $(".subscribe").removeClass('pr-sm-4 pl-sm-4');
+                $(this).removeClass('pr-sm-4 pl-sm-4');
+                $(".subscribe").addClass('pr-sm-2 pl-sm-2');
+                $(this).addClass('pr-sm-5 pl-sm-5')
+            },
+            function () {
+                $(".subscribe").removeClass('pr-sm-2 pl-sm-2');
+                $(this).removeClass('pr-sm-5 pl-sm-5');
+                $(".subscribe").addClass('pr-sm-4 pl-sm-4');
+                $(this).addClass('pr-sm-4 pl-sm-4');
+            }
+        );
+        $("#nav-button").click(function () {
+            $(".find").parent().toggleClass("d-flex flex-fill");
+            $(".subscribe").parent().toggleClass("d-flex flex-fill");
+            $(".find").parent().parent().toggleClass("mr-sm-0");
+        });
+        $(document).ready(function () {
+            $("#titlesearch").hide();
+            $("#search").keyup(search);
+        });
+
+        function search(withFilter) {
+            let value = $("#search").val().toLowerCase();
+            let words = value.split(" ");
+            let count = 0;
+            let searching = value.length !== 0;
+
+            $(".card").filter(function () {
+                let totalFilter = true;
+                let thisText = $(this).text().toLowerCase();
+                for (let i = 0; i < words.length; i++) {
+                    totalFilter = totalFilter && (thisText.indexOf(words[i]) > -1);
+                }
+                let priorityFilter = true;
+                if (searching && withFilter) {
+
+                    let priority = $("#priorityfilter").val();
+                    priorityFilter = (thisText.indexOf(priority) > -1);
+                }
+                if (totalFilter && priorityFilter) {
+                    count++;
+                }
+                $(this).toggle(totalFilter && priorityFilter);
+            });
+            if (searching) {//searching
+                hideTitles(count, 400);
+            } else {//stop searching
+                showTitles(400);
+            }
+        }
+
+        function hideTitles(count, delay) {
+            $("#titlesearch h1 span").text(count);
+            $("#titleactual").hide();
+            $("#titlesearch").show();
+            $("#titlehistory").hide();
+        }
+
+        function showTitles(delay) {
+            $("#titlesearch").hide();
+            $("#titleactual").show();
+            $("#titlehistory").show();
+        }
+
+        $("#search").hover(
+            function () {
+                $(this).addClass('pr-sm-5');
+            },
+            function () {
+                $(this).removeClass('pr-sm-5');
+            }
+        );
+        $("#search").focus(
+            function () {
+            },
+            function () {
+            }
+        );
+        fillStars($(".star-block"));
+        $(' .svg').hover(
+            function () {
+                if (!$(this).parent().attr("isRated")) {
+                    $(this).parent().attr("hoverstars", $(this).attr("rate"));
+                    $(this).addClass("star-hover");
+                    hoverStars($(this).parent());
+                }
+            },
+            function () {
+                if (!$(this).parent().attr("isRated")) {
+                    $(this).parent().attr("hoverstars", "0");
+                    $(this).removeClass("star-hover");
+                    unhoverStars($(this).parent());
+                }
+            }
+        );
+
+        $(' .svg').click(function () {
+
+            if (!$(this).parent().attr("isRated")) {
+                $(this).parent().attr("isRated", "true");
+                $(this).parent().attr("rate", $(this).attr("rate"));
+                fillStars($(this).parent());
+            }
+        });
+
+
+        function fillStars(starblock) {
+            if ($(starblock).attr("isRated")) {
+                starblock.find("svg").attr("width", "1em").attr("height", "1em");
+                let rate = +$(starblock).attr("rate");
+                let star = starblock.find("svg:first");
+                for (let i = 0; i < rate; i++) {
+                    starFill(star);
+                    star = star.next();
+                }
+            }
+        }
+
+        function starFill(star) {
+            star.removeClass('bi-star');
+            star.addClass('bi-star-fill');
+            star.attr("fill", "gold");
+            star.html(' <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>');
+        }
+        function hoverStars(starblock) {
+            let count = $(starblock).attr("hoverstars");
+            starblock.find("svg").attr("width", "1.1em").attr("height", "1.1em");
+            let star = starblock.find("svg:first");
+            for (let i = 0; i < count; i++) {
+                $(star).attr("fill", "gold");
+                star = $(star).next();
+            }
+        }
+
+        function unhoverStars(starblock) {
+            let star = starblock.find("svg:first");
+            starblock.find("svg").attr("width", "1em").attr("height", "1em");
+            for (let i = 0; i < 5; i++) {
+                $(star).attr("fill", "currentColor");
+                star = $(star).next();
+            }
+        }</script>
+</body>
+</html>
