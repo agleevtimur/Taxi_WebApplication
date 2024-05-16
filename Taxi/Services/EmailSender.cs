@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System.Threading.Tasks;
@@ -8,16 +7,16 @@ namespace Services
 {
     public class EmailSender : IEmailSender
     {
-        public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor)
+        public EmailSender()
         {
-            Options = optionsAccessor.Value;
+            //Options = optionsAccessor.Value;
         }
 
         private AuthMessageSenderOptions Options { get; } //set only via Secret Manager
 
         public Task SendEmailAsync(string email, string subject, string message)
         {
-            return Execute(Options.SendGridKey, subject, message, email);
+            return Execute("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", subject, message, email);
         }
 
         private Task Execute(string apiKey, string subject, string message, string email)
@@ -25,7 +24,7 @@ namespace Services
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("fantomas2213@gmail.com", Options.SendGridUser),
+                From = new EmailAddress("fantomas2213@gmail.com", apiKey),
                 Subject = subject,
                 PlainTextContent = message,
                 HtmlContent = message,
@@ -37,3 +36,4 @@ namespace Services
         }
     }
 }
+

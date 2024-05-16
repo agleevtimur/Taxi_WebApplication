@@ -4,8 +4,13 @@ namespace Taxi_Database.Models
 {
     public class ErrorViewModel
     {
-        public string RequestId { get; set; }
+        public ErrorViewModel(string title, string message)
+        {
+            Title = title ?? throw new ArgumentNullException(nameof(title));
+            Message = message ?? throw new ArgumentNullException(nameof(message));
+        }
 
-        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+        public string Title { get; set; }
+        public string Message { get; set; }
     }
 }

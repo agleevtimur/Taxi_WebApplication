@@ -21,4 +21,7 @@
 
 
 
+  <ItemGroup>
+    <Folder Include="Views\Users\" />
+  </ItemGroup>
 </Project>

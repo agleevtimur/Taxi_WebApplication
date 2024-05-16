@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Services\\Services.csproj": {}
+    "C:\\Users\\fanto\\Desktop\\gitTaxiWeb\\dmitrii\\Taxi\\Services\\Services.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Services\\Services.csproj": {
+    "C:\\Users\\fanto\\Desktop\\gitTaxiWeb\\dmitrii\\Taxi\\Services\\Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Services\\Services.csproj",
+        "projectUniqueName": "C:\\Users\\fanto\\Desktop\\gitTaxiWeb\\dmitrii\\Taxi\\Services\\Services.csproj",
         "projectName": "Services",
-        "projectPath": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Services\\Services.csproj",
-        "packagesPath": "C:\\Users\\Dimon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Services\\obj\\",
+        "projectPath": "C:\\Users\\fanto\\Desktop\\gitTaxiWeb\\dmitrii\\Taxi\\Services\\Services.csproj",
+        "packagesPath": "C:\\Users\\fanto\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\fanto\\Desktop\\gitTaxiWeb\\dmitrii\\Taxi\\Services\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Dimon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\fanto\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -61,6 +61,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -69,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

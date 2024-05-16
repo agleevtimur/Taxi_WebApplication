@@ -8022,19 +8022,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Dimon\\.nuget\\packages\\": {}
+    "C:\\Users\\fanto\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\BusinessLogic\\BusinessLogic.csproj",
+      "projectUniqueName": "C:\\Users\\fanto\\Desktop\\gitTaxiWeb\\dmitrii\\Taxi\\BusinessLogic\\BusinessLogic.csproj",
       "projectName": "BusinessLogic",
-      "projectPath": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\BusinessLogic\\BusinessLogic.csproj",
-      "packagesPath": "C:\\Users\\Dimon\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\BusinessLogic\\obj\\",
+      "projectPath": "C:\\Users\\fanto\\Desktop\\gitTaxiWeb\\dmitrii\\Taxi\\BusinessLogic\\BusinessLogic.csproj",
+      "packagesPath": "C:\\Users\\fanto\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\fanto\\Desktop\\gitTaxiWeb\\dmitrii\\Taxi\\BusinessLogic\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Dimon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\fanto\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8047,8 +8047,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Taxi_Database\\Taxi_Database.csproj": {
-              "projectPath": "C:\\Users\\Dimon\\OneDrive\\Документы\\GitHub\\Taxi_WebApplication\\Taxi\\Taxi_Database\\Taxi_Database.csproj"
+            "C:\\Users\\fanto\\Desktop\\gitTaxiWeb\\dmitrii\\Taxi\\Taxi_Database\\Taxi_Database.csproj": {
+              "projectPath": "C:\\Users\\fanto\\Desktop\\gitTaxiWeb\\dmitrii\\Taxi\\Taxi_Database\\Taxi_Database.csproj"
             }
           }
         }
@@ -8081,6 +8081,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[3.1.0, 3.1.0]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -8089,7 +8095,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
       }
     }
   }

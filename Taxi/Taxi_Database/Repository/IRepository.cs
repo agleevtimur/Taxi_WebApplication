@@ -7,29 +7,52 @@ namespace Taxi_Database.Repository
     public interface IRepository
     {
         Task SaveClient(Client client);
-        bool FindClient(string password);
+        int CountOfClients();
+        Task<string> GetClientIdByName(string name);
+        int CountOfClientsInMonth();
+        int CountOfSubscription();
+        Task UpdateClient(string clientId);
         Task EditClient(Client client);
         IEnumerable<Client> GetClients();
-        Client GetClient(int id);
-        Task DeleteClient(int id);
-        int SaveOrder(Order order);
+        Task<Client> GetClient(string id);
+        Client GetClientByLogin(string login);
+        Client GetClientForOrders(int id);
+        Task DeleteClient(string id);
+        Task SaveRequest(Order order);
+        int CountOdReadyOrders();
+        int CountOfReadyOrdersInDay();
         IEnumerable<Order> GetRequests();
         IEnumerable<Order> GetRequestsByClientId(int id);
         Task DeleteRequest(int id);
+        Task SaveOrder(ReadyOrders order);
+        Task<int> GetSaveOrderId(ReadyOrders order);
         IEnumerable<ReadyOrders> GetOrders();
-        List<ReadyOrders> GetOrdersByClientId(int id);
+        ReadyOrders GetOrder(int id);
+        IEnumerable<int> GetOrdersByClientId(int id);
+        ReadyOrders GetReadyOrderId(int id);
         Task DeleteOrder(int id);
+        List<Client> GetPassengers(int id);
         Task SavePassengers(int orderId, int firstId, int secondId, int thirdId, int forthId);
-        Task SaveLocation(Location location);
-        IEnumerable<Location> GetLocations();
+        Task SaveHistoryOfLocation(string location);
         IEnumerable<HistoryOfLocation> GetHistoryOfLocations();
-        int GetCountOfRates(int id);
-        double GetRating(int id);
-        Task UpdateRating(int id, int countOfRates, double rating);
+        int GetCountOfRates(string id);
+        double GetRating(string id);
+        Task UpdateRating(string id, int countOfRates, double rating);
     }
 
     public interface IRating
     {
-        Task Create(int whoId, int whomId, int orderId, int rating);
+        Task Create(string whoId, string whomId, int orderId, int rating);
+        bool Find(string whoId, string whomId, int orderId);
+    }
+
+    public interface ILocationService
+    {
+        Task SaveLocation(Location location);
+        Task<int> GetLocationId(string location);
+        Task<Location> GetLocation(string location);
+        IEnumerable<Location> GetLocations();
+        string GetLocationNameById(int id);
+
     }
 }

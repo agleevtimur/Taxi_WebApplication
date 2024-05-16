@@ -1,7 +1,10 @@
 ﻿using BusinessLogic.ModelsForControllers;
 using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Taxi_Database.Context;
 using Taxi_Database.Models;
 using Taxi_Database.Repository;
 
@@ -10,22 +13,56 @@ namespace BusinessLogic.ControllersForMVC
     public class Users : IUserController
     {
         private readonly UserManager<User> userManager;
-        public Users(UserManager<User> userManager)
+        private readonly ApplicationContext context;
+        public Users(UserManager<User> userManager, ApplicationContext context)
         {
             this.userManager = userManager;
+            this.context = context;
         }
 
-        public List<User> Index()
+        public async Task<Client> Index(string id)
         {
-            IUser repository = new UserRepository(userManager);
-            var model = repository.GetUsers();
+            IRepository repository = new Repository(context);
+            var client = await repository.GetClient(id);
+            client.Rating = Math.Round(client.Rating, 1);
+            return client;
+        }
+
+        public ClientAuthorizeViewModel Information(Client client)
+        {
+            ClientAuthorizeViewModel model = new ClientAuthorizeViewModel
+            {
+                Id = client.StringId,
+                AboutSelf = client.AboutSelf,
+                ClientName = client.ClientName,
+                CountOfTrips = client.CountOfTrips,
+                Email = client.Email,
+                FirstName = client.FirstName,
+                LeftOrdersPriority = client.LeftOrdersPriority,
+                Password = client.Password,
+                Priority = client.Priority,
+                Rating = client.Rating,
+                RegisterTime = client.RegisterTime,
+                SecondName = client.SecondName
+            };
+            return model;
+        }
+
+        public IEnumerable<Client> Clients()
+        {
+            IRepository repository = new Repository(context);
+            var model = repository.GetClients();
+
             return model;
         }
 
         public async Task<IdentityResult> Create(string email, string login, string password)
         {
             IUser repository = new UserRepository(userManager);
+            IRepository repository1 = new Repository(context);
             User user = new User { Email = email, UserName = login };
+            await repository1.SaveClient(new Client(user.Id, null, null, user.UserName, user.Email, password,
+                0, 0, 0, -1, null, 0, DateTime.Now));
             var result = await repository.CreateUser(user, password);
             return result;
         }
@@ -37,28 +74,47 @@ namespace BusinessLogic.ControllersForMVC
             return user;
         }
 
-        public EditUserViewModel EditGet(User user)
+        public async Task<EditUserViewModel> EditGet(User user)
         {
-            EditUserViewModel model = new EditUserViewModel { Id = user.Id, Email = user.Email, Login = user.UserName };
+            IRepository repository = new Repository(context);
+            var client = await repository.GetClient(user.Id);
+            EditUserViewModel model = new EditUserViewModel { Id = user.Id, Email = user.Email, Login = user.UserName,
+                FirstName = client.FirstName, SecondName = client.SecondName, AboutSelf = client.AboutSelf};
             return model;
         }
 
         public async Task<IdentityResult> EditPost(User user, EditUserViewModel model)
         {
             IUser repository = new UserRepository(userManager);
+            IRepository repository1 = new Repository(context);
+            var client = await repository1.GetClient(model.Id);
+            await repository1.EditClient(Update(model, client));
             user.Email = model.Email;
             user.UserName = model.Login;
             var result = await repository.UpdateUser(user);
             return result;
         }
 
+        private Client Update(EditUserViewModel model, Client client)
+        {
+            client.FirstName = model.FirstName;
+            client.SecondName = model.SecondName;
+            client.Email = model.Email;
+            client.ClientName = model.Login;
+            client.AboutSelf = model.AboutSelf;
+            return client;
+        }
+
         public async Task<IdentityResult> Delete(string id)
         {
             IUser repository = new UserRepository(userManager);
+            IRepository repository1 = new Repository(context);
+
             User user = await repository.FindUser(id);
             if (user != null)
             {
                 IdentityResult result = await repository.DeleteUser(user);
+                await repository1.DeleteClient(id);
                 return result;
             }
 
@@ -74,9 +130,48 @@ namespace BusinessLogic.ControllersForMVC
         public async Task<IdentityResult> ChangePost(User user, string oldPassword, string newPassword)
         {
             IUser repository = new UserRepository(userManager);
+            IRepository repository1 = new Repository(context);
             IdentityResult result =
                         await repository.ChangePassword(user, oldPassword, newPassword);
+            var client = await repository1.GetClient(user.Id);
+            client.Password = newPassword;
+            await repository1.EditClient(client);
             return result;
+        }
+        
+        public async Task Subscription(int number, string id)
+        {
+            IRepository repository = new Repository(context);
+            var client = context.Client.Where(x => x.StringId == id)
+                .FirstOrDefault();
+            switch(number)
+            {
+                case 0:
+                    client.Priority = 2;
+                    client.LeftOrdersPriority = 30;
+                    break;
+                case 1:
+                    client.Priority = 2;
+                    client.LeftOrdersPriority = 50;
+                    break;
+                case 2:
+                    client.Priority = 2;
+                    client.LeftOrdersPriority =100;
+                    break;
+                case 3:
+                    client.Priority = 1;
+                    client.LeftOrdersPriority = 30;
+                    break;
+                case 4:
+                    client.Priority = 1;
+                    client.LeftOrdersPriority = 50;
+                    break;
+                case 5:
+                    client.Priority = 1;
+                    client.LeftOrdersPriority = 100;
+                    break;
+            }
+            await context.SaveChangesAsync();
         }
     }
 }

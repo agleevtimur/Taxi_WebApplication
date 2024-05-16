@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Taxi_Database.Context;
 using Taxi_Database.Models;
@@ -21,13 +23,44 @@ namespace Taxi_Database.Repository
             await db.SaveChangesAsync();
         }
 
-        public bool FindClient(string password)
+        public int CountOfClients()
         {
-            var client = db.Client.Where(x => x.Password == password)
-                .FirstOrDefault();
-            if (client == null)
-                return false;
-            return true;
+            return db.Client.Count();
+        }
+
+        public int CountOfClientsInMonth()
+        {
+            return db.Client.Where(x => x.RegisterTime.Month == DateTime.Now.Month).Count();
+        }
+
+        public int CountOfSubscription()
+        {
+            return db.Client.Where(x => x.Priority > 0).Count();
+        }
+
+        public async Task UpdateClient(string clientId)
+        {
+            var client = db.Client
+               .Where(x => x.StringId == clientId)
+               .FirstOrDefault();
+
+            if (client.Priority != 0)//уменьшаем количество поездок в случае наличия приоритета
+            {
+                if (client.LeftOrdersPriority <= 1)//уменьшаем количество поездок
+                    client.Priority = 0;//минимальный приоритет, т.е. без приоритета
+                else
+                    client.LeftOrdersPriority--;
+            }
+
+            client.CountOfTrips++;
+            await db.SaveChangesAsync();
+        }
+
+        public async Task<string> GetClientIdByName(string name)
+        {
+            var client = await db.Client.Where(x => x.ClientName == name)
+                .FirstOrDefaultAsync();
+            return client.StringId;
         }
 
         public async Task EditClient(Client client)
@@ -43,28 +76,37 @@ namespace Taxi_Database.Repository
             return clients;
         }
 
-        public Client GetClient(int id)
+        public async Task<Client> GetClient(string id)
         {
-            var client = db.Client.Find(id);
+            var client = await db.Client.Where(x => x.StringId == id)
+                .FirstOrDefaultAsync();
             return client;
         }
 
-        public async Task DeleteClient(int id)
+        public Client GetClientByLogin(string login)
         {
-            var client = db.Client.Find(id);
+            var client = db.Client.Where(x => x.ClientName == login)
+                .FirstOrDefault();
+            return client;
+        }
+
+        public Client GetClientForOrders(int id)
+        {
+            return db.Client.Find(id);
+        }
+
+        public async Task DeleteClient(string id)
+        {
+            var client = db.Client.Where(x => x.StringId == id)
+                .FirstOrDefault();
             db.Client.Remove(client);
             await db.SaveChangesAsync();
         }
 
-        public int SaveOrder(Order order)
+        public async Task SaveRequest(Order order)
         {
             db.Order.Add(order);
-            db.ReadyOrders.Add(new ReadyOrders
-                (order.StartPointId, order.FinishPointId, order.DepartureTime, order.OrderTime));
-            db.HistoryOfLocation.Find(order.StartPointId).CountOfDepartures++;
-            db.HistoryOfLocation.Find(order.FinishPointId).CountOfArrivals++;
-            db.SaveChangesAsync();
-            return db.ReadyOrders.Last().Id;
+            await db.SaveChangesAsync();
         }
 
         public IEnumerable<Order> GetRequests()
@@ -86,33 +128,53 @@ namespace Taxi_Database.Repository
             await db.SaveChangesAsync();
         }
 
+        public async Task SaveOrder(ReadyOrders order)
+        {
+            db.ReadyOrders.Add(order);
+            db.HistoryOfLocation.Find(order.StartPointId).CountOfDepartures++;
+            db.HistoryOfLocation.Find(order.FinishPointId).CountOfArrivals++;
+            await db.SaveChangesAsync();
+        }
+
+        public async Task<int> GetSaveOrderId(ReadyOrders order)
+        {
+            var neworder = await db.ReadyOrders.Where(x => x.OrderTime == order.OrderTime)
+                .FirstOrDefaultAsync();
+            return neworder.Id;
+        }
+
         public IEnumerable<ReadyOrders> GetOrders()
         {
             var orders = db.ReadyOrders.Select(x => x);
             return orders;
         }
 
-        public List<ReadyOrders> GetOrdersByClientId (int id)
+        public int CountOdReadyOrders()
         {
-            var readyOrders = new List<ReadyOrders>();
-            var ordersId = GetOrdersId(id);
-            foreach (var orderId in ordersId)
-                readyOrders.Add(db.ReadyOrders.Find(orderId));
-            return readyOrders;
+            return db.ReadyOrders.Count();
         }
 
-        private List<int> GetOrdersId(int id)
+        public int CountOfReadyOrdersInDay()
         {
-            var ordersId = new List<int>();
-            var passengers = db.Passengers;
-            foreach (var passenger in passengers)
-            {
-                if (passenger.FirstId == id || passenger.SecondId == id
-                    || passenger.ThirdId == id || passenger.ForthId == id)
-                    ordersId.Add(passenger.OrderId);
-            }
+            return db.ReadyOrders.Where(x => x.OrderTime.Day == DateTime.Now.Day).Count();
+        }
 
-            return ordersId;
+        public ReadyOrders GetOrder(int id)
+        {
+            return db.ReadyOrders.Find(id);
+        }
+
+        public IEnumerable<int> GetOrdersByClientId (int id)
+        {
+            var orders = db.Passengers.Where(x => x.FirstId == id || x.SecondId == id
+                || x.ThirdId == id || x.ForthId == id)
+                .Select(x => x.OrderId);
+            return orders;
+        }
+
+        public ReadyOrders GetReadyOrderId(int id)
+        {
+            return db.ReadyOrders.Find(id);
         }
 
         public async Task DeleteOrder(int id)
@@ -122,25 +184,34 @@ namespace Taxi_Database.Repository
             await db.SaveChangesAsync();
         }
 
+        public List<Client> GetPassengers(int id)
+        {
+            var list = new List<Client>();
+            var passengers = db.Passengers.Where(x => x.OrderId == id);
+            var newpassengers = passengers.FirstOrDefault();
+            if(newpassengers.FirstId != 0)
+                list.Add(db.Client.Find(newpassengers.FirstId));
+            if (newpassengers.SecondId != 0)
+                list.Add(db.Client.Find(newpassengers.SecondId));
+            if (newpassengers.ThirdId != 0)
+                list.Add(db.Client.Find(newpassengers.ThirdId));
+            if(newpassengers.ForthId != 0)
+                list.Add(db.Client.Find(newpassengers.ForthId));
+            return list;
+        }
+
         public async Task SavePassengers(int orderId, int firstId, int secondId, int thirdId, int forthId)
         {
             db.Passengers.Add(new Passengers(orderId, firstId, secondId, thirdId, forthId));
             await db.SaveChangesAsync();
         }
 
-        public async Task SaveLocation(Location location)
+        public async Task SaveHistoryOfLocation(string location)
         {
-            db.Location.Add(location);
+            var newLocation = await db.Location.Where(x => x.NameOfLocation == location)
+                .FirstOrDefaultAsync();
+            db.HistoryOfLocation.Add(new HistoryOfLocation(newLocation.Id, newLocation.NameOfLocation));
             await db.SaveChangesAsync();
-            var newLocation = db.Location.Last();
-            db.HistoryOfLocation.Add(new HistoryOfLocation(newLocation.Id));
-            await db.SaveChangesAsync();
-        }
-
-        public IEnumerable<Location> GetLocations()
-        {
-            var locations = db.Location.Select(x => x);
-            return locations;
         }
 
         public IEnumerable<HistoryOfLocation> GetHistoryOfLocations()
@@ -149,21 +220,24 @@ namespace Taxi_Database.Repository
             return locations;
         }
 
-        public int GetCountOfRates(int id)
+        public int GetCountOfRates(string id)
         {
-            var client = db.Client.Find(id);
+            var client = db.Client.Where(x => x.StringId == id)
+                .FirstOrDefault();
             return client.CountOfRates;
         }
 
-        public double GetRating(int id)
+        public double GetRating(string id)
         {
-            var client = db.Client.Find(id);
+            var client = db.Client.Where(x => x.StringId == id)
+               .FirstOrDefault();
             return client.Rating;
         }
 
-        public async Task UpdateRating(int id, int countOfRates, double rating)
+        public async Task UpdateRating(string id, int countOfRates, double rating)
         {
-            var client = db.Client.Find(id);
+            var client = db.Client.Where(x => x.StringId == id)
+               .FirstOrDefault();
             client.CountOfRates = countOfRates;
             client.Rating = rating;
             db.Entry(client).State = EntityState.Modified;

@@ -9,7 +9,8 @@
 
         public int GetNewCountOfRates(int countofRates)
         {
-            return countofRates++;
+            var newCount = countofRates + 1;
+            return newCount;
         }
     }
 }

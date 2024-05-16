@@ -8,28 +8,40 @@ namespace Taxi_Database
     {
         public static async Task InitializeAsync(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
-            string adminEmail = "admin@gmail.com";
-            string password = "_Aa123456";
+            LocalRole admin = new LocalRole("admin", "admin@gmail.com", "Aa123456!");
+            LocalRole employee = new LocalRole("employee", "employee@gmail.com", "Aa1234567!");
 
-            if (await roleManager.FindByNameAsync("admin") == null)
+            await Initialize(roleManager, userManager, admin);
+            await Initialize(roleManager, userManager, employee);
+
+        }
+        private static async Task Initialize(RoleManager<IdentityRole> roleManager, UserManager<User> userManager, LocalRole role)
+        {
+            if (await roleManager.FindByNameAsync(role.Name) == null)
             {
-                await roleManager.CreateAsync(new IdentityRole("admin"));
+                await roleManager.CreateAsync(new IdentityRole(role.Name));
             }
-
-            if (await roleManager.FindByNameAsync("employee") == null)
+            if (await userManager.FindByNameAsync(role.Name) == null)
             {
-                await roleManager.CreateAsync(new IdentityRole("employee"));
-            }
-
-            if (await userManager.FindByNameAsync(adminEmail) == null)
-            {
-                User admin = new  User { Email = adminEmail, UserName = adminEmail };
-                IdentityResult result = await userManager.CreateAsync(admin, password);
+                User user = new User { Email = role.Email, UserName = role.Name };
+                IdentityResult result = await userManager.CreateAsync(user, role.Password);
 
                 if (result.Succeeded)
                 {
-                    await userManager.AddToRoleAsync(admin, "admin");
+                    await userManager.AddToRoleAsync(user, role.Name);
                 }
+            }
+        }
+        private class LocalRole
+        {
+            public string Name { get; }
+            public string Email { get; }
+            public string Password { get; }
+            public LocalRole(string name, string email, string password)
+            {
+                Name = name;
+                Email = email;
+                Password = password;
             }
         }
     }

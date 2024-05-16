@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Taxi_Database.Models;
 using BusinessLogic;
 using BusinessLogic.ControllersForMVC;
+using Microsoft.Extensions.Logging;
+using Services.Aop;
 
 namespace Taxi.Controllers
 {
@@ -14,15 +16,18 @@ namespace Taxi.Controllers
     {
         RoleManager<IdentityRole> _roleManager;
         UserManager<User> _userManager;
+        private readonly ILogger<RolesController> _logger;
 
-        public RolesController(RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
+        public RolesController(RoleManager<IdentityRole> roleManager, UserManager<User> userManager, ILogger<RolesController> logger)
         {
             _roleManager = roleManager;
             _userManager = userManager;
+            _logger = logger;
         }
         public IActionResult Index()
         {
-            IRoleController repository = new Role(_roleManager, _userManager);
+            var role = new Role(_roleManager, _userManager);
+            IRoleController repository = new Factory<IRoleController, Role>(_logger, role).Create();
             var model = repository.Index();
             return View(model);
         }
@@ -32,7 +37,8 @@ namespace Taxi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(string name)
         {
-            IRoleController repository = new Role(_roleManager, _userManager);
+            var role = new Role(_roleManager, _userManager);
+            IRoleController repository = new Factory<IRoleController, Role>(_logger, role).Create();
 
             if (!string.IsNullOrEmpty(name))
             {
@@ -51,7 +57,8 @@ namespace Taxi.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(string id)
         {
-            IRoleController repository = new Role(_roleManager, _userManager);
+            var role = new Role(_roleManager, _userManager);
+            IRoleController repository = new Factory<IRoleController, Role>(_logger, role).Create();
 
             var result = await repository.Delete(id);
             return RedirectToAction("Index");
@@ -59,15 +66,18 @@ namespace Taxi.Controllers
 
         public IActionResult UserList()
         {
-            IRoleController repository = new Role(_roleManager, _userManager);
+            var role = new Role(_roleManager, _userManager);
+            IRoleController repository = new Factory<IRoleController, Role>(_logger, role).Create();
 
             var model = repository.UserList();
             return View(model);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Edit(string userId)
         {
-            IRoleController repository = new Role(_roleManager, _userManager);
+            var role = new Role(_roleManager, _userManager);
+            IRoleController repository = new Factory<IRoleController, Role>(_logger, role).Create();
 
             // получаем пользователя
             User user = await repository.FindUser(userId);
@@ -83,8 +93,9 @@ namespace Taxi.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(string userId, List<string> roles)
         {
-            IRoleController repository = new Role(_roleManager, _userManager);
-
+            var role = new Role(_roleManager, _userManager);
+            IRoleController repository = new Factory<IRoleController, Role>(_logger, role).Create();
+            
             // получаем пользователя
             User user = await repository.FindUser(userId);
             if (user != null)

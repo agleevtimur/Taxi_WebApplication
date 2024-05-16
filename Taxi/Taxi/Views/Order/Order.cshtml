@@ -1,0 +1,298 @@
+﻿@model BusinessLogic.ModelsForControllers.OrderWithClientViewModel
+@{
+    string userName = User.Identity.Name;
+    bool isName = false;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Заказ</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
+
+    <style>
+
+
+        .nowrap {
+            white-space: nowrap
+        }
+
+        .find {
+            display: block;
+            transition: all 300ms ease-out;
+        }
+
+        .transition {
+            transition: all 300ms ease-out;
+        }
+
+        .subscribe {
+            display: block;
+            transition: all 300ms ease-out;
+        }
+
+        .high {
+            background: #5a28b3;
+            color: white;
+        }
+
+        .text-black {
+            color: black;
+        }
+
+        .card {
+            transition: all 600ms ease-out;
+        }
+
+        .card-hover {
+            border-color: #000000;
+            -moz-box-shadow: 0 0 12px #000000;
+            -webkit-box-shadow: 0 0 12px #000000;
+            box-shadow: 0 0 12px #000000;
+        }
+    </style>
+</head>
+<body>
+    <nav id="nav" class="navbar navbar-expand-lg  navbar-dark bg-dark fixed-top ">
+        <button class="navbar-toggler ml-auto" id="nav-button" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse  justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-sm-2">
+                <li class="nav-item ">
+                    <a class="nav-link flex-nowrap nowrap text-right" asp-action="Index" asp-controller="Home">О Проекте<span class="sr-only"></span></a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-auto  pl-md-0 pr-sm-2  align-content-center pb-0 transition">
+            <form asp-action="Logout" asp-controller="Account" method="post">
+                <button type="submit"
+                        class="flex-fill btn btn-primary  pr-sm-4 pl-sm-4 pb-auto mb-0 font-weight-bold text-center find">
+                    Выход
+                </button>
+            </form>
+        </div>
+    </nav>
+    <div class="container-sm p-4 " style="max-width: 40em; margin-top: 50px">
+        <div id="titleactual">
+            <h1 class="title mt-3 mb-5 ">Заказ</h1>
+        </div>
+        <div class="card mt-4 mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Готовый заказ</h5>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Название</th>
+                            <th scope="col">Данные</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Откуда</td>
+                            @foreach (var location in Model.Locations)
+                            {
+                                @if (location.Id == Model.ReadyOrder.StartPointId)
+                                {
+                                    <td>@location.NameOfLocation</td>
+                                }
+                            }
+                        </tr>
+                        <tr>
+                            <td>Куда</td>
+                            @foreach (var location in Model.Locations)
+                            {
+                                @if (location.Id == Model.ReadyOrder.FinishPointId)
+                                {
+                                    <td>@location.NameOfLocation</td>
+                                }
+                            }
+                        </tr>
+                        <tr>
+                            <td>Во сколько</td>
+                            <td>@Model.ReadyOrder.OrderTime</td>
+                        </tr>
+                        <tr>
+                            <td>Время оформления</td>
+                            <td>@Model.ReadyOrder.CompleteTime</td>
+                        </tr>
+                        @foreach (var user in Model.Clients)
+                        {
+                            @if (user.ClientName == userName)
+                            {
+                                isName = true;
+                            }
+                            <tr>
+                                <td>Попутчик</td>
+                                <td>@user.ClientName</td>
+                            </tr>
+                            <tr>
+                                <td>Рейтинг @user.ClientName</td>
+                                <td>@user.Rating</td>
+                            </tr>
+                        }
+                        @if (isName == true)
+                        {
+                            <tr>
+                                <td>Чат</td>
+                                <td>
+                                    <div class="col d-inline-flex ml-0 pl-0 mr-0 pr-0  pb-0 mb-0">
+                                        <a class="col card-link ml-0 pb-0 mr-0 pr-0 mb-0" asp-action="Index" asp-controller="Chat">Перейти в чат</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                @if (isName == true)
+                {
+                    <h1 class="title mt-3 mb-5 ">Оценка</h1>
+                    <form asp-action="Rating" asp-controller="Order" asp-route-id="@Model.ReadyOrder.Id" method="post">
+                        <input asp-for="UserName" value="@userName" hidden />
+                        <div asp-validation-summary="ModelOnly"></div>
+                        <div class="form-group-sm">
+                            <label asp-for="WhomName">Выберите ник</label>
+                            <select required class="form-control" asp-for="WhomName" id="exampleFormControlSelect1">
+                                @foreach (var client in Model.Clients)
+                                {
+                                    @if (client.ClientName != userName)
+                                    {
+                                        <option>@client.ClientName</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Rate">Введите оценку</label>
+                            <div class="input-group mb-3">
+                                <input type="number" asp-for="Rate" class="form-control" placeholder="somebody" aria-label="somebody"
+                                       aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <button type="submit"
+                                class="flex-fill btn btn-primary  pr-sm-4 pl-sm-4 pb-auto mb-0 font-weight-bold text-center find">
+                            Отправить
+                        </button>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+    <script>
+        $('.card ').hover(
+            function () {
+                $(this).addClass('border-dark card-hover')
+            },
+            function () {
+                $(this).removeClass('border-dark card-hover')
+            }
+        );
+
+
+        $(".subscribe").hover(
+            function () {
+                $(".find").removeClass('pr-sm-4 pl-sm-4');
+                $(this).removeClass('pr-sm-4 pl-sm-4');
+                $(".find").addClass('pr-sm-2 pl-sm-2');
+                $(this).addClass('pr-sm-5 pl-sm-5')
+            },
+            function () {
+                $(".find").removeClass('pr-sm-2 pl-sm-2');
+                $(this).removeClass('pr-sm-5 pl-sm-5');
+                $(".find").addClass('pr-sm-4 pl-sm-4');
+                $(this).addClass('pr-sm-4 pl-sm-4');
+            }
+        );
+        $(".find").hover(
+            function () {
+                $(".subscribe").removeClass('pr-sm-4 pl-sm-4');
+                $(this).removeClass('pr-sm-4 pl-sm-4');
+                $(".subscribe").addClass('pr-sm-2 pl-sm-2');
+                $(this).addClass('pr-sm-5 pl-sm-5')
+            },
+            function () {
+                $(".subscribe").removeClass('pr-sm-2 pl-sm-2');
+                $(this).removeClass('pr-sm-5 pl-sm-5');
+                $(".subscribe").addClass('pr-sm-4 pl-sm-4');
+                $(this).addClass('pr-sm-4 pl-sm-4');
+            }
+        );
+        $("#nav-button").click(function () {
+            $(".find").parent().toggleClass("d-flex flex-fill");
+            $(".subscribe").parent().toggleClass("d-flex flex-fill");
+            $(".find").parent().parent().toggleClass("mr-sm-0");
+        });
+        $(document).ready(function () {
+            $("#titlesearch").hide();
+            $("#search").keyup(search);
+        });
+
+        function search(withFilter) {
+            let value = $("#search").val().toLowerCase();
+            let words = value.split(" ");
+            let count = 0;
+            let searching = value.length !== 0;
+
+            $(".card").filter(function () {
+                let totalFilter = true;
+                let thisText = $(this).text().toLowerCase();
+                for (let i = 0; i < words.length; i++) {
+                    totalFilter = totalFilter && (thisText.indexOf(words[i]) > -1);
+                }
+                if (totalFilter) {
+                    count++;
+                }
+                $(this).toggle(totalFilter);
+            });
+            if (searching) {//searching
+                hideTitles(count, 400);
+            } else {//stop searching
+                showTitles(400);
+            }
+        }
+
+        function hideTitles(count, delay) {
+            $("#titlesearch h1 span").text(count);
+            $("#titleactual").hide();
+            $("#titlesearch").show();
+            $("#titlehistory").hide();
+        }
+
+        function showTitles(delay) {
+            $("#titlesearch").hide();
+            $("#titleactual").show();
+            $("#titlehistory").show();
+        }
+
+        $("#search").hover(
+            function () {
+                $(this).addClass('pr-sm-5');
+            },
+            function () {
+                $(this).removeClass('pr-sm-5');
+            }
+        );
+        $("#search").focus(
+            function () {
+            },
+            function () {
+            }
+        );</script>
+</body>
+</html>
+
